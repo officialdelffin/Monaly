@@ -6,7 +6,7 @@
 
     <!-- Cores Padrões : -->
     <color name="bage_neutral">#FFFAC9</color>
-    <color name="gray_medium">#787878</color>
+    <color name="gray_medium">#9E9E9E</color>
     <color name="gray_dark">#424242</color>
     <color name="deep_gray">#2C2C2C</color>
     <color name="text_primary">#1A1A1A</color>

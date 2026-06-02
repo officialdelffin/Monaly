@@ -31,6 +31,7 @@
         android:layout_marginBottom="30dp"
         android:text="@string/onboarding_label_welcome"
         android:textColor="@color/bage_neutral"
+        android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

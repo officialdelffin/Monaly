@@ -11,7 +11,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imageBackground"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/img_onboardin_three"
@@ -22,7 +22,7 @@
         android:scaleType="centerCrop"/>
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imageGradientEffect"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/drawable_black_gradient_effect"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -41,12 +41,12 @@
         android:text="@string/onboarding_history"
         android:textColor="@color/bage_neutral"
         android:textSize="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/textDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"

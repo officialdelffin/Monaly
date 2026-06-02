@@ -28,4 +28,5 @@
         app:layout_constraintStart_toStartOf="parent"
         android:drawableRight="@drawable/icon_arrow_right_bage"/>
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>

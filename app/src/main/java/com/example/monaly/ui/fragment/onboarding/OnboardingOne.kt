@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.monaly.R
 
@@ -40,6 +41,7 @@ class OnboardingOne : Fragment() {
         // Pegando e vinculando os componentes que o fragment precisa :
         val title : TextView = view.findViewById(R.id.textTitle)
         val description : TextView = view.findViewById(R.id.textDescription)
+        val image : ImageView = view.findViewById(R.id.imageBackground)
 
 
         // Aqui é onde verificamos se tem dados enviados para a tela do fragment, se estiver como titulo e descrição vamos fazer a substituição para que não trave o app:
@@ -48,7 +50,7 @@ class OnboardingOne : Fragment() {
 
             // Faz a busca e a troca com base na chave que definimos :
             title.text = it.getString(KEY_TITLE_ONBOARDING)
-            description.text = it.getString(KEY_DESC_ONBOARDING)
+            description.text = it.getString(KEY_DESCRIPTION_ONBOARDING)
 
 
         }
@@ -69,7 +71,8 @@ class OnboardingOne : Fragment() {
 
         // Criando as chaves :
         const val KEY_TITLE_ONBOARDING = "title"
-        const val KEY_DESC_ONBOARDING = "desc"
+        const val KEY_DESCRIPTION_ONBOARDING = "description"
+        const val KEY_IMAGE_ONBOARDING = "image"
 
 
     }

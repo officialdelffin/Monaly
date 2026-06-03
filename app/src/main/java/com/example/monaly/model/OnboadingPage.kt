@@ -14,7 +14,8 @@ data class OnboadingPage(
 
     // Atributos das paginas de onboarding :
     @StringRes val title : Int,
-    @StringRes val description : Int
+    @StringRes val description : Int,
+    @DrawableRes val image : Int
 
 
 )

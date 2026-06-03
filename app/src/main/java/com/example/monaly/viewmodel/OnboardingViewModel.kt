@@ -19,7 +19,8 @@ class OnboardingViewModel {
         OnboadingPage(
 
             title = R.string.onboarding_label_welcome,
-            description = R.string.onboarding_description_one
+            description = R.string.onboarding_description_one,
+            image = R.drawable.img_onboardin_one
 
         ),
 
@@ -27,7 +28,8 @@ class OnboardingViewModel {
 
 
             title = R.string.onboarding_memories,
-            description = R.string.ondoarding_description_two
+            description = R.string.ondoarding_description_two,
+            image = R.drawable.img_onboardin_two
 
 
         ),
@@ -37,7 +39,8 @@ class OnboardingViewModel {
 
 
             title = R.string.onboarding_history,
-            description = R.string.onboarding_description_three
+            description = R.string.onboarding_description_three,
+            image = R.drawable.img_onboardin_three
 
 
         )

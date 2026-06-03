@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.example.monaly.R
 
 
@@ -30,8 +31,19 @@ class OnboardingOne : Fragment() {
     ): View? {
 
 
-        // Inflando e retornando o XML em forma de view do fragment onboarding one :
-        return inflater.inflate(R.layout.fragment_onboarding_one, container, false)
+        // Inflando o layout XML e guardamos dentro da variável view :
+        val view = inflater.inflate(R.layout.fragment_onboarding_one, container, false)
+
+
+        // Atributos :
+
+        // Pegando e vinculando os componentes que o fragment precisa :
+        val title : TextView = view.findViewById(R.id.textTitle)
+        val description : TextView = view.findViewById(R.id.textDescription)
+
+
+        // Retornando a variavel view que faz com que o XML em forma de view do fragment onboarding one :
+        return view
 
 
     }

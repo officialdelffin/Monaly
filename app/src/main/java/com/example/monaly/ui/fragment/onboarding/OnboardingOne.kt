@@ -42,8 +42,34 @@ class OnboardingOne : Fragment() {
         val description : TextView = view.findViewById(R.id.textDescription)
 
 
+        // Aqui é onde verificamos se tem dados enviados para a tela do fragment, se estiver como titulo e descrição vamos fazer a substituição para que não trave o app:
+        arguments?.let {
+
+
+            // Faz a busca e a troca com base na chave que definimos :
+            title.text = it.getString(KEY_TITLE_ONBOARDING)
+            description.text = it.getString(KEY_DESC_ONBOARDING)
+
+
+        }
+
+
         // Retornando a variavel view que faz com que o XML em forma de view do fragment onboarding one :
         return view
+
+
+    }
+
+
+    // Definições de chaves:
+
+    // Criando as chaves de acesso que trafegam no aplicativo
+    companion object {
+
+
+        // Criando as chaves :
+        const val KEY_TITLE_ONBOARDING = "title"
+        const val KEY_DESC_ONBOARDING = "desc"
 
 
     }

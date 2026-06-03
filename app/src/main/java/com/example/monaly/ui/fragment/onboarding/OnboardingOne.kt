@@ -33,7 +33,7 @@ class OnboardingOne : Fragment() {
 
 
         // Inflando o layout XML e guardamos dentro da variável view :
-        val view = inflater.inflate(R.layout.fragment_onboarding_one, container, false)
+        val view = inflater.inflate(R.layout.fragment_onboarding, container, false)
 
 
         // Atributos :

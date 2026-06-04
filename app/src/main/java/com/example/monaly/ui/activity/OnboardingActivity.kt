@@ -12,44 +12,42 @@ import com.example.monaly.viewmodel.OnboardingViewModel
 
 class OnboardingActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
+        // Vinculando a Activity Onboarding :
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding)
 
 
+        // Atributos :
+
+        var contentIndex = 0
+        var fragment : OnboardingFragment? = null
 
 
+        // Intancias :
 
-    }
-
-
-    // Atributos :
-
-    var contentIndex = 0
-    var fragment : OnboardingFragment? = null
+        val onboardingInformation = OnboardingViewModel()
 
 
-    // Intancias :
-
-    val onboardingInformation = OnboardingViewModel()
-
-
-    // Esse trecho inicializa o fragmento com os dados corretos e o devolve para que a Activity possa usá-lo com o supportFragmentManager:
-    fun setupInitialFragment() : OnboardingFragment {
+        // Esse trecho inicializa o fragmento com os dados corretos e o devolve para que a Activity possa usá-lo com o supportFragmentManager:
+        fun setupInitialFragment() : OnboardingFragment {
 
 
-        //Criando um novo fragment com o new fragment :
-        val newFragment = OnboardingFragment.createNewFragment(onboardingInformation.OnboardingInformation[contentIndex])
+            //Criando um novo fragment com o new fragment :
+            val newFragment = OnboardingFragment.createNewFragment(onboardingInformation.OnboardingInformation[contentIndex])
 
 
-        fragment = newFragment
-        return newFragment
+            fragment = newFragment
+            return newFragment
+
+
+        }
 
 
     }
-
-
-    su
 
 
 }

@@ -4,7 +4,6 @@ package com.example.monaly.ui.activity
 // Importações :
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
 import com.example.monaly.R
 import com.example.monaly.ui.fragment.onboarding.OnboardingFragment
 import com.example.monaly.viewmodel.OnboardingViewModel

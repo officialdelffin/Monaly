@@ -25,13 +25,12 @@ class OnboardingActivity(private val activity: FragmentActivity) {
     fun setupInitialFragment() : OnboardingFragment {
 
 
+        //Criando um novo fragment com o new fragment :
         val newFragment = OnboardingFragment.createNewFragment(onboardingInformation.OnboardingInformation[contentIndex])
 
 
-        fragment = newFragment // Salva na sua variável local se precisar
-
-
-        return newFragment    // Devolve o fragmento pronto para quem chamou a função
+        fragment = newFragment
+        return newFragment
 
 
     }

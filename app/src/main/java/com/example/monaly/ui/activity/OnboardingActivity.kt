@@ -45,6 +45,8 @@ class OnboardingActivity : AppCompatActivity() {
         // Capturando o buttonNext e armazenando em uma variavel:
         buttonNext = findViewById(R.id.buttonNext)
 
+        buttonNext.setOnClickListener { contentIndex++ }
+
 
     }
 

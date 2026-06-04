@@ -13,11 +13,6 @@ import com.example.monaly.ui.fragment.onboarding.OnboardingFragment
 class OnboardingViewModel {
 
 
-    // Atributos :
-    var contentIndex = 0
-    var fragment : OnboardingFragment? = null
-
-
     // Lista com os dados da apresentação :
     val OnboardingInformation = listOf(
 
@@ -53,21 +48,6 @@ class OnboardingViewModel {
 
 
     )
-
-    // Esse trecho inicializa o fragmento com os dados corretos e o devolve para que a Activity possa usá-lo com o supportFragmentManager:
-    fun setupInitialFragment() : OnboardingFragment {
-
-
-        val newFragment = OnboardingFragment.createNewFragment(OnboardingInformation[contentIndex])
-
-
-        fragment = newFragment // Salva na sua variável local se precisar
-
-
-        return newFragment    // Devolve o fragmento pronto para quem chamou a função
-
-
-    }
 
 
 }

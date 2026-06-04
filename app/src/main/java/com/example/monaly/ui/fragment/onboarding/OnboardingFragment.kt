@@ -9,10 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.monaly.R
 import com.example.monaly.model.OnboadingPage
-import com.example.monaly.viewmodel.OnboardingViewModel
 
 
-class OnboardingOne : Fragment() {
+class OnboardingFragment : Fragment() {
 
 
     // Chamando o onCreateView para construir a interface da tela :
@@ -79,7 +78,7 @@ class OnboardingOne : Fragment() {
 
 
         // Função responsável por criar os fragments e preencher os dados vinculado aos elementos do fragment
-        fun createNewFragment (dataPageP : OnboadingPage) : OnboardingOne{
+        fun createNewFragment (dataPageP : OnboadingPage) : OnboardingFragment{
 
 
             // Pegando os dados da OnboardingPage para criar o fragment :
@@ -94,7 +93,7 @@ class OnboardingOne : Fragment() {
             }
 
 
-            val fragment = OnboardingOne()
+            val fragment = OnboardingFragment()
 
 
             fragment.arguments = dataPage

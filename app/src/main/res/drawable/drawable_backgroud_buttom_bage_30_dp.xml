@@ -3,7 +3,7 @@
 
 
 
-    <solid android:color="@color/bg_neutral"/>
+    <solid android:color="@color/bage_neutral"/>
     <corners android:radius="30dp"/>
 
 

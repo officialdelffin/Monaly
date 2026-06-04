@@ -4,22 +4,23 @@ package com.example.monaly.ui.activity
 // Importações :
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.example.monaly.R
 import com.example.monaly.ui.fragment.onboarding.OnboardingFragment
 import com.example.monaly.viewmodel.OnboardingViewModel
 
 
+// Classe responsavel por fazer o gerenciamento e a troca dos fragments do onboarding
 class OnboardingActivity : AppCompatActivity() {
 
 
     // Atributos :
-
     var contentIndex = 0
+    var buttonNext : AppCompatButton? = null
     var fragment : OnboardingFragment? = null
 
 
     // Intancias :
-
     val onboardingInformation = OnboardingViewModel()
 
 
@@ -39,6 +40,10 @@ class OnboardingActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.containerOnboarding,fragmentGlobal)
             .commit()
+
+
+        // Capturando o buttonNext e armazenando em uma variavel:
+        buttonNext = findViewById(R.id.buttonNext)
 
 
     }

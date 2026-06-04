@@ -13,6 +13,17 @@ import com.example.monaly.viewmodel.OnboardingViewModel
 class OnboardingActivity : AppCompatActivity() {
 
 
+    // Atributos :
+
+    var contentIndex = 0
+    var fragment : OnboardingFragment? = null
+
+
+    // Intancias :
+
+    val onboardingInformation = OnboardingViewModel()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
@@ -21,30 +32,24 @@ class OnboardingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_onboarding)
 
 
-        // Atributos :
-
-        var contentIndex = 0
-        var fragment : OnboardingFragment? = null
-
-
-        // Intancias :
-
-        val onboardingInformation = OnboardingViewModel()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.containerOnboarding,fragment)
+            .commit()
 
 
-        // Esse trecho inicializa o fragmento com os dados corretos e o devolve para que a Activity possa usá-lo com o supportFragmentManager:
-        fun setupInitialFragment() : OnboardingFragment {
+    }
 
 
-            //Criando um novo fragment com o new fragment :
-            val newFragment = OnboardingFragment.createNewFragment(onboardingInformation.OnboardingInformation[contentIndex])
+    // Esse trecho inicializa o fragmento com os dados corretos e o devolve para que a Activity possa usá-lo com o supportFragmentManager:
+    fun setupInitialFragment() : OnboardingFragment {
 
 
-            fragment = newFragment
-            return newFragment
+        //Criando um novo fragment com o new fragment :
+        val newFragment = OnboardingFragment.createNewFragment(onboardingInformation.OnboardingInformation[contentIndex])
 
 
-        }
+        fragment = newFragment
+        return newFragment
 
 
     }

@@ -32,8 +32,13 @@ class OnboardingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_onboarding)
 
 
+        // Chamando a função que inicializa o fragment e armazenando em uma variavel global :
+        val fragmentGlobal = setupInitialFragment()
+
+
+        // Fazendo a substituição do fragment dentro do container :
         supportFragmentManager.beginTransaction()
-            .replace(R.id.containerOnboarding,fragment)
+            .replace(R.id.containerOnboarding,fragmentGlobal)
             .commit()
 
 

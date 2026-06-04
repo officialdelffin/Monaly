@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.monaly.R
+import com.example.monaly.model.OnboadingPage
+import com.example.monaly.viewmodel.OnboardingViewModel
 
 
 class OnboardingOne : Fragment() {
@@ -51,6 +53,7 @@ class OnboardingOne : Fragment() {
             // Faz a busca e a troca com base na chave que definimos :
             title.text = it.getString(KEY_TITLE_ONBOARDING)
             description.text = it.getString(KEY_DESCRIPTION_ONBOARDING)
+            image.setImageResource(it.getInt(KEY_IMAGE_ONBOARDING))
 
 
         }
@@ -73,6 +76,34 @@ class OnboardingOne : Fragment() {
         const val KEY_TITLE_ONBOARDING = "title"
         const val KEY_DESCRIPTION_ONBOARDING = "description"
         const val KEY_IMAGE_ONBOARDING = "image"
+
+
+        // Função responsável por criar os fragments e preencher os dados vinculado aos elementos do fragment
+        fun createNewFragment (dataPageP : OnboadingPage) : OnboardingOne{
+
+
+            // Pegando os dados da OnboardingPage para criar o fragment :
+            val dataPage = Bundle().apply {
+
+
+                putInt(KEY_TITLE_ONBOARDING, dataPageP.title)
+                putInt(KEY_DESCRIPTION_ONBOARDING, dataPageP.description)
+                putInt(KEY_IMAGE_ONBOARDING, dataPageP.image)
+
+
+            }
+
+
+            val fragment = OnboardingOne()
+
+
+            fragment.arguments = dataPage
+
+
+            return fragment
+
+
+        }
 
 
     }

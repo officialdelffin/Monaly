@@ -2,12 +2,25 @@ package com.example.monaly.ui.activity
 
 
 // Importações :
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
+import com.example.monaly.R
 import com.example.monaly.ui.fragment.onboarding.OnboardingFragment
 import com.example.monaly.viewmodel.OnboardingViewModel
 
 
-class OnboardingActivity(private val activity: FragmentActivity) {
+class OnboardingActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_onboarding)
+
+
+
+
+
+    }
 
 
     // Atributos :
@@ -34,5 +47,9 @@ class OnboardingActivity(private val activity: FragmentActivity) {
 
 
     }
+
+
+    su
+
 
 }

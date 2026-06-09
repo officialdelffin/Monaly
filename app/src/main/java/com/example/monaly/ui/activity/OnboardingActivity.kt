@@ -46,8 +46,13 @@ class OnboardingActivity : AppCompatActivity() {
         buttonNext = findViewById(R.id.buttonNext)
 
 
-        // Definindo a ação do clique do botão :
-        buttonNext.setOnClickListener { contentIndex++ }
+        // Definindo o que o buttonNext faz :
+        buttonNext?.setOnClickListener {
+
+            contentIndex++
+
+
+        }
 
 
     }

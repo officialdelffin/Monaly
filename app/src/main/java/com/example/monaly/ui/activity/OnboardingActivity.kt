@@ -49,7 +49,30 @@ class OnboardingActivity : AppCompatActivity() {
         // Definindo o que o buttonNext faz :
         buttonNext?.setOnClickListener {
 
+
             contentIndex++
+
+
+            if (contentIndex < onboardingInformation.OnboardingInformation.size) {
+
+
+                val nextFragment = setupInitialFragment()
+
+
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.containerOnboarding, nextFragment)
+                    .commit()
+
+
+            }
+
+            else {
+
+
+                finish()
+
+
+            }
 
 
         }
@@ -67,6 +90,8 @@ class OnboardingActivity : AppCompatActivity() {
 
 
         fragment = newFragment
+
+
         return newFragment
 
 

@@ -50,15 +50,19 @@ class OnboardingActivity : AppCompatActivity() {
         buttonNext?.setOnClickListener {
 
 
+            // Soma mais um na variavel que controla a troca dos fragments do Onboarding :
             contentIndex++
 
 
+            // Se a variavel tiver de controle de fragment for menor do que o numero de paginas que o onboarind tem ele permite uma ação :
             if (contentIndex < onboardingInformation.OnboardingInformation.size) {
 
 
+                // Cria uma constante que chama a função que cria o fragment :
                 val nextFragment = setupInitialFragment()
 
 
+                // É aqui onde o gerenciamento realmente acontece do fragment onde o supportFragmentManager faz a troca dos dados :
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.containerOnboarding, nextFragment)
                     .commit()
@@ -66,9 +70,12 @@ class OnboardingActivity : AppCompatActivity() {
 
             }
 
+
+            // Caso o número da variavel que controla a troca de activity for maior que o numero de paginas que tem, ele finaliza ( Isso é temporario ) :
             else {
 
 
+                // Finalizando ( Isso tambem é temporário ) :
                 finish()
 
 

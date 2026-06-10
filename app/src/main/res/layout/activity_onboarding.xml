@@ -24,14 +24,16 @@
     </FrameLayout>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/drawable_background_button_round_transparent"
         android:id="@+id/buttonBack"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:text="Button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/containerOnboarding" />
+        app:layout_constraintTop_toTopOf="@+id/containerOnboarding"
+        android:drawableStart="@drawable/icon_arrow_back_ios"
+        android:paddingStart="15dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonNext"

@@ -20,14 +20,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-
         android:id="@+id/buttonNext"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="50dp"
         android:background="@drawable/drawable_backgroun_buttom_gray_medium_30_dp"
+        android:drawableRight="@drawable/icon_arrow_right_bage"
         android:gravity="start|center_vertical"
         android:paddingStart="25dp"
         android:paddingEnd="25dp"
@@ -38,8 +38,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        android:drawableRight="@drawable/icon_arrow_right_bage"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

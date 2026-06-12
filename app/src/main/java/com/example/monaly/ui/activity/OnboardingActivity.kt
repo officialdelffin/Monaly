@@ -51,28 +51,28 @@ class OnboardingActivity : AppCompatActivity() {
         buttonBack?.setOnClickListener {
 
 
-            if () {
+            if (contentIndex > 0) {
 
 
-
-
-
-            }
-
-
-            if () {
-
-
-
+                contentIndex--
 
 
             }
 
 
-            if () {
+            if (contentIndex == onboardingInformation.OnboardingInformation.size - 1) {
 
 
+                buttonNext?.isEnabled = false
 
+
+            }
+
+
+            if (contentIndex == 0) {
+
+
+                buttonBack?.isEnabled = false
 
 
             }

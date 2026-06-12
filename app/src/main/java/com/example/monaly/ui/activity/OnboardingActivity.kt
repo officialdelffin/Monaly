@@ -51,6 +51,7 @@ class OnboardingActivity : AppCompatActivity() {
         buttonBack?.setOnClickListener {
 
 
+            // Quando clicar no botão de voltar ele muda a variavel que gerencia os fragments :
             if (contentIndex > 0) {
 
 
@@ -63,7 +64,7 @@ class OnboardingActivity : AppCompatActivity() {
             if (contentIndex == onboardingInformation.OnboardingInformation.size - 1) {
 
 
-                buttonNext?.isEnabled = false
+                buttonNext?.isEnabled = true
 
 
             }

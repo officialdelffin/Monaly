@@ -70,6 +70,7 @@ class OnboardingActivity : AppCompatActivity() {
             }
 
 
+            // Se o varial de controle do fragment estiver com zero ele desativa o buttonBack :
             if (contentIndex == 0) {
 
 

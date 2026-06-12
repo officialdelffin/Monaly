@@ -25,10 +25,11 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonBack"
+        android:text=""
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:background="@drawable/drawable_background_button_round_transparent"
         android:drawableStart="@drawable/icon_arrow_back_ios"
         android:enabled="false"

@@ -16,8 +16,9 @@ class OnboardingActivity : AppCompatActivity() {
 
     // Atributos :
     var contentIndex = 0
-    var buttonNext : AppCompatButton? = null
-    var fragment : OnboardingFragment? = null
+    var buttonBack: AppCompatButton? = null
+    var buttonNext: AppCompatButton? = null
+    var fragment: OnboardingFragment? = null
 
 
     // Intancias :
@@ -38,12 +39,46 @@ class OnboardingActivity : AppCompatActivity() {
 
         // Fazendo a substituição do fragment dentro do container :
         supportFragmentManager.beginTransaction()
-            .replace(R.id.containerOnboarding,fragmentGlobal)
+            .replace(R.id.containerOnboarding, fragmentGlobal)
             .commit()
 
 
         // Capturando o buttonNext e armazenando em uma variavel:
         buttonNext = findViewById(R.id.buttonNext)
+
+
+        // Definindo o que o buttonBack faz :
+        buttonBack?.setOnClickListener {
+
+
+            if () {
+
+
+
+
+
+            }
+
+
+            if () {
+
+
+
+
+
+            }
+
+
+            if () {
+
+
+
+
+
+            }
+
+
+        }
 
 
         // Definindo o que o buttonNext faz :
@@ -71,6 +106,24 @@ class OnboardingActivity : AppCompatActivity() {
             }
 
 
+            if (contentIndex == onboardingInformation.OnboardingInformation.size - 1) {
+
+
+                buttonBack?.isEnabled = false
+
+
+            }
+
+
+            if (contentIndex == 1) {
+
+
+                buttonBack?.isEnabled = true
+
+
+            }
+
+
             // Caso o número da variavel que controla a troca de activity for maior que o numero de paginas que tem, ele finaliza ( Isso é temporario ) :
             else {
 
@@ -89,11 +142,12 @@ class OnboardingActivity : AppCompatActivity() {
 
 
     // Esse trecho inicializa o fragmento com os dados corretos e o devolve para que a Activity possa usá-lo com o supportFragmentManager:
-    fun setupInitialFragment() : OnboardingFragment {
+    fun setupInitialFragment(): OnboardingFragment {
 
 
         //Criando um novo fragment com o new fragment :
-        val newFragment = OnboardingFragment.createNewFragment(onboardingInformation.OnboardingInformation[contentIndex])
+        val newFragment =
+            OnboardingFragment.createNewFragment(onboardingInformation.OnboardingInformation[contentIndex])
 
 
         fragment = newFragment

@@ -61,6 +61,7 @@ class OnboardingActivity : AppCompatActivity() {
             }
 
 
+            // Só para dar o commit do doi fds :
             if (contentIndex == onboardingInformation.OnboardingInformation.size - 1) {
 
 

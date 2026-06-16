@@ -45,6 +45,7 @@ class OnboardingActivity : AppCompatActivity() {
 
         // Capturando o buttonNext e armazenando em uma variavel:
         buttonNext = findViewById(R.id.buttonNext)
+        buttonBack = findViewById(R.id.buttonBack)
 
 
         // Definindo o que o buttonBack faz :

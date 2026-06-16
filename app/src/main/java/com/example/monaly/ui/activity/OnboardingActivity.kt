@@ -52,31 +52,41 @@ class OnboardingActivity : AppCompatActivity() {
         buttonBack?.setOnClickListener {
 
 
-            // Quando clicar no botão de voltar ele muda a variavel que gerencia os fragments :
             if (contentIndex > 0) {
 
 
+                // Diminui o índice para apontar para a pagina anterior :
                 contentIndex--
 
 
+                // Fabrica o fragmento com os dados da página anterior :
+                val previousFragment = setupInitialFragment()
+
+
+                // Atualiza a tela visualmente com o fragmento anterior :
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.containerOnboarding, previousFragment)
+                    .commit()
+
+
             }
 
 
-            // Só para dar o commit do doi fds :
-            if (contentIndex == onboardingInformation.OnboardingInformation.size - 1) {
-
-
-                buttonNext?.isEnabled = true
-
-
-            }
-
-
-            // Se o varial de controle do fragment estiver com zero ele desativa o buttonBack :
+            // Se voltou para a primeira tela (índice 0), desativa o botão de voltar :
             if (contentIndex == 0) {
 
 
                 buttonBack?.isEnabled = false
+
+
+            }
+
+
+            // Se voltou de telas avançadas, garante que o botão Next volte a ficar ativo :
+            if (contentIndex < onboardingInformation.OnboardingInformation.size - 1) {
+
+
+                buttonNext?.isEnabled = true
 
 
             }

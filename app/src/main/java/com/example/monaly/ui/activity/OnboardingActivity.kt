@@ -3,6 +3,7 @@ package com.example.monaly.ui.activity
 
 // Importações :
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import com.example.monaly.R
@@ -46,6 +47,11 @@ class OnboardingActivity : AppCompatActivity() {
         // Capturando o buttonNext e armazenando em uma variavel:
         buttonNext = findViewById(R.id.buttonNext)
         buttonBack = findViewById(R.id.buttonBack)
+
+
+        // Definindo que o buttonBack vai começar invisivel e desativado :
+        buttonBack?.visibility = View.INVISIBLE
+        buttonBack?.isEnabled = false
 
 
         // Definindo o que o buttonBack faz :

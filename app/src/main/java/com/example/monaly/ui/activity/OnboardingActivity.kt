@@ -83,6 +83,16 @@ class OnboardingActivity : AppCompatActivity() {
 
             }
 
+            if (contentIndex == 0) {
+
+
+                // Definindo que o buttonBack vai começar invisivel e desativado :
+                buttonBack?.visibility = View.INVISIBLE
+                buttonBack?.isEnabled = false
+
+
+            }
+
 
         }
 

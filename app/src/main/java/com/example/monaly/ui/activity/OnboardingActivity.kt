@@ -26,6 +26,7 @@ class OnboardingActivity : AppCompatActivity() {
     val onboardingInformation = OnboardingViewModel()
 
 
+    // Tela responsavel por criar a interface :
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
@@ -49,6 +50,7 @@ class OnboardingActivity : AppCompatActivity() {
         buttonBack = findViewById(R.id.buttonBack)
 
 
+        // Definindo que o buttonBack ja comece como desativado :
         if (contentIndex == 0) {
 
 
@@ -64,6 +66,7 @@ class OnboardingActivity : AppCompatActivity() {
         buttonBack?.setOnClickListener {
 
 
+            // Efetuando a troca do fragment :
             if (contentIndex > 0) {
 
 
@@ -83,6 +86,8 @@ class OnboardingActivity : AppCompatActivity() {
 
             }
 
+
+            // Se o buttonBack voltar para a tela inicial ele desativo o buttonBack novamente :
             if (contentIndex == 0) {
 
 
@@ -121,6 +126,8 @@ class OnboardingActivity : AppCompatActivity() {
 
             }
 
+
+            // Ativa o buttonBack depois da primeira tela :
             if (contentIndex > 0) {
 
 
@@ -157,9 +164,8 @@ class OnboardingActivity : AppCompatActivity() {
             OnboardingFragment.createNewFragment(onboardingInformation.OnboardingInformation[contentIndex])
 
 
+        // Recebendo o fragment e retornando o newFragment :
         fragment = newFragment
-
-
         return newFragment
 
 

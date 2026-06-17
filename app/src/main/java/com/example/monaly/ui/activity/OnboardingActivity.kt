@@ -49,9 +49,15 @@ class OnboardingActivity : AppCompatActivity() {
         buttonBack = findViewById(R.id.buttonBack)
 
 
-        // Definindo que o buttonBack vai começar invisivel e desativado :
-        buttonBack?.visibility = View.INVISIBLE
-        buttonBack?.isEnabled = false
+        if (contentIndex == 0) {
+
+
+            // Definindo que o buttonBack vai começar invisivel e desativado :
+            buttonBack?.visibility = View.INVISIBLE
+            buttonBack?.isEnabled = false
+
+
+        }
 
 
         // Definindo o que o buttonBack faz :
@@ -73,26 +79,6 @@ class OnboardingActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.containerOnboarding, previousFragment)
                     .commit()
-
-
-            }
-
-
-            // Se voltou para a primeira tela (índice 0), desativa o botão de voltar :
-            if (contentIndex == 0) {
-
-
-                buttonBack?.isEnabled = false
-
-
-            }
-
-
-            // Se voltou de telas avançadas, garante que o botão Next volte a ficar ativo :
-            if (contentIndex < onboardingInformation.OnboardingInformation.size - 1) {
-
-
-                buttonNext?.isEnabled = true
 
 
             }
@@ -125,19 +111,10 @@ class OnboardingActivity : AppCompatActivity() {
 
             }
 
-
-            if (contentIndex == onboardingInformation.OnboardingInformation.size - 1) {
-
-
-                buttonBack?.isEnabled = false
+            if (contentIndex > 0) {
 
 
-            }
-
-
-            if (contentIndex == 1) {
-
-
+                buttonBack?.visibility = View.VISIBLE
                 buttonBack?.isEnabled = true
 
 

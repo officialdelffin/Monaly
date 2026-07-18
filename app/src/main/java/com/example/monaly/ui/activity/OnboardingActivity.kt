@@ -1,175 +1,88 @@
 package com.example.monaly.ui.activity
 
-
-// Importações :
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.viewpager2.widget.ViewPager2
 import com.example.monaly.R
-import com.example.monaly.ui.fragment.onboarding.OnboardingFragment
+import com.example.monaly.ui.fragment.onboarding.OnboardingAdapter
 import com.example.monaly.viewmodel.OnboardingViewModel
 
-
-// Classe responsavel por fazer o gerenciamento e a troca dos fragments do onboarding
 class OnboardingActivity : AppCompatActivity() {
 
+    // Componentes de UI
+    private lateinit var viewPager: ViewPager2
+    private lateinit var buttonBack: AppCompatButton
+    private lateinit var buttonNext: AppCompatButton
 
-    // Atributos :
-    var contentIndex = 0
-    var buttonBack: AppCompatButton? = null
-    var buttonNext: AppCompatButton? = null
-    var fragment: OnboardingFragment? = null
+    // Instância da ViewModel com os dados
+    private val onboardingViewModel = OnboardingViewModel()
 
-
-    // Intancias :
-    val onboardingInformation = OnboardingViewModel()
-
-
-    // Tela responsavel por criar a interface :
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
-        // Vinculando a Activity Onboarding :
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding)
 
-
-        // Chamando a função que inicializa o fragment e armazenando em uma variavel global :
-        val fragmentGlobal = setupInitialFragment()
-
-
-        // Fazendo a substituição do fragment dentro do container :
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.containerOnboarding, fragmentGlobal)
-            .commit()
-
-
-        // Capturando o buttonNext e armazenando em uma variavel:
+        // Inicializando os componentes de visualização
+        viewPager = findViewById(R.id.viewPagerOnboarding)
         buttonNext = findViewById(R.id.buttonNext)
         buttonBack = findViewById(R.id.buttonBack)
 
+        // Configurando o Adapter do ViewPager2 com a lista de páginas da ViewModel
+        val adapter = OnboardingAdapter(this, onboardingViewModel.OnboardingInformation)
+        viewPager.adapter = adapter
 
-        // Definindo que o buttonBack ja comece como desativado :
-        if (contentIndex == 0) {
+        // Registrando um listener para interceptar quando o usuário arrastar a tela para o lado
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                // Atualiza o estado visual dos botões com base na página atual
+                updateButtonsState(position)
+            }
+        })
 
-
-            // Definindo que o buttonBack vai começar invisivel e desativado :
-            buttonBack?.visibility = View.INVISIBLE
-            buttonBack?.isEnabled = false
-
-
+        // Configura o comportamento do botão "Voltar"
+        buttonBack.setOnClickListener {
+            val currentItem = viewPager.currentItem
+            if (currentItem > 0) {
+                // Altera a página do ViewPager2 de forma animada
+                viewPager.currentItem = currentItem - 1
+            }
         }
 
+        // Configura o comportamento do botão "Próximo"
+        buttonNext.setOnClickListener {
+            val currentItem = viewPager.currentItem
+            val totalItems = onboardingViewModel.OnboardingInformation.size
 
-        // Definindo o que o buttonBack faz :
-        buttonBack?.setOnClickListener {
-
-
-            // Efetuando a troca do fragment :
-            if (contentIndex > 0) {
-
-
-                // Diminui o índice para apontar para a pagina anterior :
-                contentIndex--
-
-
-                // Fabrica o fragmento com os dados da página anterior :
-                val previousFragment = setupInitialFragment()
-
-
-                // Atualiza a tela visualmente com o fragmento anterior :
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.containerOnboarding, previousFragment)
-                    .commit()
-
-
-            }
-
-
-            // Se o buttonBack voltar para a tela inicial ele desativo o buttonBack novamente :
-            if (contentIndex == 0) {
-
-
-                // Definindo que o buttonBack vai começar invisivel e desativado :
-                buttonBack?.visibility = View.INVISIBLE
-                buttonBack?.isEnabled = false
-
-
-            }
-
-
-        }
-
-
-        // Definindo o que o buttonNext faz :
-        buttonNext?.setOnClickListener {
-
-
-            // Soma mais um na variavel que controla a troca dos fragments do Onboarding :
-            contentIndex++
-
-
-            // Se a variavel tiver de controle de fragment for menor do que o numero de paginas que o onboarind tem ele permite uma ação :
-            if (contentIndex < onboardingInformation.OnboardingInformation.size) {
-
-
-                // Cria uma constante que chama a função que cria o fragment :
-                val nextFragment = setupInitialFragment()
-
-
-                // É aqui onde o gerenciamento realmente acontece do fragment onde o supportFragmentManager faz a troca dos dados :
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.containerOnboarding, nextFragment)
-                    .commit()
-
-
-            }
-
-
-            // Ativa o buttonBack depois da primeira tela :
-            if (contentIndex > 0) {
-
-
-                buttonBack?.visibility = View.VISIBLE
-                buttonBack?.isEnabled = true
-
-
-            }
-
-
-            // Caso o número da variavel que controla a troca de activity for maior que o numero de paginas que tem, ele finaliza ( Isso é temporario ) :
-            else {
-
-
-                // Finalizando ( Isso tambem é temporário ) :
+            if (currentItem < totalItems - 1) {
+                // Avança para a próxima página do Onboarding
+                viewPager.currentItem = currentItem + 1
+            } else {
+                // Chegou ao fim do Onboarding (comportamento temporário mantido)
                 finish()
-
-
             }
+        }
+    }
 
-
+    /**
+     * Atualiza dinamicamente a visibilidade e o estado de clique dos botões.
+     */
+    private fun updateButtonsState(position: Int) {
+        if (position == 0) {
+            // Se for a primeira página, esconde o botão de voltar
+            buttonBack.visibility = View.INVISIBLE
+            buttonBack.isEnabled = false
+        } else {
+            // Para qualquer outra página, exibe o botão de voltar
+            buttonBack.visibility = View.VISIBLE
+            buttonBack.isEnabled = true
         }
 
-
+        // Caso deseje mudar o texto do último botão de "Próximo" para "Entrar", o código ficaria aqui:
+        val totalItems = onboardingViewModel.OnboardingInformation.size
+        if (position == totalItems - 1) {
+            buttonNext.text = getString(R.string.onboarding_bottom_next) // Mantido mapeamento original
+        }
     }
-
-
-    // Esse trecho inicializa o fragmento com os dados corretos e o devolve para que a Activity possa usá-lo com o supportFragmentManager:
-    fun setupInitialFragment(): OnboardingFragment {
-
-
-        //Criando um novo fragment com o new fragment :
-        val newFragment =
-            OnboardingFragment.createNewFragment(onboardingInformation.OnboardingInformation[contentIndex])
-
-
-        // Recebendo o fragment e retornando o newFragment :
-        fragment = newFragment
-        return newFragment
-
-
-    }
-
-
 }

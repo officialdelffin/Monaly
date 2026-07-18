@@ -45,6 +45,10 @@ class OnboardingActivity : AppCompatActivity() {
         viewPager.adapter = adapter
 
 
+        // Configurando o pré-carregamento de uma página adjacente para garantir fluidez no swipe :
+        viewPager.offscreenPageLimit = 1
+
+
         // Registrando um listener para interceptar quando o usuário arrastar a tela para o lado :
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
 

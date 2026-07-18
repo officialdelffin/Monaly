@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 
-
+// Classe do adaptador do ViewPager2 encarregada de instanciar e gerenciar os fragmentos dinamicamente :
 class OnboardingAdapter( activity: AppCompatActivity, private val pages: List<OnboadingPage> ) : FragmentStateAdapter(activity) {
 
 
@@ -20,6 +20,7 @@ class OnboardingAdapter( activity: AppCompatActivity, private val pages: List<On
     override fun createFragment(position: Int): Fragment {
 
 
+        // Instancia um novo OnboardingFragment injetando os dados do model correspondente :
         return OnboardingFragment.createNewFragment(pages[position])
 
 

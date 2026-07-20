@@ -2,10 +2,13 @@ package com.example.monaly.ui.activity
 
 
 // Importações :
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColor
 import androidx.viewpager2.widget.ViewPager2
 import com.example.monaly.R
 import com.example.monaly.ui.fragment.onboarding.OnboardingAdapter
@@ -121,7 +124,7 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
 
-    // Função interna usada para habilitar, desabilitar ou ocultar os botões dependendo do índice da página atual :
+    // Função interna usada para habilitar, desabilitar ou ocultar os botões dependendo do índice da página atual e também faz a troca dos status do buttom :
     private fun updateButtonsState(position: Int) {
 
 
@@ -131,6 +134,22 @@ class OnboardingActivity : AppCompatActivity() {
             // Se for a primeira página, esconde o botão de voltar :
             buttonBack.visibility = View.INVISIBLE
             buttonBack.isEnabled = false
+
+
+        }
+
+        if (position == 2) {
+
+
+            // Definindo novos atributos do buttonNext:
+            val newTextEnter : String = getString(R.string.onboarding_bottom_login_in)
+            val newTextColorEnter : Int = ContextCompat.getColor(this, R.color.text_primary)
+            val newColorBage : Int = ContextCompat.getColor(this,R.color.bage_neutral)
+
+            // Se for a terceira página, o boão vai alterar a cor para bage e o text vai mudar para a string entrar :
+            buttonNext.text = newTextEnter
+            buttonNext.backgroundTintList = ColorStateList.valueOf(newColorBage)
+            buttonNext.setTextColor(newTextColorEnter)
 
 
         }

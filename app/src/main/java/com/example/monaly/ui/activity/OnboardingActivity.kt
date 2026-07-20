@@ -141,7 +141,7 @@ class OnboardingActivity : AppCompatActivity() {
         if (position == 2) {
 
 
-            // Definindo novos atributos do buttonNext:
+            // Definindo novos atributos do buttonNext :
             val newTextEnter : String = getString(R.string.onboarding_bottom_login_in)
             val newTextColorEnter : Int = ContextCompat.getColor(this, R.color.text_primary)
             val newColorBage : Int = ContextCompat.getColor(this,R.color.bage_neutral)
@@ -150,6 +150,23 @@ class OnboardingActivity : AppCompatActivity() {
             buttonNext.text = newTextEnter
             buttonNext.backgroundTintList = ColorStateList.valueOf(newColorBage)
             buttonNext.setTextColor(newTextColorEnter)
+
+
+        }
+
+        if (position != 2) {
+
+
+            // Definindo cores padrões do buttonNext :
+            val defaultTextButtonNext : String = getString(R.string.onboarding_bottom_next)
+            val defaultTextColorButtonNext : Int = ContextCompat.getColor(this, R.color.bage_neutral)
+            val defaultColorButtonNext : Int = ContextCompat.getColor(this, R.color.gray_medium)
+
+
+            // Se for a terceira página, o boão vai alterar a cor para bage e o text vai mudar para a string entrar :
+            buttonNext.text = defaultTextButtonNext
+            buttonNext.backgroundTintList = ColorStateList.valueOf(defaultColorButtonNext)
+            buttonNext.setTextColor(defaultTextColorButtonNext)
 
 
         }

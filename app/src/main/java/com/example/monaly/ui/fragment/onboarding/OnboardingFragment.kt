@@ -14,6 +14,7 @@ import com.example.monaly.R
 import com.example.monaly.model.OnboadingPage
 
 
+// Classe responsável por representar uma página individual do Onboarding, inflando o layout XML e vinculando os dados visuais na interface :
 class OnboardingFragment : Fragment() {
 
 

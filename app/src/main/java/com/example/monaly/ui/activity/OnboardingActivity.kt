@@ -8,7 +8,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.toColor
 import androidx.viewpager2.widget.ViewPager2
 import com.example.monaly.R
 import com.example.monaly.ui.fragment.onboarding.OnboardingAdapter
@@ -157,7 +156,7 @@ class OnboardingActivity : AppCompatActivity() {
         if (position != 2) {
 
 
-            // Definindo cores padrões do buttonNext :
+            // Definindo os colors padrões do buttonNext :
             val defaultTextButtonNext : String = getString(R.string.onboarding_bottom_next)
             val defaultTextColorButtonNext : Int = ContextCompat.getColor(this, R.color.bage_neutral)
             val defaultColorButtonNext : Int = ContextCompat.getColor(this, R.color.gray_medium)

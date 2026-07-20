@@ -182,10 +182,6 @@ class OnboardingActivity : AppCompatActivity() {
         }
 
 
-        // Caso deseje mudar o texto do último botão de "Próximo" para "Entrar", o código ficaria aqui :
-        val totalItems = onboardingViewModel.OnboardingInformation.size
-
-
     }
 
 

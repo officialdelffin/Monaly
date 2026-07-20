@@ -186,16 +186,6 @@ class OnboardingActivity : AppCompatActivity() {
         val totalItems = onboardingViewModel.OnboardingInformation.size
 
 
-        if (position == totalItems - 1) {
-
-
-            // Mantido mapeamento original :
-            buttonNext.text = getString(R.string.onboarding_bottom_next)
-
-
-        }
-
-
     }
 
 

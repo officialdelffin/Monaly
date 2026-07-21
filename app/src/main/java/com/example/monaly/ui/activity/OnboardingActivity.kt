@@ -3,6 +3,7 @@ package com.example.monaly.ui.activity
 
 // Importações :
 import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -127,16 +128,18 @@ class OnboardingActivity : AppCompatActivity() {
     private fun updateButtonsState(position: Int) {
 
 
+        // Se for a primeira página, esconde o botão de voltar :
         if (position == 0) {
 
 
-            // Se for a primeira página, esconde o botão de voltar :
             buttonBack.visibility = View.INVISIBLE
             buttonBack.isEnabled = false
 
 
         }
 
+
+        // Se for a 3 página ele muda as cores do button e muda o text :
         if (position == 2) {
 
 
@@ -144,15 +147,26 @@ class OnboardingActivity : AppCompatActivity() {
             val newTextEnter : String = getString(R.string.onboarding_bottom_login_in)
             val newTextColorEnter : Int = ContextCompat.getColor(this, R.color.text_primary)
             val newColorBage : Int = ContextCompat.getColor(this,R.color.bage_neutral)
+            val newArrowIcon : Drawable? = ContextCompat.getDrawable(this, R.drawable.icon_arrow_right_text_primary)
 
             // Se for a terceira página, o boão vai alterar a cor para bage e o text vai mudar para a string entrar :
             buttonNext.text = newTextEnter
             buttonNext.backgroundTintList = ColorStateList.valueOf(newColorBage)
             buttonNext.setTextColor(newTextColorEnter)
+            buttonNext.setCompoundDrawablesWithIntrinsicBounds(
+
+                null,
+                null,
+                newArrowIcon,
+                null
+
+            )
 
 
         }
 
+
+        // Definindo cor e text padrão para sempre voltarem as cores padrões quando sair da 3° tela do Onboarding :
         if (position != 2) {
 
 
@@ -160,12 +174,21 @@ class OnboardingActivity : AppCompatActivity() {
             val defaultTextButtonNext : String = getString(R.string.onboarding_bottom_next)
             val defaultTextColorButtonNext : Int = ContextCompat.getColor(this, R.color.bage_neutral)
             val defaultColorButtonNext : Int = ContextCompat.getColor(this, R.color.gray_medium)
+            val defalutArrowIcon : Drawable? = ContextCompat.getDrawable(this, R.drawable.icon_arrow_right_bage)
 
 
             // Se for a terceira página, o boão vai alterar a cor para bage e o text vai mudar para a string entrar :
             buttonNext.text = defaultTextButtonNext
             buttonNext.backgroundTintList = ColorStateList.valueOf(defaultColorButtonNext)
             buttonNext.setTextColor(defaultTextColorButtonNext)
+            buttonNext.setCompoundDrawablesWithIntrinsicBounds(
+
+                null,
+                null,
+                defalutArrowIcon,
+                null
+
+            )
 
 
         }

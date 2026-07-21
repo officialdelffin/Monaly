@@ -1,12 +1,11 @@
 
 // Pacotes :
-package com.example.monaly.viewmodel
+package com.example.monaly.ui.viewmodel
 
 
 // Importações :
 import com.example.monaly.R
-import com.example.monaly.model.OnboadingPage
-import com.example.monaly.ui.fragment.onboarding.OnboardingFragment
+import com.example.monaly.domain.model.OnboadingPage
 
 
 // Essa classe é responsável por generenciar as informações das telas de onboarding, como foto, titulo e descrição :

@@ -1,6 +1,6 @@
 
 // Pacote :
-package com.example.monaly.main
+package com.example.monaly.ui.main
 
 
 // Importações :

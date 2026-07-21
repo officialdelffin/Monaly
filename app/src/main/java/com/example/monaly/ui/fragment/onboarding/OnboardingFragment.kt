@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import coil.load
 import com.example.monaly.R
-import com.example.monaly.model.OnboadingPage
+import com.example.monaly.domain.model.OnboadingPage
 
 
 // Classe responsável por representar uma página individual do Onboarding, inflando o layout XML e vinculando os dados visuais na interface :

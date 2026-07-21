@@ -1,6 +1,6 @@
 
 // Pacote :
-package com.example.monaly.model
+package com.example.monaly.domain.model
 
 
 // Importações :

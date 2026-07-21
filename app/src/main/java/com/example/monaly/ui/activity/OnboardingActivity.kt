@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.monaly.R
 import com.example.monaly.ui.fragment.onboarding.OnboardingAdapter
-import com.example.monaly.viewmodel.OnboardingViewModel
+import com.example.monaly.ui.viewmodel.OnboardingViewModel
 
 
 // Classe responsável por gerenciar o ciclo de vida da tela de Onboarding e a interação com os botões de navegação :

@@ -1,52 +1,25 @@
-
-// Pacotes :
 package com.example.monaly.ui.viewmodel
 
 
 // Importações :
-import com.example.monaly.R
 import com.example.monaly.domain.model.OnboadingPage
+import com.example.monaly.data.repository.OnboardingRepositoryImplementation
+import com.example.monaly.domain.repository.OnboardingRepository
 
 
-// Essa classe é responsável por generenciar as informações das telas de onboarding, como foto, titulo e descrição :
-class OnboardingViewModel {
+// O ViewModel recebe o repositório como uma dependência para funcionar :
+class OnboardingViewModel(
 
 
-    // Lista com os dados da apresentação :
-    val OnboardingInformation = listOf(
+    // Instanciando temporariamente a implementação manual (pagaremos essa dívida técnica com Injeção de Dependência depois) :
+    private val repository: OnboardingRepository = OnboardingRepositoryImplementation()
 
 
-        OnboadingPage(
-
-            title = R.string.onboarding_label_welcome,
-            description = R.string.onboarding_description_one,
-            image = R.drawable.img_onboardin_one
-
-        ),
-
-        OnboadingPage(
+) {
 
 
-            title = R.string.onboarding_memories,
-            description = R.string.ondoarding_description_two,
-            image = R.drawable.img_onboardin_two
-
-
-        ),
-
-        OnboadingPage(
-
-
-
-            title = R.string.onboarding_history,
-            description = R.string.onboarding_description_three,
-            image = R.drawable.img_onboardin_three
-
-
-        )
-
-
-    )
+    // A variável agora chama a função do repositório em vez de fabricar a lista :
+    val OnboardingInformation: List<OnboadingPage> = repository.getPages()
 
 
 }

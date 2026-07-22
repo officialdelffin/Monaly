@@ -10,7 +10,7 @@ interface OnboardingRepository {
 
 
     // criando a função getPage que devolve uma lista de objetos da pagina do OnboardingPage :
-    fun getPage() : List<OnboadingPage>
+    fun getPages() : List<OnboadingPage>
 
 
 }

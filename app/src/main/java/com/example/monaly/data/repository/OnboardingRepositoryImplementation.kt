@@ -12,7 +12,7 @@ class OnboardingRepositoryImplementation : OnboardingRepository {
 
 
     // Sobrescrevendo o metodo getPage da interface OnboardingRepository :
-    override fun getPage(): List<OnboadingPage> {
+    override fun getPages(): List<OnboadingPage> {
 
 
         // Retornando a list com todos os dados para fornecer pora fazer a entrega :

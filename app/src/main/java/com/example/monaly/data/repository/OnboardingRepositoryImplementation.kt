@@ -19,6 +19,7 @@ class OnboardingRepositoryImplementation : OnboardingRepository {
         return listOf(
 
 
+            // Dados da pagina one :
             OnboadingPage(
 
 
@@ -30,6 +31,7 @@ class OnboardingRepositoryImplementation : OnboardingRepository {
             ),
 
 
+            // Dados da pagina two :
             OnboadingPage(
 
 
@@ -41,6 +43,7 @@ class OnboardingRepositoryImplementation : OnboardingRepository {
             ),
 
 
+            // Dados da pagina three :
             OnboadingPage(
 
 
@@ -53,7 +56,6 @@ class OnboardingRepositoryImplementation : OnboardingRepository {
 
 
         )
-
 
 
     }

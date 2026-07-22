@@ -139,6 +139,17 @@ class OnboardingActivity : AppCompatActivity() {
         }
 
 
+        // Se não for a primeira página, habilita o botão novamente :
+        if (position != 0) {
+
+
+            buttonBack.visibility = View.VISIBLE
+            buttonBack.isEnabled = true
+
+
+        }
+
+
         // Se for a 3 página ele muda as cores do button e muda o text :
         if (position == 2) {
 

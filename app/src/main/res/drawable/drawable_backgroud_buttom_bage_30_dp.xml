@@ -4,7 +4,7 @@
 
 
     <solid android:color="@color/bage_neutral"/>
-    <corners android:radius="30dp"/>
+    <corners android:radius="10dp"/>
 
 
 

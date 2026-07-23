@@ -8,7 +8,7 @@
     tools:context=".ui.activity.LoginActivity">
 
     <androidx.appcompat.widget.AppCompatButton
-        android:background="@drawable/drawable_backgroud_buttom_bage_30_dp"
+        android:background="@drawable/drawable_backgroud_button_bage_10_dp"
         android:id="@+id/button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -184,7 +184,7 @@ class OnboardingActivity : AppCompatActivity() {
             // Definindo os colors padrões do buttonNext :
             val defaultTextButtonNext : String = getString(R.string.onboarding_bottom_next)
             val defaultTextColorButtonNext : Int = ContextCompat.getColor(this, R.color.bage_neutral)
-            val defaultColorButtonNext : Int = ContextCompat.getColor(this, R.color.gray_medium)
+            val defaultColorButtonNext : Int = ContextCompat.getColor(this, R.color.gray_dark)
             val defalutArrowIcon : Drawable? = ContextCompat.getDrawable(this, R.drawable.icon_arrow_right_bage)
 
 

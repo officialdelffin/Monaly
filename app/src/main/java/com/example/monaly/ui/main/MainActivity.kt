@@ -1,5 +1,3 @@
-
-// Pacote :
 package com.example.monaly.ui.main
 
 

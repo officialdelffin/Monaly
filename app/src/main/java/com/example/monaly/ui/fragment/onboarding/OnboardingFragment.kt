@@ -105,11 +105,7 @@ class OnboardingFragment : Fragment() {
 
 
             val fragment = OnboardingFragment()
-
-
             fragment.arguments = dataPage
-
-
             return fragment
 
 

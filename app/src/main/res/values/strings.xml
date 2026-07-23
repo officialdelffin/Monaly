@@ -5,6 +5,8 @@
     <string name="app_name">Monaly</string>
 
 
+
+
     <!-- Textos do Onboarding : -->
 
     <!-- Tela Ondoarding Um : -->
@@ -30,11 +32,18 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
+
+
     <!-- Textos do Login : -->
 
     <!-- Titulo do Login : -->
+    <string name="login_title"><b>De volta às suas memórias Monaly</b></string>
+
     <!-- Descrição do login : -->
+    <string name="login_description">Suas coleções em grupo e conexões privadas estão esperando por você. Acesse para ver as novidades nos seus álbuns.</string>
+
     <!-- Botão de entrar com google do Login : -->
+    <string name="login_button"><b>Logar com o Google</b></string>
 
 
 </resources>

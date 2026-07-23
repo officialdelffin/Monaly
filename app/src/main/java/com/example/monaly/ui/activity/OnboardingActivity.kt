@@ -156,7 +156,7 @@ class OnboardingActivity : AppCompatActivity() {
 
             // Definindo novos atributos do buttonNext :
             val newTextEnter : String = getString(R.string.onboarding_bottom_login_in)
-            val newTextColorEnter : Int = ContextCompat.getColor(this, R.color.text_primary)
+            val newTextColorEnter : Int = ContextCompat.getColor(this, R.color.gray_deep)
             val newColorBage : Int = ContextCompat.getColor(this,R.color.bage_neutral)
             val newArrowIcon : Drawable? = ContextCompat.getDrawable(this, R.drawable.icon_arrow_right_text_primary)
 

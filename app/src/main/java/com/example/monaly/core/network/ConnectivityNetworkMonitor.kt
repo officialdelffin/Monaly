@@ -22,26 +22,24 @@ class ConnectivityNetworkMonitor (private val context : Context) : NetworkMonito
     override val isOnline: Flow<Boolean> = callbackFlow {
 
 
-        // 1. Criamos o "ouvinte" oficial do Android para a placa de rede :
+        // 1. Criamos o nosso ouvinte oficial do Android para a placa de rede :
         val callback = object : ConnectivityManager.NetworkCallback() {
 
 
-            // Acionado automaticamente quando o celular se conecta a uma rede válida :
+            // Acionado automaticamente quando o celular se conecta a uma rede válida e injeta o valor true dentro do fluxo :
             override fun onAvailable(network: Network) {
 
 
-                // Injetamos o valor "true" dentro do fluxo :
                 trySend(true)
 
 
             }
 
 
-            // Acionado automaticamente quando o celular perde a conexão :
+            // Acionado automaticamente quando o celular perde a conexão e injetanto do valor false dentro do fluxp :
             override fun onLost(network: Network) {
 
 
-                // Injetamos o valor "false" dentro do fluxo :
                 trySend(false)
 
 
@@ -57,11 +55,10 @@ class ConnectivityNetworkMonitor (private val context : Context) : NetworkMonito
         trySend(isCurrentlyConnected)
 
 
-        // Bloqueio de segurança e limpeza (evita vazamento de memória) :
+        // Bloqueio de segurança e limpeza que evita vazamento de memória e definindo quando o aplicativo fechar ou a tela for destruída, desativamos o ouvinte :
         awaitClose {
 
 
-            // Quando o aplicativo fechar ou a tela for destruída, desativamos o ouvinte :
             connectivityManager.unregisterNetworkCallback(callback)
 
 

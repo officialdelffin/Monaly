@@ -2,7 +2,7 @@ package com.example.monaly.ui.fragment.onboarding
 
 
 // Importações :
-import com.example.monaly.model.OnboadingPage
+import com.example.monaly.domain.model.OnboadingPage
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

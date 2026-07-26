@@ -2,14 +2,17 @@ package com.example.monaly.ui.activity
 
 
 // Importações :
+import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.monaly.R
 import com.example.monaly.ui.fragment.onboarding.OnboardingAdapter
-import com.example.monaly.viewmodel.OnboardingViewModel
+import com.example.monaly.ui.viewmodel.OnboardingViewModel
 
 
 // Classe responsável por gerenciar o ciclo de vida da tela de Onboarding e a interação com os botões de navegação :
@@ -121,16 +124,82 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
 
-    // Função interna usada para habilitar, desabilitar ou ocultar os botões dependendo do índice da página atual :
+    // Função interna usada para habilitar, desabilitar ou ocultar os botões dependendo do índice da página atual e também faz a troca dos status do buttom :
     private fun updateButtonsState(position: Int) {
 
 
+        // Se for a primeira página, esconde o botão de voltar :
         if (position == 0) {
 
 
-            // Se for a primeira página, esconde o botão de voltar :
             buttonBack.visibility = View.INVISIBLE
             buttonBack.isEnabled = false
+
+
+        }
+
+
+        // Se não for a primeira página, habilita o botão novamente :
+        if (position != 0) {
+
+
+            buttonBack.visibility = View.VISIBLE
+            buttonBack.isEnabled = true
+
+
+        }
+
+
+        // Se for a 3 página ele muda as cores do button e muda o text :
+        if (position == 2) {
+
+
+            // Definindo novos atributos do buttonNext :
+            val newTextEnter : String = getString(R.string.onboarding_bottom_login_in)
+            val newTextColorEnter : Int = ContextCompat.getColor(this, R.color.gray_deep)
+            val newColorBage : Int = ContextCompat.getColor(this,R.color.bage_neutral)
+            val newArrowIcon : Drawable? = ContextCompat.getDrawable(this, R.drawable.icon_arrow_right_text_primary)
+
+            // Se for a terceira página, o boão vai alterar a cor para bage e o text vai mudar para a string entrar :
+            buttonNext.text = newTextEnter
+            buttonNext.backgroundTintList = ColorStateList.valueOf(newColorBage)
+            buttonNext.setTextColor(newTextColorEnter)
+            buttonNext.setCompoundDrawablesWithIntrinsicBounds(
+
+                null,
+                null,
+                newArrowIcon,
+                null
+
+            )
+
+
+        }
+
+
+        // Definindo cor e text padrão para sempre voltarem as cores padrões quando sair da 3° tela do Onboarding :
+        if (position != 2) {
+
+
+            // Definindo os colors padrões do buttonNext :
+            val defaultTextButtonNext : String = getString(R.string.onboarding_bottom_next)
+            val defaultTextColorButtonNext : Int = ContextCompat.getColor(this, R.color.bage_neutral)
+            val defaultColorButtonNext : Int = ContextCompat.getColor(this, R.color.gray_dark)
+            val defalutArrowIcon : Drawable? = ContextCompat.getDrawable(this, R.drawable.icon_arrow_right_bage)
+
+
+            // Se for a terceira página, o boão vai alterar a cor para bage e o text vai mudar para a string entrar :
+            buttonNext.text = defaultTextButtonNext
+            buttonNext.backgroundTintList = ColorStateList.valueOf(defaultColorButtonNext)
+            buttonNext.setTextColor(defaultTextColorButtonNext)
+            buttonNext.setCompoundDrawablesWithIntrinsicBounds(
+
+                null,
+                null,
+                defalutArrowIcon,
+                null
+
+            )
 
 
         }
@@ -142,20 +211,6 @@ class OnboardingActivity : AppCompatActivity() {
             // Para qualquer outra página, exibe o botão de voltar :
             buttonBack.visibility = View.VISIBLE
             buttonBack.isEnabled = true
-
-
-        }
-
-
-        // Caso deseje mudar o texto do último botão de "Próximo" para "Entrar", o código ficaria aqui :
-        val totalItems = onboardingViewModel.OnboardingInformation.size
-
-
-        if (position == totalItems - 1) {
-
-
-            // Mantido mapeamento original :
-            buttonNext.text = getString(R.string.onboarding_bottom_next)
 
 
         }

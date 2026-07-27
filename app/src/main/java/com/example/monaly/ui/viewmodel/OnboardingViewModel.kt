@@ -15,6 +15,8 @@ class OnboardingViewModel(
 
     // Instanciando temporariamente a implementação manual (pagaremos essa dívida técnica com Injeção de Dependência depois) :
     private val repository: OnboardingRepository = OnboardingRepositoryImplementation(),
+
+
     private val networkMonitor: NetworkMonitor
 
 

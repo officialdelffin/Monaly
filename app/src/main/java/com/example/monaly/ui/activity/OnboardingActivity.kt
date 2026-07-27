@@ -2,15 +2,20 @@ package com.example.monaly.ui.activity
 
 
 // Importações :
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.monaly.R
+import com.example.monaly.core.network.ConnectivityNetworkMonitor
 import com.example.monaly.ui.fragment.onboarding.OnboardingAdapter
 import com.example.monaly.ui.viewmodel.OnboardingViewModel
 
@@ -25,8 +30,8 @@ class OnboardingActivity : AppCompatActivity() {
     private lateinit var buttonNext: AppCompatButton
 
 
-    // Instância da ViewModel com os dados :
-    private val onboardingViewModel = OnboardingViewModel()
+    // Avisamos ao Kotlin que o ViewModel será inicializado depois, usando a Fábrica dentro do onCreate :
+    private lateinit var onboardingViewModel: OnboardingViewModel
 
 
     // Função que inicializa a activity, infla o layout e configura os listeners de eventos da tela :
@@ -35,6 +40,33 @@ class OnboardingActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding)
+
+
+        // Instanciamos o nosso monitor passando o Context this representa a própria Activity :
+        val networkMonitor = ConnectivityNetworkMonitor(this)
+
+
+        // Criamos uma fábrica para ensinar o Android a construir o OnboardingViewModel :
+        val factory = object : ViewModelProvider.Factory {
+
+
+            // Sobrescrevemos o método de criação padrão :
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+
+
+                // Retornamos o nosso ViewModel injetando o monitor recém-criado :
+                @Suppress("UNCHECKED_CAST")
+                return OnboardingViewModel(networkMonitor = networkMonitor) as T
+
+
+            }
+
+
+        }
+
+
+        // Finalmente, pedimos ao Android para nos dar o ViewModel usando a nossa fábrica :
+        onboardingViewModel = ViewModelProvider(this, factory)[OnboardingViewModel::class.java]
 
 
         // Inicializando os componentes de visualização :
@@ -111,8 +143,33 @@ class OnboardingActivity : AppCompatActivity() {
             } else {
 
 
-                // Chegou ao fim do Onboarding - comportamento temporário mantido :
-                finish()
+                // Chegou ao fim do Onboarding, verificamos a internet no fluxo de estado :
+                val hasInternet = onboardingViewModel.isOnline.value
+
+
+                if (hasInternet) {
+
+
+                    // Se tem internet, criamos a intenção de navegar para a tela de Login :
+                    val intent = Intent(this, LoginActivity::class.java)
+
+
+                    // Iniciamos a nova tela :
+                    startActivity(intent)
+
+
+                    // Encerramos a tela de onboarding para o usuário não voltar com o botão de voltar do sistema :
+                    finish()
+
+
+                } else {
+
+
+                    // Se não tem internet, exibimos uma notificação bloqueando o acesso :
+                    Toast.makeText(this, "Sem conexão com a internet. Verifique sua rede e tente novamente.", Toast.LENGTH_LONG).show()
+
+
+                }
 
 
             }

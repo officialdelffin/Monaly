@@ -12,7 +12,20 @@
           "package_name": "com.example.monaly"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "205670454949-hhiik60iralkarek582v0j2q8n3qri7r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.monaly",
+            "certificate_hash": "26cc65f6232cf1532465a8291181c534a17ee697"
+          }
+        },
+        {
+          "client_id": "205670454949-ts73kmpvdh5m3bcp7pl7611202po91i7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA_x5VRUBqnZJx06KyfL3bFCP5AV74nLko"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205670454949-ts73kmpvdh5m3bcp7pl7611202po91i7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

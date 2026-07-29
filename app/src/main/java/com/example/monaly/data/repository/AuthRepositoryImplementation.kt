@@ -16,6 +16,7 @@ class AuthRepositoryImpl(private val auth: FirebaseAuth) : AuthRepository {
     override suspend fun signInWithGoogle(idToken: String): Result<Boolean> {
 
 
+        // Executando um trycatch :
         return try {
 
 
@@ -23,7 +24,7 @@ class AuthRepositoryImpl(private val auth: FirebaseAuth) : AuthRepository {
             val credential = GoogleAuthProvider.getCredential(idToken, null)
 
 
-            // Aciona o Firebase para tentar o login com a credencial e aguarda a resposta (await) :
+            // Aciona o Firebase para tentar o login com a credencial e aguarda a resposta - await :
             auth.signInWithCredential(credential).await()
 
 

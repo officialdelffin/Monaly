@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "205670454949",
+    "project_id": "official-monaly",
+    "storage_bucket": "official-monaly.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205670454949:android:ee2cbe0c112badf3e55f4c",
+        "android_client_info": {
+          "package_name": "com.example.monaly"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_x5VRUBqnZJx06KyfL3bFCP5AV74nLko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

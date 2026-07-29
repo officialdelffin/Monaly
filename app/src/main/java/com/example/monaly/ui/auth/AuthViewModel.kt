@@ -38,11 +38,8 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
         viewModelScope.launch {
 
 
-            // Avisa a tela que o carregamento começou, sendo útil para mostrar um ProgressBar :
+            // Avisa a tela que o carregamento começou, sendo útil para mostrar um ProgressBar e depois tenta fazer o login usando a função que criamos no repositório :
             _authState.value = AuthState.Loading
-
-
-            // Tenta fazer o login usando a função que criamos no repositório :
             val result = repository.signInWithGoogle(idToken)
 
 
@@ -57,6 +54,8 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
 
 
                 },
+
+
                 onFailure = {
 
 

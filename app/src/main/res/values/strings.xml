@@ -26,8 +26,8 @@
 
     <!-- Textos Botões Onboarding : -->
 
-    <string name="onboarding_bottom_next"><b>Próximo</b></string>
-    <string name="onboarding_bottom_login_in"><b>Entrar</b></string>
+    <string name="onboarding_bottom_next">Próximo</string>
+    <string name="onboarding_bottom_login_in">Entrar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -43,7 +43,7 @@
     <string name="login_description">Suas coleções em grupo e conexões privadas estão esperando por você. Acesse para ver as novidades nos seus álbuns.</string>
 
     <!-- Botão de entrar com google do Login : -->
-    <string name="login_button"><b>Logar com o Google</b></string>
+    <string name="login_button">Logar com o Google</string>
 
 
 </resources>

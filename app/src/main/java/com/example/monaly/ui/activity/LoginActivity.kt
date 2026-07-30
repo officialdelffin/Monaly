@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         // Mapeando o botão da interface :
-        val buttonLogin = findViewById<AppCompatButton>(R.id.buttonLogin)
+        val buttonLogin = findViewById<AppCompatButton>(R.id.buttonLoginGoogle)
 
 
         // Configurando a ação de clique do botão de Entrar :

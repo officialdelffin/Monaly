@@ -117,19 +117,14 @@ class LoginActivity : AppCompatActivity() {
                 when (state) {
 
 
-                    is AuthState.Idle -> {
+                    // Estado inicial, não a nada a ser feito ainda :
+                    is AuthState.Idle -> { }
 
 
-                        // Estado inicial, não fazemos nada :
-
-
-                    }
-
-
+                    // bloqueamos o clique enquanto carrega para evitar múltiplos logins :
                     is AuthState.Loading -> {
 
 
-                        // Enquanto carrega, bloqueamos o clique para evitar múltiplos logins :
                         buttonLogin.isEnabled = false
                         buttonLogin.text = "Autenticando..."
 
@@ -137,6 +132,7 @@ class LoginActivity : AppCompatActivity() {
                     }
 
 
+                    // Caso a aprovação for feita :
                     is AuthState.Success -> {
 
 
@@ -144,6 +140,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this@LoginActivity, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show()
 
 
+                        // Definindo o caminho do intent :
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)
 
@@ -155,10 +152,10 @@ class LoginActivity : AppCompatActivity() {
                     }
 
 
+                    // Se o Firebase recusou, liberamos o botão novamente e mostramos o erro :
                     is AuthState.Error -> {
 
 
-                        // Se o Firebase recusou, liberamos o botão novamente e mostramos o erro :
                         buttonLogin.isEnabled = true
                         buttonLogin.text = getString(R.string.login_button)
                         Toast.makeText(this@LoginActivity, state.message, Toast.LENGTH_LONG).show()

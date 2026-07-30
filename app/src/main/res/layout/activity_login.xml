@@ -36,7 +36,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/drawable_backgroud_button_bage_10_dp"
         android:drawableRight="@drawable/icon_arrow_right_text_primary"
         android:gravity="start|center_vertical"

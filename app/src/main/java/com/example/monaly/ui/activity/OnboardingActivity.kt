@@ -18,6 +18,8 @@ import com.example.monaly.R
 import com.example.monaly.core.network.ConnectivityNetworkMonitor
 import com.example.monaly.ui.fragment.onboarding.OnboardingAdapter
 import com.example.monaly.ui.viewmodel.OnboardingViewModel
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 
 // Classe responsável por gerenciar o ciclo de vida da tela de Onboarding e a interação com os botões de navegação :
@@ -73,6 +75,16 @@ class OnboardingActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.viewPagerOnboarding)
         buttonNext = findViewById(R.id.buttonNext)
         buttonBack = findViewById(R.id.buttonBack)
+
+
+        // Mantém o fluxo de internet sempre ativo e observando as mudanças reais de rede :
+        lifecycleScope.launch {
+
+
+            onboardingViewModel.isOnline.collect { status -> }
+
+
+        }
 
 
         // Configurando o Adapter do ViewPager2 com a lista de páginas da ViewModel :

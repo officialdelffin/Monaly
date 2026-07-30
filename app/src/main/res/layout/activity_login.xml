@@ -32,26 +32,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonLoginGoogle"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/drawable_backgroun_button_gray_dark_10_dp"
-        android:drawableRight="@drawable/icon_arrow_right_bage"
-        android:gravity="start|center_vertical"
-        android:paddingStart="25dp"
-        android:paddingEnd="25dp"
-        android:text="@string/login_button"
-        android:textAllCaps="false"
-        android:textColor="@color/bage_neutral"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageBackgroundLogin"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="291dp"
+        android:layout_height="289dp"
+        app:layout_constraintBottom_toTopOf="@+id/textTitleLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.481"
+        app:srcCompat="@drawable/img_logo_monaly" />
 
     <TextView
         android:id="@+id/textTitleLogin"
@@ -82,16 +72,26 @@
         android:textSize="16dp"
         android:textColor="@color/gray_medium" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="291dp"
-        android:layout_height="289dp"
-        app:layout_constraintBottom_toTopOf="@+id/textTitleLogin"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonLoginGoogle"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/drawable_backgroun_button_gray_dark_10_dp"
+        android:drawableRight="@drawable/icon_arrow_right_bage"
+        android:gravity="start|center_vertical"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:text="@string/login_button"
+        android:textAllCaps="false"
+        android:textColor="@color/bage_neutral"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageBackgroundLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.481"
-        app:srcCompat="@drawable/img_logo_monaly" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

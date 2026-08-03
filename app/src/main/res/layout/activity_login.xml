@@ -85,7 +85,7 @@
         android:paddingEnd="25dp"
         android:text="@string/login_button"
         android:textAllCaps="false"
-        android:textColor="@color/gray_dark"
+        android:textColor="@color/black"
         android:textSize="18dp"
         app:backgroundTint="@null"
         app:icon="@drawable/img_icon_google"

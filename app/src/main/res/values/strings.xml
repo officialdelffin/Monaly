@@ -43,7 +43,7 @@
     <string name="login_description">Suas coleções em grupo e conexões privadas estão esperando por você. Acesse para ver as novidades nos seus álbuns.</string>
 
     <!-- Botão de entrar com google do Login : -->
-    <string name="login_button">Logar com o Google</string>
+    <string name="login_button">Entrar com o Google</string>
 
 
 </resources>

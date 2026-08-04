@@ -16,7 +16,6 @@ import com.example.monaly.data.repository.AuthRepositoryImpl
 import com.example.monaly.ui.auth.AuthState
 import com.example.monaly.ui.auth.AuthViewModel
 import com.example.monaly.ui.auth.GoogleAuthUiClient
-import com.example.monaly.ui.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 

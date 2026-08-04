@@ -5,8 +5,6 @@
     <string name="app_name">Monaly</string>
 
 
-
-
     <!-- Textos do Onboarding : -->
 
     <!-- Tela Ondoarding Um : -->
@@ -30,8 +28,6 @@
     <string name="onboarding_bottom_login_in">Entrar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-
 
 
     <!-- Textos do Login : -->

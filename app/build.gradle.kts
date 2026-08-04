@@ -60,6 +60,8 @@ kotlin {
 
 dependencies {
 
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
     implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
     implementation("androidx.credentials:credentials-play-services-auth:1.2.2")
     implementation("androidx.credentials:credentials:1.2.2")

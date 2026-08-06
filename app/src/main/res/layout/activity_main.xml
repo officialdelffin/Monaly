@@ -24,6 +24,7 @@
     <!-- A barra de navegação inferior preparada para flutuar no futuro : -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
+        style="@style/Widget.MaterialComponents.BottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="30dp"
@@ -37,7 +38,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/button_nav_menu"
         app:itemIconTint="@color/selector_button_nav_colors"
-        app:itemActiveIndicatorEnabled="false"
         app:itemRippleColor="@null"
         app:labelVisibilityMode="selected"
         app:itemTextColor="@android:color/transparent" />

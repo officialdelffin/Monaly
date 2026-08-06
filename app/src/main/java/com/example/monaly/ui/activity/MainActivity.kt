@@ -33,6 +33,19 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        // Primeiro encontramos o nosso NavHostFragment pelo ID :
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as androidx.navigation.fragment.NavHostFragment
+
+
+        // Segundo extraímos o controlador de navegação interno dele :
+        val navController = navHostFragment.navController
+
+
+        // Terceiro conectamos o controlador à nossa barra inferior flutuante :
+        val bottomNavigationView = findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigationView)
+        androidx.navigation.ui.NavigationUI.setupWithNavController(bottomNavigationView, navController)
+
+
     }
 
 

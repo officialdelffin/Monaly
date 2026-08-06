@@ -25,15 +25,21 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/drawable_background_button_gray_deep_10_dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        app:itemActiveIndicatorEnabled="false"
+        app:itemIconTint="@color/selector_button_nav_colors"
+        app:itemRippleColor="@null"
+        app:itemTextColor="@android:color/transparent"
+        app:labelVisibilityMode="selected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="unlabeled" />
+        app:menu="@menu/button_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

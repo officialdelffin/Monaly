@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+
+    <!-- Aba Início : -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.monaly.ui.fragment.HomeFragment"
+        tools:layout="@layout/fragment_home" />
+
+
+    <!-- Aba Galeria : -->
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="com.example.monaly.ui.fragment.GalleryFragment"
+        tools:layout="@layout/fragment_gallery" />
+
+
+    <!-- Aba Álbuns : -->
+    <fragment
+        android:id="@+id/albumsFragment"
+        android:name="com.example.monaly.ui.fragment.AlbumsFragment"
+        tools:layout="@layout/fragment_albums" />
+
+
+    <!-- Aba Perfil : -->
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.monaly.ui.fragment.ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
+
 
 </navigation>

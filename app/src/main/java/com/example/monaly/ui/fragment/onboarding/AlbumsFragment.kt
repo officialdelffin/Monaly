@@ -7,4 +7,4 @@ import com.example.monaly.R
 
 
 // Usamos o construtor direto do Fragment para injetar o layout sem precisar de boilerplate :
-class AlbumsFragmet : Fragment(R.layout.fragment_albums)
+class AlbumsFragment : Fragment(R.layout.fragment_albums)

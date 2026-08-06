@@ -11,6 +11,7 @@ android {
     namespace = "com.example.monaly"
     compileSdk = 36
 
+
     defaultConfig {
 
         applicationId = "com.example.monaly"
@@ -71,7 +72,7 @@ dependencies {
     implementation("io.coil-kt:coil:2.6.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+    implementation("com.google.android.material:material:1.11.0")
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)

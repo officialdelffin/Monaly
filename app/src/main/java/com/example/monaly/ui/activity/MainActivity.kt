@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
 
         // Conectamos o controlador à nossa barra inferior flutuante :
         val bottomNavigationView = findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigationView)
-        androidx.navigation.ui.NavigationUI.setupWithNavController(bottomNavigationView, navController)
 
 
     }

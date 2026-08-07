@@ -20,24 +20,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        style="@style/Widget.MaterialComponents.BottomNavigationView"
-        android:layout_width="0dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/drawable_background_button_gray_deep_10_dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        app:itemIconTint="@color/selector_button_nav_colors"
-        app:itemRippleColor="@null"
-        app:itemTextColor="@android:color/transparent"
-        app:labelVisibilityMode="selected"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/button_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,7 +26,7 @@
         android:id="@+id/bottomNavigationView"
         style="@style/Widget.MaterialComponents.BottomNavigationView"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
@@ -39,6 +39,9 @@
         app:menu="@menu/button_nav_menu"
         app:itemIconTint="@color/selector_button_nav_colors"
         app:itemRippleColor="@null"
-        app:labelVisibilityMode="unlabeled" />
+        app:labelVisibilityMode="selected"
+        app:itemTextColor="@android:color/transparent"
+        app:itemPaddingTop="14dp"
+        app:itemPaddingBottom="8dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

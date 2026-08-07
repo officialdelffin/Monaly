@@ -39,7 +39,6 @@
         app:menu="@menu/button_nav_menu"
         app:itemIconTint="@color/selector_button_nav_colors"
         app:itemRippleColor="@null"
-        app:labelVisibilityMode="selected"
-        app:itemTextColor="@android:color/transparent" />
+        app:labelVisibilityMode="unlabeled" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

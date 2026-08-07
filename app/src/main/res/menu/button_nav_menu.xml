@@ -4,25 +4,21 @@
     <!-- Item da aba Início onde ficará o fluxo híbrido com a Câmera : -->
     <item
         android:id="@+id/homeFragment"
-        android:icon="@android:drawable/ic_menu_compass"
-        android:title="Início" />
+        android:icon="@android:drawable/ic_menu_compass" />
 
     <!-- Item da aba Galeria Geral : -->
     <item
         android:id="@+id/galleryFragment"
-        android:icon="@android:drawable/ic_menu_gallery"
-        android:title="Galeria" />
+        android:icon="@android:drawable/ic_menu_gallery" />
 
     <!-- Item da aba Álbuns Compartilhados : -->
     <item
         android:id="@+id/albumsFragment"
-        android:icon="@android:drawable/ic_menu_slideshow"
-        android:title="Álbuns" />
+        android:icon="@android:drawable/ic_menu_slideshow"/>
 
     <!-- Item da aba de Perfil : -->
     <item
         android:id="@+id/profileFragment"
-        android:icon="@android:drawable/ic_menu_myplaces"
-        android:title="Perfil" />
+        android:icon="@android:drawable/ic_menu_myplaces" />
 
 </menu>

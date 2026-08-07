@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Primeiro : Sobrescrevemos a margem interna padrão (que empurra o ícone para cima). Ao zerar isso, o ícone desce para o centro naturalmente : -->
+    <dimen name="design_bottom_navigation_margin">5dp</dimen>
+
+    <!--  Segundo : Diminuímos levemente o tamanho do "texto fantasma" para que ele não ocupe tanto espaço, dando mais liberdade para a barra de 70dp respirar : -->
+    <dimen name="design_bottom_navigation_text_size">0sp</dimen>
+
+    <!-- Terceiro : Tamanho do texto quando ativo (também reduzido para manter a proporção da animação) : -->
+    <dimen name="design_bottom_navigation_active_text_size">0sp</dimen>
+
+</resources>

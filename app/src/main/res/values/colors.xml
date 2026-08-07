@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <resources>
-
 
     <!-- Cores Padrões : -->
     <color name="bage_neutral">#FFFAC9</color>
@@ -10,7 +8,6 @@
     <color name="gray_dark">#424242</color>
     <color name="gray_deep">#1A1A1A</color>
     <color name="black">#000000</color>
-
 
 </resources>
 

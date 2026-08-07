@@ -1,6 +1,5 @@
 <resources>
 
-
     <!-- Nome do aplicativo : -->
     <string name="app_name">Monaly</string>
 
@@ -40,6 +39,5 @@
 
     <!-- Botão de entrar com google do Login : -->
     <string name="login_button">Entrar com o Google</string>
-
 
 </resources>

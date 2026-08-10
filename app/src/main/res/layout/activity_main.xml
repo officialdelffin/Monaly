@@ -20,5 +20,53 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
 
+    <!-- Barra de navegação flutuante : -->
+    <LinearLayout
+        android:id="@+id/customBottomNav"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/drawable_background_button_gray_deep_10_dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Icone Início : -->
+        <ImageView
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_home_bage_neutral" />
+
+        <!-- Icone Galeria : -->
+        <ImageView
+            android:id="@+id/navGallery"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_gallery_bage_neutral" />
+
+        <!-- Icone Álbuns : -->
+        <ImageView
+            android:id="@+id/navAlbums"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_albums_bage_neutral" />
+
+        <!-- Icone Perfil : -->
+        <ImageView
+            android:id="@+id/navProfile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_profile_bage_neutral" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

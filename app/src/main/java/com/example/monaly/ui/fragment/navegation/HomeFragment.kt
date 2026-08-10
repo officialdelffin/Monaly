@@ -1,10 +1,7 @@
-package com.example.monaly.ui.fragment
+package com.example.monaly.ui.fragment.navegation
 
-
-// Importações :
 import androidx.fragment.app.Fragment
 import com.example.monaly.R
 
-
 // Usamos o construtor direto do Fragment para injetar o layout sem precisar de boilerplate :
-class GalleryFragment : Fragment(R.layout.fragment_gallery)
+class HomeFragment : Fragment(R.layout.fragment_home)

@@ -8,25 +8,25 @@
     <!-- Aba Início : -->
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.monaly.ui.fragment.HomeFragment"
+        android:name="com.example.monaly.ui.fragment.navegation.HomeFragment"
         tools:layout="@layout/fragment_home" />
 
     <!-- Aba Galeria : -->
     <fragment
         android:id="@+id/galleryFragment"
-        android:name="com.example.monaly.ui.fragment.GalleryFragment"
+        android:name="com.example.monaly.ui.fragment.navegation.GalleryFragment"
         tools:layout="@layout/fragment_gallery" />
 
     <!-- Aba Álbuns : -->
     <fragment
         android:id="@+id/albumsFragment"
-        android:name="com.example.monaly.ui.fragment.AlbumsFragment"
+        android:name="com.example.monaly.ui.fragment.navegation.AlbumsFragment"
         tools:layout="@layout/fragment_albums" />
 
     <!-- Aba Perfil : -->
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.monaly.ui.fragment.ProfileFragment"
+        android:name="com.example.monaly.ui.fragment.navegation.ProfileFragment"
         tools:layout="@layout/fragment_profile" />
 
 </navigation>

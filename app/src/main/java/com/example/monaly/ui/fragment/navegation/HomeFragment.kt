@@ -30,6 +30,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewPager.adapter = adapter
 
 
+        // Forçamos o ViewPager a iniciar na posição 1 sendo o Feed, em vez da 0 sendo a Câmera e fazendo com que o parâmetro false desativa a animação de rolagem para que a tela mude instantaneamente nos bastidores :
+        viewPager.setCurrentItem(1, false)
+
+
     }
 
 

@@ -23,9 +23,16 @@ class HomePagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
         return when (position) {
 
 
-            0 -> FeedFragment()
-            1 -> CameraFragment()
-            else -> FeedFragment() // Fallback de segurança para evitar falhas :
+            // Posição 0 (Esquerda): Agora a Câmera fica no lado esquerdo :
+            0 -> CameraFragment()
+
+
+            // Posição 1 (Direita): O Feed fica no centro/direita :
+            1 -> FeedFragment()
+
+
+            // Fallback de segurança para evitar falhas :
+            else -> FeedFragment()
 
 
         }

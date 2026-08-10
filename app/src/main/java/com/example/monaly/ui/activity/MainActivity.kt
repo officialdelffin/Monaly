@@ -45,6 +45,8 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNavigationView)
 
 
+
+
     }
 
 

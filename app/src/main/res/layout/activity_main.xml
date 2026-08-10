@@ -39,32 +39,36 @@
         <ImageView
             android:id="@+id/navHome"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="1"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_home_bage_neutral" />
 
         <!-- Icone Galeria : -->
         <ImageView
             android:id="@+id/navGallery"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="1"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_gallery_bage_neutral" />
 
         <!-- Icone Álbuns : -->
         <ImageView
             android:id="@+id/navAlbums"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="1"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_albums_bage_neutral" />
 
         <!-- Icone Perfil : -->
         <ImageView
             android:id="@+id/navProfile"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="1"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_profile_bage_neutral" />
 
     </LinearLayout>

@@ -61,10 +61,10 @@ class MainActivity : AppCompatActivity() {
 
 
             // Devolve a imagem normal cinza para todos :
-            navHome.setImageResource(R.drawable.ic_home_gray_medium)
-            navGallery.setImageResource(R.drawable.ic_gallery_gray_medium)
-            navAlbums.setImageResource(R.drawable.ic_albums_gray_medium)
-            navProfile.setImageResource(R.drawable.ic_profile_gray_medium)
+            navHome.setImageResource(R.drawable.ic_home_bage_neutral)
+            navGallery.setImageResource(R.drawable.ic_gallery_bage_neutral)
+            navAlbums.setImageResource(R.drawable.ic_albums_bage_neutral)
+            navProfile.setImageResource(R.drawable.ic_profile_bage_neutral)
 
 
         }
@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         navHome.setOnClickListener {
 
 
-            selectTab(navHome, R.id.homeFragment, R.drawable.ic_home_bage_neutral)
+            selectTab(navHome, R.id.homeFragment, R.drawable.ic_home_gray_medium)
 
 
         }
@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity() {
         navGallery.setOnClickListener {
 
 
-            selectTab(navGallery, R.id.galleryFragment, R.drawable.ic_gallery_bage_neutral)
+            selectTab(navGallery, R.id.galleryFragment, R.drawable.ic_gallery_gray_medium)
 
 
         }
@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity() {
         navAlbums.setOnClickListener {
 
 
-            selectTab(navAlbums, R.id.albumsFragment, R.drawable.ic_albums_bage_neutral)
+            selectTab(navAlbums, R.id.albumsFragment, R.drawable.ic_albums_gray_medium)
 
 
         }
@@ -130,14 +130,14 @@ class MainActivity : AppCompatActivity() {
         navProfile.setOnClickListener {
 
 
-            selectTab(navProfile, R.id.profileFragment, R.drawable.ic_profile_bage_neutral)
+            selectTab(navProfile, R.id.profileFragment, R.drawable.ic_profile_gray_medium)
 
 
         }
 
 
         // 5° Aciona a aba Início por padrão quando o app abrir :
-        selectTab(navHome, R.id.homeFragment, R.drawable.ic_home_bage_neutral)
+        selectTab(navHome, R.id.homeFragment, R.drawable.ic_home_gray_medium)
 
 
     }

@@ -4,8 +4,8 @@ package com.example.monaly.ui.adapter
 //Importações
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.monaly.ui.fragment.camera.CameraFragment
-import com.example.monaly.ui.fragment.camera.FeedFragment
+import com.example.monaly.ui.fragment.navegation.CameraFragment
+import com.example.monaly.ui.fragment.navegation.FeedFragment
 
 
 // Adapter responsável por instanciar as telas de forma isolada e segura na memória :

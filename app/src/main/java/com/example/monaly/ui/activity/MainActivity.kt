@@ -58,10 +58,10 @@ class MainActivity : AppCompatActivity() {
             navProfile.animate().translationY(0f).setDuration(200).start()
 
 
-            navHome.setImageResource(R.drawable.ic_home_gray_medium)
-            navGallery.setImageResource(R.drawable.ic_gallery_gray_medium)
-            navAlbums.setImageResource(R.drawable.ic_albums_gray_medium)
-            navProfile.setImageResource(R.drawable.ic_profile_gray_medium)
+            navHome.setImageResource(R.drawable.ic_home_bage_neutral)
+            navGallery.setImageResource(R.drawable.ic_gallery_bage_neutral)
+            navAlbums.setImageResource(R.drawable.ic_albums_bage_neutral)
+            navProfile.setImageResource(R.drawable.ic_profile_bage_neutral)
 
 
         }
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                 0 -> {
 
                     navHome.animate().translationY(-15f).setDuration(200).start()
-                    navHome.setImageResource(R.drawable.ic_home_bage_neutral)
+                    navHome.setImageResource(R.drawable.ic_home_gray_medium)
 
                 }
 
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
                 1 -> {
 
                     navGallery.animate().translationY(-15f).setDuration(200).start()
-                    navGallery.setImageResource(R.drawable.ic_gallery_bage_neutral)
+                    navGallery.setImageResource(R.drawable.ic_gallery_gray_medium)
 
                 }
 
@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
                 2 -> {
 
                     navAlbums.animate().translationY(-15f).setDuration(200).start()
-                    navAlbums.setImageResource(R.drawable.ic_albums_bage_neutral)
+                    navAlbums.setImageResource(R.drawable.ic_albums_gray_medium)
 
                 }
 
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
                 3 -> {
 
                     navProfile.animate().translationY(-15f).setDuration(200).start()
-                    navProfile.setImageResource(R.drawable.ic_profile_bage_neutral)
+                    navProfile.setImageResource(R.drawable.ic_profile_gray_medium)
 
                 }
 

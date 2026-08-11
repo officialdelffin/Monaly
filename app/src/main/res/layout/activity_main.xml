@@ -8,7 +8,7 @@
     android:background="@color/black"
     tools:context=".ui.activity.MainActivity">
 
-    <!-- O nosso novo Trilho Global (Substitui o NavHostFragment) : -->
+    <!-- O trilho Global  : -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPagerMain"
         android:layout_width="0dp"

@@ -8,7 +8,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.viewpager2.widget.ViewPager2
 import com.example.monaly.R
+import com.example.monaly.ui.adapter.MainPagerAdapter
 
 
 // Classe principal de execução :
@@ -34,63 +36,78 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        // Encontrando o nosso NavHostFragment pelo ID :
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as androidx.navigation.fragment.NavHostFragment
-
-
-        // Extraíndo o controlador de navegação interno dele :
-        val navController = navHostFragment.navController
-
-
-        // 1° Mapeando os nossos novos botões customizados da tela :
+        // Mapeando o Trilho Global e os botões da barra :
+        val viewPagerMain = findViewById<ViewPager2>(R.id.viewPagerMain)
         val navHome = findViewById<ImageView>(R.id.navHome)
         val navGallery = findViewById<ImageView>(R.id.navGallery)
         val navAlbums = findViewById<ImageView>(R.id.navAlbums)
         val navProfile = findViewById<ImageView>(R.id.navProfile)
 
 
-        // 2° Função interna para resetar todos os ícones para o estado desativado :
+        // Conectando o Adaptador ao Trilho Global :
+        viewPagerMain.adapter = MainPagerAdapter(this)
+
+
+        // Função interna para resetar todos os ícones para o estado desativado :
         fun resetAllNavItems() {
 
 
-            // Volta a posição para o eixo 0 no centro :
             navHome.animate().translationY(0f).setDuration(200).start()
             navGallery.animate().translationY(0f).setDuration(200).start()
             navAlbums.animate().translationY(0f).setDuration(200).start()
             navProfile.animate().translationY(0f).setDuration(200).start()
 
 
-            // Devolve a imagem normal cinza para todos :
-            navHome.setImageResource(R.drawable.ic_home_bage_neutral)
-            navGallery.setImageResource(R.drawable.ic_gallery_bage_neutral)
-            navAlbums.setImageResource(R.drawable.ic_albums_bage_neutral)
-            navProfile.setImageResource(R.drawable.ic_profile_bage_neutral)
+            navHome.setImageResource(R.drawable.ic_home_gray_medium)
+            navGallery.setImageResource(R.drawable.ic_gallery_gray_medium)
+            navAlbums.setImageResource(R.drawable.ic_albums_gray_medium)
+            navProfile.setImageResource(R.drawable.ic_profile_gray_medium)
 
 
         }
 
 
-        // 3° Função que executa a animação, a troca de imagem e a navegação :
-        fun selectTab(selectedView: ImageView, destinationId: Int, activeDrawable: Int) {
+        // Função para atualizar o visual da barra de acordo com a aba selecionada :
+        fun updateBottomNavUI(position: Int) {
 
 
-            // Abaixa todos e volta para as imagens cinzas :
             resetAllNavItems()
 
 
-            // Levanta apenas o selecionado (ajuste o -15f se quiser que suba mais ou menos) :
-            selectedView.animate().translationY(-15f).setDuration(200).start()
+            when (position) {
 
 
-            // Aplica a imagem com cor destacada :
-            selectedView.setImageResource(activeDrawable)
+                0 -> {
+
+                    navHome.animate().translationY(-15f).setDuration(200).start()
+                    navHome.setImageResource(R.drawable.ic_home_bage_neutral)
+
+                }
 
 
-            // Manda o NavController trocar a tela (se já não estivermos nela) :
-            if (navController.currentDestination?.id != destinationId) {
+                1 -> {
+
+                    navGallery.animate().translationY(-15f).setDuration(200).start()
+                    navGallery.setImageResource(R.drawable.ic_gallery_bage_neutral)
+
+                }
 
 
-                navController.navigate(destinationId)
+                2 -> {
+
+                    navAlbums.animate().translationY(-15f).setDuration(200).start()
+                    navAlbums.setImageResource(R.drawable.ic_albums_bage_neutral)
+
+                }
+
+
+                3 -> {
+
+                    navProfile.animate().translationY(-15f).setDuration(200).start()
+                    navProfile.setImageResource(R.drawable.ic_profile_bage_neutral)
+
+                }
+
 
 
             }
@@ -99,11 +116,28 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        // 4° Configurando os cliques para cada aba :
+        // Sincronizando o arrasto do dedo com a barra inferior e definindo que sempre que o ViewPager confirmar que a tela mudou, nós atualizamos o visual da barra :
+        viewPagerMain.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+
+
+            override fun onPageSelected(position: Int) {
+
+
+                super.onPageSelected(position)
+                updateBottomNavUI(position)
+
+
+            }
+
+
+        })
+
+
+        // Configurando os cliques que o botão apenas avisa o ViewPager para trocar de tela e também, o parâmetro true faz a tela deslizar suavemente até a nova aba :
         navHome.setOnClickListener {
 
 
-            selectTab(navHome, R.id.homeFragment, R.drawable.ic_home_gray_medium)
+            viewPagerMain.setCurrentItem(0, true)
 
 
         }
@@ -112,7 +146,7 @@ class MainActivity : AppCompatActivity() {
         navGallery.setOnClickListener {
 
 
-            selectTab(navGallery, R.id.galleryFragment, R.drawable.ic_gallery_gray_medium)
+            viewPagerMain.setCurrentItem(1, true)
 
 
         }
@@ -121,7 +155,7 @@ class MainActivity : AppCompatActivity() {
         navAlbums.setOnClickListener {
 
 
-            selectTab(navAlbums, R.id.albumsFragment, R.drawable.ic_albums_gray_medium)
+            viewPagerMain.setCurrentItem(2, true)
 
 
         }
@@ -130,14 +164,10 @@ class MainActivity : AppCompatActivity() {
         navProfile.setOnClickListener {
 
 
-            selectTab(navProfile, R.id.profileFragment, R.drawable.ic_profile_gray_medium)
+            viewPagerMain.setCurrentItem(3, true)
 
 
         }
-
-
-        // 5° Aciona a aba Início por padrão quando o app abrir :
-        selectTab(navHome, R.id.homeFragment, R.drawable.ic_home_gray_medium)
 
 
     }

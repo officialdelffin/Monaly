@@ -1,5 +1,6 @@
 <resources>
 
+
     <!-- Nome do aplicativo : -->
     <string name="app_name">Monaly</string>
 
@@ -39,5 +40,24 @@
 
     <!-- Botão de entrar com google do Login : -->
     <string name="login_button">Entrar com o Google</string>
+
+
+    <!-- Textos do Fragment Feed : -->
+
+    <!-- Botão de adicionar midia ou albums : -->
+    <string name="feed_button_to_add">Adicionar mídia ou álbuns</string>
+
+    <!-- Title midias do dashboarding : -->
+    <string name="feed_title_midia">Mídias</string>
+
+    <!-- Title albuns do dashboarding : -->
+    <string name="feed_title_albuns">Álbuns</string>
+
+    <!-- Title midias do dashboarding : -->
+    <string name="feed_title_conections">Conexões</string>
+
+    <!-- Numeração padrão do dashboarding : -->
+    <string name="feed__defaut_number">0</string>
+
 
 </resources>

@@ -4,69 +4,36 @@
     <!-- Nome do aplicativo : -->
     <string name="app_name">Monaly</string>
 
-
-    <!-- Textos do Onboarding : -->
-
     <!-- Tela Ondoarding Um : -->
-
     <string name="onboarding_label_welcome">Bem-vindo ao Monaly</string>
     <string name="onboarding_description_one">Seu novo lar para fotos e vídeos. Organize, crie álbuns colaborativos e guarde memórias com total privacidade. Comece a criar sua história hoje.</string>
 
     <!-- Tela Onboarding Dois : -->
-
     <string name="onboarding_memories">Memórias Feitas em Grupo</string>
     <string name="ondoarding_description_two">Crie Álbuns Compartilhados e convide quem viveu o momento. Todos podem adicionar fotos, construindo um acervo visual completo e exclusivo para o seu grupo.</string>
 
     <!-- Tela Onboarding Three : -->
-
     <string name="onboarding_history">Sua História, Sempre à Mão</string>
     <string name="onboarding_description_three">A Galeria unificada exibe todas as suas mídias por ordem cronológica. Pesquise por título, nome do álbum ou por quem postou aquela foto.</string>
-
-    <!-- Textos Botões Onboarding : -->
-
     <string name="onboarding_bottom_next">Próximo</string>
     <string name="onboarding_bottom_login_in">Entrar</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
     <!-- Textos do Login : -->
-
-    <!-- Titulo do Login : -->
     <string name="login_title">De volta às suas memórias Monaly</string>
-
-    <!-- Descrição do login : -->
     <string name="login_description">Suas coleções em grupo e conexões privadas estão esperando por você. Acesse para ver as novidades nos seus álbuns.</string>
-
-    <!-- Hint de email : -->
     <string name="logint_hint_email">Digite seu e-mail:</string>
-
-    <!-- Hint de senha : -->
     <string name="login_hint_password">Digite a sua senha:</string>
-
     <string name="login_content_description">Botão de entrar</string>
-
-    <!-- Botão de entrar com google do Login : -->
     <string name="login_button">Entrar com o Google</string>
 
 
     <!-- Textos do Fragment Feed : -->
-
-    <!-- Botão de adicionar midia ou albums : -->
     <string name="feed_button_to_add">Adicionar mídia ou álbuns</string>
-
     <string name="feed_content_description_notification">Botão de notificação</string>
-
-    <!-- Title midias do dashboarding : -->
     <string name="feed_title_midia">mídias</string>
-
-    <!-- Title albuns do dashboarding : -->
     <string name="feed_title_albuns">álbuns</string>
-
-    <!-- Title midias do dashboarding : -->
     <string name="feed_title_conections">conexões</string>
-
-    <!-- Numeração padrão do dashboarding : -->
     <string name="feed__defaut_number">0</string>
 
 

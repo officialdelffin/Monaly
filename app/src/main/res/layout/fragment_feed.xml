@@ -19,6 +19,7 @@
         android:text="@string/feed_button_to_add"
         android:textColor="@color/gray_dark"
         android:textAllCaps="false"
+        android:textSize="15dp"
         android:gravity="start|center_vertical"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
@@ -81,7 +82,7 @@
         android:layout_marginBottom="15dp"
         android:text="@string/feed_title_albuns"
         android:textColor="@color/bage_neutral"
-        android:textSize="18dp"
+        android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/textDefaultAlbun"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -93,7 +94,7 @@
         android:layout_marginBottom="15dp"
         android:text="@string/feed_title_conections"
         android:textColor="@color/bage_neutral"
-        android:textSize="18dp"
+        android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/textDefaultConection"
         app:layout_constraintEnd_toEndOf="@+id/textDefaultConection"
         app:layout_constraintStart_toStartOf="@+id/textDefaultConection" />
@@ -105,7 +106,7 @@
         android:layout_marginBottom="15dp"
         android:text="@string/feed_title_midia"
         android:textColor="@color/bage_neutral"
-        android:textSize="18dp"
+        android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/textDefaultMidia"
         app:layout_constraintEnd_toEndOf="@+id/textDefaultMidia"
         app:layout_constraintStart_toStartOf="@+id/textDefaultMidia" />

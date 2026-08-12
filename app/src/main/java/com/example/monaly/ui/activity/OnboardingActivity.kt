@@ -19,6 +19,7 @@ import com.example.monaly.core.network.ConnectivityNetworkMonitor
 import com.example.monaly.ui.fragment.onboarding.OnboardingAdapter
 import com.example.monaly.ui.viewmodel.OnboardingViewModel
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 
 
@@ -29,7 +30,7 @@ class OnboardingActivity : AppCompatActivity() {
     // Componentes de UI :
     private lateinit var viewPager: ViewPager2
     private lateinit var buttonBack: AppCompatButton
-    private lateinit var buttonNext: AppCompatButton
+    private lateinit var buttonNext: MaterialButton
 
 
     // Avisamos ao Kotlin que o ViewModel será inicializado depois, usando a Fábrica dentro do onCreate :
@@ -226,21 +227,18 @@ class OnboardingActivity : AppCompatActivity() {
             // Definindo novos atributos do buttonNext :
             val newTextEnter : String = getString(R.string.onboarding_bottom_login_in)
             val newTextColorEnter : Int = ContextCompat.getColor(this, R.color.gray_dark)
-            val newColorBage : Int = ContextCompat.getColor(this,R.color.bage_neutral)
+            val newColorBage : Int = ContextCompat.getColor(this, R.color.bage_neutral)
             val newArrowIcon : Drawable? = ContextCompat.getDrawable(this, R.drawable.ic_arrow_right_gray_dark)
 
-            // Se for a terceira página, o boão vai alterar a cor para bage e o text vai mudar para a string entrar :
+
+            // Se for a terceira página, o botão vai alterar a cor para bage e o text vai mudar para a string entrar :
             buttonNext.text = newTextEnter
             buttonNext.backgroundTintList = ColorStateList.valueOf(newColorBage)
             buttonNext.setTextColor(newTextColorEnter)
-            buttonNext.setCompoundDrawablesWithIntrinsicBounds(
 
-                null,
-                null,
-                newArrowIcon,
-                null
 
-            )
+            // Usamos a propriedade nativa do MaterialButton para injetar a imagem corretamente :
+            buttonNext.icon = newArrowIcon
 
 
         }
@@ -250,36 +248,21 @@ class OnboardingActivity : AppCompatActivity() {
         if (position != 2) {
 
 
-            // Definindo os colors padrões do buttonNext :
+            // Definindo as cores padrões do buttonNext :
             val defaultTextButtonNext : String = getString(R.string.onboarding_bottom_next)
             val defaultTextColorButtonNext : Int = ContextCompat.getColor(this, R.color.bage_neutral)
             val defaultColorButtonNext : Int = ContextCompat.getColor(this, R.color.gray_dark)
-            val defalutArrowIcon : Drawable? = ContextCompat.getDrawable(this, R.drawable.icon_arrow_right_bage)
+            val defaultArrowIcon : Drawable? = ContextCompat.getDrawable(this, R.drawable.ic_arrow_right_bage_neutral)
 
 
-            // Se for a terceira página, o boão vai alterar a cor para bage e o text vai mudar para a string entrar :
+            // Restaura o texto e as cores originais :
             buttonNext.text = defaultTextButtonNext
             buttonNext.backgroundTintList = ColorStateList.valueOf(defaultColorButtonNext)
             buttonNext.setTextColor(defaultTextColorButtonNext)
-            buttonNext.setCompoundDrawablesWithIntrinsicBounds(
-
-                null,
-                null,
-                defalutArrowIcon,
-                null
-
-            )
 
 
-        }
-
-
-        else {
-
-
-            // Para qualquer outra página, exibe o botão de voltar :
-            buttonBack.visibility = View.VISIBLE
-            buttonBack.isEnabled = true
+            // Restaura o ícone original de forma nativa :
+            buttonNext.icon = defaultArrowIcon
 
 
         }

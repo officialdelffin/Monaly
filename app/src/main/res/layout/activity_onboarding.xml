@@ -40,7 +40,7 @@
         app:cornerRadius="10dp"
         app:icon="@drawable/ic_arrow_right_bage_neutral"
         app:iconGravity="end"
-        app:iconSize="30dp"
+        app:iconSize="33dp"
         app:iconTint="@null"
         android:gravity="start|center_vertical"
         android:paddingStart="25dp"

@@ -8,17 +8,6 @@
     android:background="@color/black"
     tools:context=".ui.fragment.navegation.FeedFragment">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Home"
-        android:textColor="@color/gray_medium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonAdd"
         android:layout_width="0dp"
@@ -46,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textDefaultAlbun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
@@ -58,7 +47,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/textDefaultConection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
@@ -67,10 +56,10 @@
         android:textSize="25dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonNotification"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView6" />
+        app:layout_constraintStart_toEndOf="@+id/textDefaultAlbun" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/textDefaultMidia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
@@ -78,6 +67,43 @@
         android:textColor="@color/bage_neutral"
         android:textSize="25dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
-        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintEnd_toStartOf="@+id/textDefaultAlbun"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textTitleAlbun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:text="@string/feed_title_albuns"
+        android:textColor="@color/bage_neutral"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/textDefaultAlbun"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textTitleConection"
+        android:layout_width="60dp"
+        android:layout_height="18dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/feed_title_conections"
+        android:textColor="@color/bage_neutral"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/textDefaultConection"
+        app:layout_constraintEnd_toEndOf="@+id/textDefaultConection"
+        app:layout_constraintStart_toStartOf="@+id/textDefaultConection" />
+
+    <TextView
+        android:id="@+id/textTitleMidia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:text="@string/feed_title_midia"
+        android:textColor="@color/bage_neutral"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/textDefaultMidia"
+        app:layout_constraintEnd_toEndOf="@+id/textDefaultMidia"
+        app:layout_constraintStart_toStartOf="@+id/textDefaultMidia" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

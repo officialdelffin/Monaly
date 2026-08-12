@@ -48,13 +48,13 @@
     <string name="feed_button_to_add">Adicionar mídia ou álbuns</string>
 
     <!-- Title midias do dashboarding : -->
-    <string name="feed_title_midia">Mídias</string>
+    <string name="feed_title_midia">mídias</string>
 
     <!-- Title albuns do dashboarding : -->
-    <string name="feed_title_albuns">Álbuns</string>
+    <string name="feed_title_albuns">álbuns</string>
 
     <!-- Title midias do dashboarding : -->
-    <string name="feed_title_conections">Conexões</string>
+    <string name="feed_title_conections">conexões</string>
 
     <!-- Numeração padrão do dashboarding : -->
     <string name="feed__defaut_number">0</string>

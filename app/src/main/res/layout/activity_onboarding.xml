@@ -43,7 +43,7 @@
         android:text="@string/onboarding_bottom_next"
         android:textAllCaps="false"
         android:textColor="@color/bage_neutral"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

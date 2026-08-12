@@ -22,7 +22,7 @@
     <LinearLayout
         android:id="@+id/customBottomNav"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
@@ -39,7 +39,7 @@
         <ImageView
             android:id="@+id/navHome"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="32dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_home_bage_neutral" />
@@ -48,7 +48,7 @@
         <ImageView
             android:id="@+id/navGallery"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="32dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_gallery_bage_neutral" />
@@ -57,7 +57,7 @@
         <ImageView
             android:id="@+id/navAlbums"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="32dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_albums_bage_neutral" />
@@ -66,7 +66,7 @@
         <ImageView
             android:id="@+id/navProfile"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="32dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_profile_bage_neutral" />

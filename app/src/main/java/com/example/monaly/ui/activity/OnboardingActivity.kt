@@ -225,9 +225,9 @@ class OnboardingActivity : AppCompatActivity() {
 
             // Definindo novos atributos do buttonNext :
             val newTextEnter : String = getString(R.string.onboarding_bottom_login_in)
-            val newTextColorEnter : Int = ContextCompat.getColor(this, R.color.gray_deep)
+            val newTextColorEnter : Int = ContextCompat.getColor(this, R.color.gray_dark)
             val newColorBage : Int = ContextCompat.getColor(this,R.color.bage_neutral)
-            val newArrowIcon : Drawable? = ContextCompat.getDrawable(this, R.drawable.icon_arrow_right_text_primary)
+            val newArrowIcon : Drawable? = ContextCompat.getDrawable(this, R.drawable.ic_arrow_right_gray_dark)
 
             // Se for a terceira página, o boão vai alterar a cor para bage e o text vai mudar para a string entrar :
             buttonNext.text = newTextEnter

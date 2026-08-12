@@ -28,15 +28,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonNext"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="40dp"
+        app:backgroundTint="@color/gray_dark"
         android:background="@drawable/drawable_background_button_gray_dark_10_dp"
-        android:drawableRight="@drawable/icon_arrow_right_bage"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_arrow_right_bage_neutral"
+        app:iconGravity="end"
+        app:iconSize="30dp"
+        app:iconTint="@null"
         android:gravity="start|center_vertical"
         android:paddingStart="25dp"
         android:paddingEnd="25dp"

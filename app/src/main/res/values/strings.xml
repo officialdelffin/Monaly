@@ -38,6 +38,14 @@
     <!-- Descrição do login : -->
     <string name="login_description">Suas coleções em grupo e conexões privadas estão esperando por você. Acesse para ver as novidades nos seus álbuns.</string>
 
+    <!-- Hint de email : -->
+    <string name="logint_hint_email">Digite seu e-mail:</string>
+
+    <!-- Hint de senha : -->
+    <string name="login_hint_password">Digite a sua senha:</string>
+
+    <string name="login_content_description">Botão de entrar</string>
+
     <!-- Botão de entrar com google do Login : -->
     <string name="login_button">Entrar com o Google</string>
 
@@ -46,6 +54,8 @@
 
     <!-- Botão de adicionar midia ou albums : -->
     <string name="feed_button_to_add">Adicionar mídia ou álbuns</string>
+
+    <string name="feed_content_description_notification">Botão de notificação</string>
 
     <!-- Title midias do dashboarding : -->
     <string name="feed_title_midia">mídias</string>
@@ -58,6 +68,7 @@
 
     <!-- Numeração padrão do dashboarding : -->
     <string name="feed__defaut_number">0</string>
+
 
 
 </resources>

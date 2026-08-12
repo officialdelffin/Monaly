@@ -50,7 +50,8 @@
         app:iconSize="28dp"
         app:iconTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/feed_content_description_notification"/>
 
     <TextView
         android:id="@+id/textDefaultAlbun"

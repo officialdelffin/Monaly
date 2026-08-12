@@ -9,17 +9,17 @@
 
     <!-- Tela Ondoarding Um : -->
 
-    <string name="onboarding_label_welcome"><b>Bem-vindo ao Monaly</b></string>
+    <string name="onboarding_label_welcome">Bem-vindo ao Monaly</string>
     <string name="onboarding_description_one">Seu novo lar para fotos e vídeos. Organize, crie álbuns colaborativos e guarde memórias com total privacidade. Comece a criar sua história hoje.</string>
 
     <!-- Tela Onboarding Dois : -->
 
-    <string name="onboarding_memories"><b>Memórias Feitas em Grupo</b></string>
+    <string name="onboarding_memories">Memórias Feitas em Grupo</string>
     <string name="ondoarding_description_two">Crie Álbuns Compartilhados e convide quem viveu o momento. Todos podem adicionar fotos, construindo um acervo visual completo e exclusivo para o seu grupo.</string>
 
     <!-- Tela Onboarding Three : -->
 
-    <string name="onboarding_history"><b>Sua História, Sempre à Mão</b></string>
+    <string name="onboarding_history">Sua História, Sempre à Mão</string>
     <string name="onboarding_description_three">A Galeria unificada exibe todas as suas mídias por ordem cronológica. Pesquise por título, nome do álbum ou por quem postou aquela foto.</string>
 
     <!-- Textos Botões Onboarding : -->
@@ -33,7 +33,7 @@
     <!-- Textos do Login : -->
 
     <!-- Titulo do Login : -->
-    <string name="login_title"><b>De volta às suas memórias Monaly</b></string>
+    <string name="login_title">De volta às suas memórias Monaly</string>
 
     <!-- Descrição do login : -->
     <string name="login_description">Suas coleções em grupo e conexões privadas estão esperando por você. Acesse para ver as novidades nos seus álbuns.</string>

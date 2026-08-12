@@ -11,8 +11,8 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonAdd"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/drawable_background_button_gray_dark_10_dp"
@@ -35,9 +35,9 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonNotification"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="30dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="40dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/drawable_background_button_gray_dark_10_dp"
         android:contentDescription="@string/feed_content_description_notification"

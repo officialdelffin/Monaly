@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <!-- Imagem de fundo do Álbum que ocupará todo o espaço disponível : -->
+
+    <!-- Película de gradiente preto para dar contraste aos textos : -->
+
+    <!-- A Tag indicando se é Público ou Compartilhado : -->
+
+    <!-- A Descrição do Álbum (com limite de linhas para não quebrar o layout) : -->
     <ImageView
         android:id="@+id/imageAlbumCover"
         android:layout_width="0dp"
@@ -13,45 +20,46 @@
         android:src="@color/gray_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <!-- Película de gradiente preto para dar contraste aos textos : -->
     <View
         android:layout_width="0dp"
-        android:layout_height="250dp"
+        android:layout_height="0dp"
         android:background="@drawable/bg_gradient_black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- A Tag indicando se é Público ou Compartilhado : -->
     <TextView
         android:id="@+id/textAlbumTag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="15dp"
         android:text="Álbum compartilhado - Público"
         android:textColor="@color/gray_medium"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textAlbumTitle"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- A Descrição do Álbum (com limite de linhas para não quebrar o layout) : -->
     <TextView
         android:id="@+id/textAlbumDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="30dp"
         android:ellipsize="end"
         android:maxLines="4"
         android:text="Descrição do álbum vai aqui. Preparado para receber textos grandes do banco de dados sem deformar a tela."
-        android:textColor="@color/bage_neutral"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/textAlbumTag"
+        android:textColor="@color/gray_medium"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -62,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="15dp"
         android:text="Título do Álbum"
         android:textColor="@color/bage_neutral"
         android:textSize="22sp"

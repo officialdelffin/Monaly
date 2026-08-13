@@ -185,7 +185,7 @@ class MainActivity : AppCompatActivity() {
 
 
             // Forçamos a escala da fonte para exatamente 1.0 - 100%, ignorando o zoom do usuário :
-            configuration.fontScale = 1.0f
+            configuration.fontScale = 0.8f
 
 
             // Criamos um novo contexto com a nossa regra de fonte travada :

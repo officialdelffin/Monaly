@@ -43,7 +43,7 @@
         android:layout_marginBottom="15dp"
         android:text="Álbum compartilhado - Público"
         android:textColor="@color/gray_medium"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textAlbumTitle"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -58,7 +58,7 @@
         android:maxLines="4"
         android:text="Descrição do álbum vai aqui. Preparado para receber textos grandes do banco de dados sem deformar a tela."
         android:textColor="@color/gray_medium"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

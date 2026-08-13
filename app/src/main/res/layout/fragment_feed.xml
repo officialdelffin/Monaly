@@ -8,10 +8,20 @@
     android:background="@color/black"
     tools:context=".ui.fragment.navegation.FeedFragment">
 
+    <!-- Este é o motor que vai deslizar os nossos Cards de Álbum automaticamente : -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerFeedAlbums"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/textTitleMidia"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonAdd"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="55dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
@@ -35,8 +45,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonNotification"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/drawable_background_button_gray_dark_10_dp"
@@ -69,7 +79,7 @@
         android:id="@+id/textDefaultConection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
+        android:layout_marginStart="100dp"
         android:text="@string/feed__defaut_number"
         android:textColor="@color/bage_neutral"
         android:textSize="25dp"
@@ -80,7 +90,7 @@
         android:id="@+id/textDefaultMidia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="120dp"
+        android:layout_marginEnd="100dp"
         android:text="@string/feed__defaut_number"
         android:textColor="@color/bage_neutral"
         android:textSize="25dp"

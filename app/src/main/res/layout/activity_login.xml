@@ -24,7 +24,7 @@
         android:id="@+id/imageGradientEffect"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/drawable_black_gradient_effect"
+        android:src="@drawable/bg_gradient_black"
         app:layout_constraintBottom_toTopOf="@+id/inputEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

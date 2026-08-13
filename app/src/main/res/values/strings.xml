@@ -29,7 +29,7 @@
 
 
     <!-- Textos do Fragment Feed : -->
-    <string name="feed_button_to_add">Adicionar mídia ou álbuns</string>
+    <string name="feed_button_to_add">Adicionar mídia</string>
     <string name="feed_content_description_notification">Botão de notificação</string>
     <string name="feed_title_midia">mídias</string>
     <string name="feed_title_albuns">álbuns</string>

@@ -26,6 +26,8 @@
     <string name="login_hint_password">Digite a sua senha:</string>
     <string name="login_content_description">Botão de entrar</string>
     <string name="login_button">Entrar com o Google</string>
+    <string name="login_click_text_forgot_password">esqueci a minha senha</string>
+    <string name="login_click_text_create_account">criar uma conta</string>
 
 
     <!-- Textos do Fragment Feed : -->

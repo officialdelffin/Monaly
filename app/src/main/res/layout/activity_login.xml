@@ -66,27 +66,26 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="250dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="280dp"
         android:background="@drawable/drawable_background_button_gray_dark_10_dp"
+        android:fontFamily="sans-serif"
         android:gravity="start|center_vertical"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:text="@string/login_button"
         android:textAllCaps="false"
         android:textColor="@color/bage_neutral"
+        android:textFontWeight="400"
         android:textSize="20sp"
         android:textStyle="normal"
-        android:fontFamily="sans-serif"
-        android:textFontWeight="400"
         app:backgroundTint="@null"
         app:icon="@drawable/img_icon_google"
         app:iconGravity="end"
         app:iconSize="24dp"
         app:iconTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/buttonLogIn"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
@@ -94,7 +93,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/drawable_background_button_bage_10_dp"
         android:contentDescription="@string/login_content_description"
         android:insetTop="0dp"
@@ -106,9 +104,8 @@
         app:iconPadding="0dp"
         app:iconSize="25dp"
         app:iconTint="@null"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLoginGoogle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/inputPassword" />
+        app:layout_constraintBottom_toBottomOf="@+id/buttonLoginGoogle"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputEmail"
@@ -134,10 +131,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLoginGoogle"
-        app:layout_constraintEnd_toStartOf="@+id/buttonLogIn"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLogIn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -147,5 +144,25 @@
             android:hint="@string/login_hint_password" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/clickTextForgotPasswork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/login_click_text_forgot_password"
+        app:layout_constraintStart_toStartOf="@+id/buttonLoginGoogle"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLoginGoogle" />
+
+    <TextView
+        android:id="@+id/clickTextCreateAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
+        android:text="@string/login_click_text_create_account"
+        app:layout_constraintEnd_toEndOf="@+id/buttonLogIn"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogIn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

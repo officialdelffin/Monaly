@@ -173,4 +173,38 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    // Sobrescrevemos o contexto base do aplicativo para interceptar as configurações do sistema :
+    override fun attachBaseContext(newBase: android.content.Context?) {
+
+
+        if (newBase != null) {
+
+
+            // Capturamos a configuração de tela atual que o celular está tentando empurrar para o app :
+            val configuration = android.content.res.Configuration(newBase.resources.configuration)
+
+
+            // Forçamos a escala da fonte para exatamente 1.0 - 100%, ignorando o zoom do usuário :
+            configuration.fontScale = 1.0f
+
+
+            // Criamos um novo contexto com a nossa regra de fonte travada :
+            val context = newBase.createConfigurationContext(configuration)
+
+
+            super.attachBaseContext(context)
+
+
+        } else {
+
+
+            super.attachBaseContext(newBase)
+
+
+        }
+
+
+    }
+
+
 }

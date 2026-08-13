@@ -64,7 +64,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonLoginGoogle"
         android:layout_width="0dp"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="250dp"
@@ -76,6 +76,8 @@
         android:textAllCaps="false"
         android:textColor="@color/bage_neutral"
         android:textSize="20sp"
+        android:textStyle="normal"
+        android:fontFamily="sans-serif"
         android:textFontWeight="400"
         app:backgroundTint="@null"
         app:icon="@drawable/img_icon_google"

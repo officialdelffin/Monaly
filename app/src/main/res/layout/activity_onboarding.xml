@@ -47,7 +47,6 @@
         android:paddingEnd="25dp"
         android:text="@string/onboarding_bottom_next"
         android:textAllCaps="false"
-        android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textColor="@color/bage_neutral"
         android:textSize="20sp"

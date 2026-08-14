@@ -41,7 +41,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 
-        // 1. Mapeando os componentes visuais da interface :
+        // Mapeando os componentes visuais da interface :
         val viewPager = findViewById<ViewPager2>(R.id.viewPagerRegister)
         val buttonNext = findViewById<MaterialButton>(R.id.buttonRegisterNext)
         val buttonBack = findViewById<AppCompatButton>(R.id.buttonRegisterBack)
@@ -50,7 +50,7 @@ class RegisterActivity : AppCompatActivity() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBarRegister)
 
 
-        // 2. Bloqueia o arrasto do dedo na tela e injeta o Adaptador com as 3 etapas :
+        // Bloqueia o arrasto do dedo na tela e injeta o Adaptador com as 3 etapas :
         viewPager.isUserInputEnabled = false
         viewPager.adapter = RegisterPagerAdapter(this)
 

@@ -2,7 +2,6 @@
 
 <resources>
 
-    <!-- Cores Padrões : -->
     <color name="bage_neutral">#FFFAC9</color>
     <color name="gray_medium">#9E9E9E</color>
     <color name="gray_dark">#424242</color>

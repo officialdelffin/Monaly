@@ -18,7 +18,6 @@
     <string name="onboarding_bottom_next">Próximo</string>
     <string name="onboarding_bottom_login_in">Entrar</string>
 
-
     <!-- Textos do Login : -->
     <string name="login_title">De volta às suas memórias Monaly</string>
     <string name="login_description">Suas coleções em grupo e conexões privadas estão esperando por você. Acesse para ver as novidades nos seus álbuns.</string>
@@ -29,7 +28,6 @@
     <string name="login_click_text_forgot_password">esqueci a minha senha</string>
     <string name="login_click_text_create_account">criar uma conta</string>
 
-
     <!-- Textos do Fragment Feed : -->
     <string name="feed_button_to_add">Adicionar mídia</string>
     <string name="feed_content_description_notification">Botão de notificação</string>
@@ -38,17 +36,14 @@
     <string name="feed_title_conections">conexões</string>
     <string name="feed__defaut_number">0</string>
 
-
     <!-- Textos do Registro : -->
     <string name="register_button_next">Avançar</string>
     <string name="register_button_finish">Criar Conta</string>
-
 
     <!-- Etapa um - E-mail : -->
     <string name="register_title_email">Qual é o seu e-mail?</string>
     <string name="register_desc_email">Ele será usado para acessar a sua conta e recuperar sua senha de forma segura.</string>
     <string name="register_hint_email">Digite seu e-mail</string>
-
 
     <!-- Etapa dois - Nome e Username : -->
     <string name="register_title_profile">Como devemos te chamar?</string>
@@ -57,12 +52,10 @@
     <string name="register_hint_last_name">Sobrenome</string>
     <string name="register_hint_username">Nome de usuário</string>
 
-
     <!-- Etapa tres - Senha : -->
     <string name="register_title_password">Crie uma senha forte</string>
     <string name="register_desc_password">Sua senha deve conter apenas letras e números, sem caracteres especiais.</string>
     <string name="register_hint_password">Digite sua senha</string>
-
 
     <!-- Etapa quatro - Resumo e Link : -->
     <string name="register_title_summary">Tudo pronto!</string>

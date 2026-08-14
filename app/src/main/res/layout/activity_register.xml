@@ -34,7 +34,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
-        android:text="Qual é o seu e-mail?"
+        android:text="@string/register_title_email"
         android:textColor="@color/bage_neutral"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -43,7 +43,24 @@
         app:layout_constraintTop_toBottomOf="@+id/progressBarRegister" />
 
 
-    <!-- O Trilho Mestre que vai segurar os Fragments do formulário : -->
+    <!-- NOVA ADIÇÃO: Descrição Dinâmica da Etapa Atual : -->
+    <TextView
+        android:id="@+id/textRegisterStepDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/register_desc_email"
+        android:textColor="@color/gray_medium"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textRegisterStepTitle" />
+
+
+    <!-- O Trilho Mestre que vai segurar as nossas mini telas (Fragments) do formulário : -->
+    <!-- NOTA: A âncora do topo agora aponta para a nova descrição : -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPagerRegister"
         android:layout_width="0dp"
@@ -53,10 +70,10 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonRegisterNext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textRegisterStepTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/textRegisterStepDescription" />
 
 
-    <!-- Botão de Voltar Invisível na primeira etapa : -->
+    <!-- Botão de Voltar (Invisível na primeira etapa) : -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonRegisterBack"
         android:layout_width="60dp"
@@ -80,7 +97,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/drawable_background_button_bage_10_dp"
-        android:text="Avançar"
+        android:text="@string/register_button_next"
         android:textAllCaps="false"
         android:textColor="@color/gray_dark"
         android:textSize="20sp"

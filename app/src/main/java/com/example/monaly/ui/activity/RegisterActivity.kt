@@ -3,12 +3,18 @@ package com.example.monaly.ui.activity
 
 // Importações :
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.monaly.R
+import com.example.monaly.ui.adapter.RegisterPagerAdapter
+import com.google.android.material.button.MaterialButton
 
 
 // Tela responsável por guiar o fluxo progressivo de cadastro de forma segura :
@@ -35,12 +41,118 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 
-        // Mapeando o nosso Trilho Mestre :
+        // 1. Mapeando os componentes visuais da interface :
         val viewPager = findViewById<ViewPager2>(R.id.viewPagerRegister)
+        val buttonNext = findViewById<MaterialButton>(R.id.buttonRegisterNext)
+        val buttonBack = findViewById<AppCompatButton>(R.id.buttonRegisterBack)
+        val textTitle = findViewById<TextView>(R.id.textRegisterStepTitle)
+        val textDesc = findViewById<TextView>(R.id.textRegisterStepDescription)
+        val progressBar = findViewById<ProgressBar>(R.id.progressBarRegister)
 
 
-        // Bloqueia o arrasto do dedo na tela. O usuário é obrigado a preencher e usar o botão Avançar fazendo a segurança da UX:
+        // 2. Bloqueia o arrasto do dedo na tela e injeta o Adaptador com as 3 etapas :
         viewPager.isUserInputEnabled = false
+        viewPager.adapter = RegisterPagerAdapter(this)
+
+
+        // SSOT (Single Source of Truth) que atualiza a interface sempre que a tela muda de verdade :
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+
+
+            override fun onPageSelected(position: Int) {
+
+
+                super.onPageSelected(position)
+
+
+                when (position) {
+
+
+                    // E-mail) :
+                    0 -> {
+
+
+                        textTitle.text = getString(R.string.register_title_email)
+                        textDesc.text = getString(R.string.register_desc_email)
+                        buttonBack.visibility = View.INVISIBLE
+                        progressBar.progress = 25
+
+
+                    }
+
+
+                    // Nome e Username :
+                    1 -> {
+
+
+                        textTitle.text = getString(R.string.register_title_profile)
+                        textDesc.text = getString(R.string.register_desc_profile)
+                        buttonBack.visibility = View.VISIBLE
+                        progressBar.progress = 50
+
+
+                    }
+
+
+                    // Senha :
+                    2 -> {
+
+
+                        textTitle.text = getString(R.string.register_title_password)
+                        textDesc.text = getString(R.string.register_desc_password)
+                        buttonBack.visibility = View.VISIBLE
+                        progressBar.progress = 75
+
+
+                    }
+
+
+                }
+
+
+            }
+
+
+        })
+
+
+        // Configurando o clique do Botão de Avançar :
+        buttonNext.setOnClickListener {
+
+
+            val currentItem = viewPager.currentItem
+
+
+            // Limite de etapas (por enquanto são 3, então o índice máximo é 2) :
+            if (currentItem < 2) {
+
+
+                viewPager.setCurrentItem(currentItem + 1, true)
+
+
+            }
+
+
+        }
+
+
+        // Configurando o clique do Botão de Voltar :
+        buttonBack.setOnClickListener {
+
+
+            val currentItem = viewPager.currentItem
+
+
+            if (currentItem > 0) {
+
+
+                viewPager.setCurrentItem(currentItem - 1, true)
+
+
+            }
+
+
+        }
 
 
     }

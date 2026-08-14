@@ -8,7 +8,6 @@
     android:background="@color/black"
     tools:context=".ui.activity.MainActivity">
 
-    <!-- O trilho Global  : -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPagerMain"
         android:layout_width="0dp"
@@ -18,7 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Barra de navegação flutuante : -->
     <LinearLayout
         android:id="@+id/customBottomNav"
         android:layout_width="0dp"
@@ -35,7 +33,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <!-- Icone Início : -->
         <ImageView
             android:id="@+id/navHome"
             android:layout_width="0dp"
@@ -44,7 +41,6 @@
             android:scaleType="fitCenter"
             android:src="@drawable/ic_home_bage_neutral" />
 
-        <!-- Icone Galeria : -->
         <ImageView
             android:id="@+id/navGallery"
             android:layout_width="0dp"
@@ -53,7 +49,6 @@
             android:scaleType="fitCenter"
             android:src="@drawable/ic_gallery_bage_neutral" />
 
-        <!-- Icone Álbuns : -->
         <ImageView
             android:id="@+id/navAlbums"
             android:layout_width="0dp"
@@ -62,7 +57,6 @@
             android:scaleType="fitCenter"
             android:src="@drawable/ic_albums_bage_neutral" />
 
-        <!-- Icone Perfil : -->
         <ImageView
             android:id="@+id/navProfile"
             android:layout_width="0dp"

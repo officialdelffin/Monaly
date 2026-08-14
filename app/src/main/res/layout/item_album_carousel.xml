@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Imagem de fundo do Álbum que ocupará todo o espaço disponível : -->
-
-    <!-- Película de gradiente preto para dar contraste aos textos : -->
-
-    <!-- A Tag indicando se é Público ou Compartilhado : -->
-
-    <!-- A Descrição do Álbum (com limite de linhas para não quebrar o layout) : -->
     <ImageView
         android:id="@+id/imageAlbumCover"
         android:layout_width="0dp"
@@ -63,7 +55,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- O Título Principal do Álbum : -->
     <TextView
         android:id="@+id/textAlbumTitle"
         android:layout_width="0dp"

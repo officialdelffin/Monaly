@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <!-- O nosso Semáforo envolvendo o ViewPager2 do Home e ele impede que a MainActivity roube o gesto quando o usuário quiser arrastar a Câmera : -->
     <com.example.monaly.utils.NestedScrollableHost
         android:layout_width="0dp"
         android:layout_height="0dp"

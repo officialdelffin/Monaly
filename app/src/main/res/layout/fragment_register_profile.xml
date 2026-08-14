@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
 
-
-    <!-- Campo de Nome (Ocupando a metade esquerda) : -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayoutRegisterFirstName"
         android:layout_width="0dp"
@@ -19,7 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputEditRegisterFirstName"
             android:layout_width="match_parent"
@@ -27,14 +23,7 @@
             android:hint="@string/register_hint_first_name"
             android:inputType="textPersonName" />
 
-
     </com.google.android.material.textfield.TextInputLayout>
-
-
-    <!-- Campo de Sobrenome (Ocupando a metade direita) : -->
-
-
-    <!-- Campo de Username Único (Ocupando a linha inteira abaixo) : -->
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayoutRegisterLastName"
@@ -47,14 +36,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputLayoutRegisterFirstName">
 
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputEditRegisterLastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/register_hint_last_name"
             android:inputType="textPersonName" />
-
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,7 +57,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputLayoutRegisterLastName">
 
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputEditRegisterUsername"
             android:layout_width="match_parent"
@@ -78,8 +64,6 @@
             android:hint="@string/register_hint_username"
             android:inputType="textNoSuggestions" />
 
-
     </com.google.android.material.textfield.TextInputLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

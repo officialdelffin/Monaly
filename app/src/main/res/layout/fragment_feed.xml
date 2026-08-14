@@ -8,7 +8,6 @@
     android:background="@color/black"
     tools:context=".ui.fragment.navegation.FeedFragment">
 
-    <!-- Este é o motor que vai deslizar os nossos Cards de Álbum automaticamente : -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPagerFeedAlbums"
         android:layout_width="0dp"

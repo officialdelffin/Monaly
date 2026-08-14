@@ -8,8 +8,6 @@
     android:background="@color/black"
     tools:context=".ui.activity.RegisterActivity">
 
-
-    <!-- Barra de Progresso no topo para guiar o usuário visualmente : -->
     <ProgressBar
         android:id="@+id/progressBarRegister"
         style="?android:attr/progressBarStyleHorizontal"
@@ -25,8 +23,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <!-- Título Dinâmico da Etapa Atual : -->
     <TextView
         android:id="@+id/textRegisterStepTitle"
         android:layout_width="0dp"
@@ -42,8 +38,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressBarRegister" />
 
-
-    <!-- Descrição Dinâmica da Etapa Atual : -->
     <TextView
         android:id="@+id/textRegisterStepDescription"
         android:layout_width="0dp"
@@ -58,8 +52,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textRegisterStepTitle" />
 
-
-    <!-- O Trilho Mestre que vai segurar os Fragments do formulário e nota que a âncora do topo agora aponta para a nova descrição : -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPagerRegister"
         android:layout_width="0dp"
@@ -69,8 +61,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textRegisterStepDescription" />
 
-
-    <!-- Botão de Voltar que é invisível na primeira etapa : -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonRegisterBack"
         android:layout_width="50dp"
@@ -84,8 +74,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-
-    <!-- Botão Principal de Avançar : -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonRegisterNext"
         android:layout_width="0dp"
@@ -101,6 +89,5 @@
         app:backgroundTint="@color/bage_neutral"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

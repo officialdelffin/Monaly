@@ -67,6 +67,8 @@
     <!-- Etapa quatro - Resumo e Link : -->
     <string name="register_title_summary">Tudo pronto!</string>
     <string name="register_desc_summary">Revise seus dados abaixo. Ao criar a conta, enviaremos um link de confirmação para o seu e-mail.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -54,7 +54,7 @@ class RegisterActivity : AppCompatActivity() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBarRegister)
 
 
-        // [MUDANÇA 1] Instanciando o nosso Cofre Compartilhado para armazenar e validar os dados :
+        // [MUDANÇA 1] Instanciando o nosso cofre compartilhado para armazenar e validar os dados :
         val viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
 
 
@@ -63,11 +63,10 @@ class RegisterActivity : AppCompatActivity() {
         viewPager.adapter = RegisterPagerAdapter(this)
 
 
-        // SSOT (Single Source of Truth) que atualiza a interface sempre que a tela muda de verdade :
+        // SSOT que atualiza a interface sempre que a tela muda de verdade :
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
 
 
-            // [AQUI ESTÁ O SEU BLOCO onPageSelected] :
             override fun onPageSelected(position: Int) {
 
 
@@ -129,14 +128,14 @@ class RegisterActivity : AppCompatActivity() {
         })
 
 
-        // [MUDANÇA 3] Fica observando a validação do e-mail em tempo real (em milissegundos) :
+        // Fica observando a validação do e-mail em tempo real em milissegundos :
         lifecycleScope.launch {
 
 
             viewModel.isEmailValid.collect { isValid ->
 
 
-                // Só interfere no botão se o usuário estiver na Etapa 1 (Posição 0) :
+                // Só interfere no botão se o usuário estiver na Etapa 1 sendo a osição 0 :
                 if (viewPager.currentItem == 0) {
 
 
@@ -159,7 +158,7 @@ class RegisterActivity : AppCompatActivity() {
             val currentItem = viewPager.currentItem
 
 
-            // Limite de etapas (por enquanto são 3, então o índice máximo é 2) :
+            // Limite de etapas, por enquanto são 3, então o índice máximo é 2 :
             if (currentItem < 2) {
 
 
@@ -172,7 +171,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 
-        // Configurando o clique do Botão de Voltar :
+        // Configurando o clique do botão de Voltar :
         buttonBack.setOnClickListener {
 
 

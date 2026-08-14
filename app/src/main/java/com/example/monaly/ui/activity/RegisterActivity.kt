@@ -54,7 +54,7 @@ class RegisterActivity : AppCompatActivity() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBarRegister)
 
 
-        // Instanciando o nosso Cofre Compartilhado para armazenar e validar os dados :
+        // [MUDANÇA 1] Instanciando o nosso Cofre Compartilhado para armazenar e validar os dados :
         val viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
 
 

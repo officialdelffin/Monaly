@@ -48,7 +48,7 @@ class RegisterEmailFragment : Fragment(R.layout.fragment_register_email) {
                 viewModel.validateEmail(emailText)
 
 
-                // Feedback visual UX que mostra erro em vermelho se o formato for inválido e não estiver vazio :
+                // Feedback visual UX que ostra erro em vermelho se o formato for inválido e não estiver vazio :
                 if (viewModel.isEmailValid.value || emailText.isEmpty()) {
 
 

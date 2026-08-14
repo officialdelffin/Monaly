@@ -18,6 +18,7 @@ import com.example.monaly.ui.auth.AuthViewModel
 import com.example.monaly.ui.auth.GoogleAuthUiClient
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
+import androidx.core.app.ActivityOptionsCompat
 
 
 // Classe responsável pela manipulação dos elementos da activity de login :
@@ -167,6 +168,36 @@ class LoginActivity : AppCompatActivity() {
 
 
             }
+
+
+        }
+
+
+        // Mapeando o botão de texto para criar uma nova conta :
+        val textCreateAccount = findViewById<android.widget.TextView>(R.id.clickTextCreateAccount)
+
+
+        // Configurando a navegação para a tela de registro :
+        textCreateAccount.setOnClickListener {
+
+
+            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+
+
+            // Criamos o pacote de animação customizada usando a forma moderna e atualizada do Android :
+            val options = ActivityOptionsCompat.makeCustomAnimation(
+
+
+                this@LoginActivity,
+                android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right
+
+
+            )
+
+
+            // Iniciamos a nova tela passando a intenção e as opções de animação juntas :
+            startActivity(intent, options.toBundle())
 
 
         }

@@ -11,10 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.monaly.R
 import com.example.monaly.ui.adapter.RegisterPagerAdapter
+import com.example.monaly.ui.viewmodel.RegisterViewModel
 import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.launch
 
 
 // Tela responsável por guiar o fluxo progressivo de cadastro de forma segura :
@@ -50,6 +54,10 @@ class RegisterActivity : AppCompatActivity() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBarRegister)
 
 
+        // Instanciando o nosso Cofre Compartilhado para armazenar e validar os dados :
+        val viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
+
+
         // Bloqueia o arrasto do dedo na tela e injeta o Adaptador com as 3 etapas :
         viewPager.isUserInputEnabled = false
         viewPager.adapter = RegisterPagerAdapter(this)
@@ -59,6 +67,7 @@ class RegisterActivity : AppCompatActivity() {
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
 
 
+            // [AQUI ESTÁ O SEU BLOCO onPageSelected] :
             override fun onPageSelected(position: Int) {
 
 
@@ -68,7 +77,7 @@ class RegisterActivity : AppCompatActivity() {
                 when (position) {
 
 
-                    // E-mail) :
+                    // E-mail :
                     0 -> {
 
 
@@ -76,6 +85,10 @@ class RegisterActivity : AppCompatActivity() {
                         textDesc.text = getString(R.string.register_desc_email)
                         buttonBack.visibility = View.INVISIBLE
                         progressBar.progress = 25
+
+
+                        // [MUDANÇA 2] Bloqueia ou libera o botão baseado no que o usuário já havia digitado no Cofre :
+                        buttonNext.isEnabled = viewModel.isEmailValid.value
 
 
                     }
@@ -114,6 +127,29 @@ class RegisterActivity : AppCompatActivity() {
 
 
         })
+
+
+        // [MUDANÇA 3] Fica observando a validação do e-mail em tempo real (em milissegundos) :
+        lifecycleScope.launch {
+
+
+            viewModel.isEmailValid.collect { isValid ->
+
+
+                // Só interfere no botão se o usuário estiver na Etapa 1 (Posição 0) :
+                if (viewPager.currentItem == 0) {
+
+
+                    buttonNext.isEnabled = isValid
+
+
+                }
+
+
+            }
+
+
+        }
 
 
         // Configurando o clique do Botão de Avançar :

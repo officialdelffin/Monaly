@@ -1,4 +1,5 @@
-package com.example.monaly.ui.fragment.useregister
+package com.example.monaly.ui.fragment.register
+
 
 // Importações :
 import android.os.Bundle
@@ -7,8 +8,8 @@ import androidx.fragment.app.Fragment
 import com.example.monaly.R
 
 
-// Fragment responsável por capturar o Nome e Username na segunda etapa do cadastro :
-class RegisterProfileFragment : Fragment(R.layout.fragment_register_profile) {
+// Fragment responsável por capturar e validar a senha na terceira etapa do cadastro :
+class RegisterPasswordFragment : Fragment(R.layout.fragment_register_password) {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

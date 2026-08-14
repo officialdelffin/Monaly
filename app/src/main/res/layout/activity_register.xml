@@ -5,6 +5,89 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".ui.activity.RegisterActivity">
+
+
+    <!-- Barra de Progresso no topo para guiar o usuário visualmente : -->
+    <ProgressBar
+        android:id="@+id/progressBarRegister"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="30dp"
+        android:max="100"
+        android:progress="25"
+        android:progressTint="@color/bage_neutral"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!-- Título Dinâmico da Etapa Atual : -->
+    <TextView
+        android:id="@+id/textRegisterStepTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:text="Qual é o seu e-mail?"
+        android:textColor="@color/bage_neutral"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBarRegister" />
+
+
+    <!-- O Trilho Mestre que vai segurar os Fragments do formulário : -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerRegister"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonRegisterNext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textRegisterStepTitle" />
+
+
+    <!-- Botão de Voltar Invisível na primeira etapa : -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonRegisterBack"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/drawable_background_button_round_transparent"
+        android:drawableStart="@drawable/icon_arrow_back_ios"
+        android:paddingStart="15dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <!-- Botão Principal de Avançar : -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonRegisterNext"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/drawable_background_button_bage_10_dp"
+        android:text="Avançar"
+        android:textAllCaps="false"
+        android:textColor="@color/gray_dark"
+        android:textSize="20sp"
+        app:backgroundTint="@color/bage_neutral"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonRegisterBack" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

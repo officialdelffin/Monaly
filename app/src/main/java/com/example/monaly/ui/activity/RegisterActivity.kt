@@ -7,10 +7,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.viewpager2.widget.ViewPager2
 import com.example.monaly.R
 
 
-// Tela responsável por coletar os dados do novo usuário :
+// Tela responsável por guiar o fluxo progressivo de cadastro de forma segura :
 class RegisterActivity : AppCompatActivity() {
 
 
@@ -32,6 +33,14 @@ class RegisterActivity : AppCompatActivity() {
 
 
         }
+
+
+        // Mapeando o nosso Trilho Mestre :
+        val viewPager = findViewById<ViewPager2>(R.id.viewPagerRegister)
+
+
+        // Bloqueia o arrasto do dedo na tela. O usuário é obrigado a preencher e usar o botão Avançar fazendo a segurança da UX:
+        viewPager.isUserInputEnabled = false
 
 
     }

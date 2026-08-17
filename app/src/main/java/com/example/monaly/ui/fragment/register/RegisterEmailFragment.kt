@@ -55,7 +55,11 @@ class RegisterEmailFragment : Fragment(R.layout.fragment_register_email) {
                     inputLayout.error = null
 
 
-                } else {
+                }
+
+
+
+                else {
 
 
                     inputLayout.error = "Formato de e-mail inválido"

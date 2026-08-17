@@ -75,4 +75,29 @@ class RegisterViewModel : ViewModel() {
     }
 
 
+    //  Variável de estado para validar se a Etapa 2 está completa :
+    private val _isProfileValid = MutableStateFlow(false)
+
+
+    // Variável pública de validação que a Activity vai observar para a Etapa 2 :
+    val isProfileValid: StateFlow<Boolean> = _isProfileValid.asStateFlow()
+
+
+    // Valida se o Nome, Sobrenome e Username foram preenchidos corretamente :
+    fun validateProfile(firstName: String, lastName: String, username: String) {
+
+
+        updateProfile(firstName, lastName, username)
+
+
+        // Regra simples de preenchimento: Nenhum dos três campos pode estar vazio :
+        val isValid = firstName.isNotBlank() && lastName.isNotBlank() && username.isNotBlank()
+
+
+        _isProfileValid.value = isValid
+
+
+    }
+
+
 }

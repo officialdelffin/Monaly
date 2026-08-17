@@ -54,7 +54,7 @@ class RegisterActivity : AppCompatActivity() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBarRegister)
 
 
-        // [MUDANÇA 1] Instanciando o nosso cofre compartilhado para armazenar e validar os dados :
+        // Instanciando o nosso cofre compartilhado para armazenar e validar os dados :
         val viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
 
 
@@ -103,6 +103,10 @@ class RegisterActivity : AppCompatActivity() {
                         progressBar.progress = 50
 
 
+                        // Libera ou bloqueia o botão com base na validação atual do perfil no Cofre :
+                        buttonNext.isEnabled = viewModel.isProfileValid.value
+
+
                     }
 
 
@@ -137,6 +141,29 @@ class RegisterActivity : AppCompatActivity() {
 
                 // Só interfere no botão se o usuário estiver na Etapa 1 sendo a osição 0 :
                 if (viewPager.currentItem == 0) {
+
+
+                    buttonNext.isEnabled = isValid
+
+
+                }
+
+
+            }
+
+
+        }
+
+
+        // Fica observando a validação do perfil (Nome/Username) em tempo real :
+        lifecycleScope.launch {
+
+
+            viewModel.isProfileValid.collect { isValid ->
+
+
+                // Só interfere no botão se o usuário estiver na Etapa 2 (Posição 1) :
+                if (viewPager.currentItem == 1) {
 
 
                     buttonNext.isEnabled = isValid

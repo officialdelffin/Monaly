@@ -66,15 +66,6 @@ class RegisterViewModel : ViewModel() {
     }
 
 
-    fun updatePassword(newPassword: String) {
-
-
-        _password.value = newPassword
-
-
-    }
-
-
     //  Variável de estado para validar se a Etapa 2 está completa :
     private val _isProfileValid = MutableStateFlow(false)
 
@@ -95,6 +86,36 @@ class RegisterViewModel : ViewModel() {
 
 
         _isProfileValid.value = isValid
+
+
+    }
+
+
+    // Variável de estado para validar se a Etapa 3 (Senha) está correta :
+    private val _isPasswordValid = MutableStateFlow(false)
+
+
+    // Variável pública de validação que a Activity vai observar para a Etapa 3 :
+    val isPasswordValid: StateFlow<Boolean> = _isPasswordValid.asStateFlow()
+
+
+    // Valida a senha usando Regex para garantir que tenha apenas letras e números (sem símbolos ou espaços) :
+    fun validatePassword(password: String) {
+
+        updatePassword(password)
+
+        // Regex que aceita apenas letras (maiúsculas/minúsculas) e números, com tamanho mínimo de 6 caracteres :
+        val passwordRegex = "^[a-zA-Z0-9]{6,}\$"
+
+        _isPasswordValid.value = password.matches(passwordRegex.toRegex())
+
+    }
+
+
+    fun updatePassword(newPassword: String) {
+
+
+        _password.value = newPassword
 
 
     }

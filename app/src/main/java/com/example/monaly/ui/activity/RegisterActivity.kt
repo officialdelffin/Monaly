@@ -120,6 +120,10 @@ class RegisterActivity : AppCompatActivity() {
                         progressBar.progress = 75
 
 
+                        // Libera ou bloqueia o botão com base na validação atual da senha no Cofre :
+                        buttonNext.isEnabled = viewModel.isPasswordValid.value
+
+
                     }
 
 
@@ -155,7 +159,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 
-        // Fica observando a validação do perfil (Nome/Username) em tempo real :
+        // Fica observando a validação do perfil Nome e Username em tempo real :
         lifecycleScope.launch {
 
 
@@ -164,6 +168,29 @@ class RegisterActivity : AppCompatActivity() {
 
                 // Só interfere no botão se o usuário estiver na Etapa 2 (Posição 1) :
                 if (viewPager.currentItem == 1) {
+
+
+                    buttonNext.isEnabled = isValid
+
+
+                }
+
+
+            }
+
+
+        }
+
+
+        // Fica observando a validação da senha em tempo real :
+        lifecycleScope.launch {
+
+
+            viewModel.isPasswordValid.collect { isValid ->
+
+
+                // Só interfere no botão se o usuário estiver na Etapa 3 (Posição 2) :
+                if (viewPager.currentItem == 2) {
 
 
                     buttonNext.isEnabled = isValid

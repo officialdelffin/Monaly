@@ -247,4 +247,35 @@ class RegisterActivity : AppCompatActivity() {
     }
 
 
+    // Controla o estado de clique e as cores do botão dinamicamente :
+    private fun setNextButtonState(buttonNext: MaterialButton, isValid: Boolean) {
+
+
+        buttonNext.isEnabled = isValid
+
+
+        if (isValid) {
+
+
+            // Botão Aceso / Validado :
+            buttonNext.setBackgroundResource(R.drawable.drawable_background_button_bage_10_dp)
+            buttonNext.backgroundTintList = getColorStateList(R.color.bage_neutral)
+            buttonNext.setTextColor(getColor(R.color.gray_dark))
+
+
+        } else {
+
+
+            // Botão Apagado / Desativado :
+            buttonNext.setBackgroundResource(R.drawable.drawable_background_button_gray_deep_10_dp)
+            buttonNext.backgroundTintList = null
+            buttonNext.setTextColor(getColor(R.color.gray_dark))
+
+
+        }
+
+
+    }
+
+
 }

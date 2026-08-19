@@ -123,12 +123,12 @@ class RegisterViewModel : ViewModel() {
     }
 
 
-    // Controla se a tela deve mostrar uma bolinha girando (carregamento) :
+    // Controla se a tela deve mostrar uma bolinha girando sendo o carregamento :
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
 
-    // Avisa a Activity sobre o resultado final (Sucesso ou o motivo do Erro) :
+    // Avisa a Activity sobre o resultado final sendo sucesso ou o motivo do erro :
     private val _registrationState = MutableStateFlow<String?>(null)
     val registrationState: StateFlow<String?> = _registrationState.asStateFlow()
 
@@ -207,7 +207,7 @@ class RegisterViewModel : ViewModel() {
             .addOnFailureListener { error ->
 
 
-                // Se a criação da conta falhar (ex: email já existe), avisamos a Activity :
+                // Se a criação da conta falhar ex: email já existe, avisamos a Activity :
                 _isLoading.value = false
                 _registrationState.value = "Erro na conta: ${error.message}"
 

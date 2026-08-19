@@ -1,0 +1,67 @@
+<resources>
+
+
+    <!-- Nome do aplicativo : -->
+    <string name="app_name">Monaly</string>
+
+    <!-- Tela Ondoarding Um : -->
+    <string name="onboarding_label_welcome">Bem-vindo ao Monaly</string>
+    <string name="onboarding_description_one">Seu novo lar para fotos e vídeos. Organize, crie álbuns colaborativos e guarde memórias com total privacidade. Comece a criar sua história hoje.</string>
+
+    <!-- Tela Onboarding Dois : -->
+    <string name="onboarding_memories">Memórias Feitas em Grupo</string>
+    <string name="ondoarding_description_two">Crie Álbuns Compartilhados e convide quem viveu o momento. Todos podem adicionar fotos, construindo um acervo visual completo e exclusivo para o seu grupo.</string>
+
+    <!-- Tela Onboarding Three : -->
+    <string name="onboarding_history">Sua História, Sempre à Mão</string>
+    <string name="onboarding_description_three">A Galeria unificada exibe todas as suas mídias por ordem cronológica. Pesquise por título, nome do álbum ou por quem postou aquela foto.</string>
+    <string name="onboarding_bottom_next">Próximo</string>
+    <string name="onboarding_bottom_login_in">Entrar</string>
+
+    <!-- Textos do Login : -->
+    <string name="login_title">De volta às suas memórias Monaly</string>
+    <string name="login_description">Suas coleções em grupo e conexões privadas estão esperando por você. Acesse para ver as novidades nos seus álbuns.</string>
+    <string name="logint_hint_email">Digite seu e-mail:</string>
+    <string name="login_hint_password">Digite a sua senha:</string>
+    <string name="login_content_description">Botão de entrar</string>
+    <string name="login_button">Entrar com o Google</string>
+    <string name="login_click_text_forgot_password">esqueci a minha senha</string>
+    <string name="login_click_text_create_account">criar uma conta</string>
+
+    <!-- Textos do Fragment Feed : -->
+    <string name="feed_button_to_add">Adicionar mídia</string>
+    <string name="feed_content_description_notification">Botão de notificação</string>
+    <string name="feed_title_midia">mídias</string>
+    <string name="feed_title_albuns">álbuns</string>
+    <string name="feed_title_conections">conexões</string>
+    <string name="feed__defaut_number">0</string>
+
+    <!-- Textos do Registro : -->
+    <string name="register_button_next">Avançar</string>
+    <string name="register_button_finish">Criar Conta</string>
+
+    <!-- Etapa um - E-mail : -->
+    <string name="register_title_email">Qual é o seu e-mail?</string>
+    <string name="register_desc_email">Ele será usado para acessar a sua conta e recuperar sua senha de forma segura.</string>
+    <string name="register_hint_email">Digite seu e-mail</string>
+
+    <!-- Etapa dois - Nome e Username : -->
+    <string name="register_title_profile">Como devemos te chamar?</string>
+    <string name="register_desc_profile">Escolha seu nome e um @username único para o seu perfil.</string>
+    <string name="register_hint_first_name">Nome</string>
+    <string name="register_hint_last_name">Sobrenome</string>
+    <string name="register_hint_username">Nome de usuário</string>
+
+    <!-- Etapa tres - Senha : -->
+    <string name="register_title_password">Crie uma senha forte</string>
+    <string name="register_desc_password">Sua senha deve conter apenas letras e números, sem caracteres especiais.</string>
+    <string name="register_hint_password">Digite sua senha</string>
+
+    <!-- Etapa quatro - Resumo e Link : -->
+    <string name="register_title_summary">Tudo pronto!</string>
+    <string name="register_desc_summary">Revise seus dados abaixo. Ao criar a conta, enviaremos um link de confirmação para o seu e-mail.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>

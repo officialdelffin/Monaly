@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "205670454949",
+    "project_id": "official-monaly",
+    "storage_bucket": "official-monaly.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205670454949:android:ee2cbe0c112badf3e55f4c",
+        "android_client_info": {
+          "package_name": "com.example.monaly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "205670454949-711jj4vbduep35tp3u40g4ottt1nfu1k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.monaly",
+            "certificate_hash": "1d32f79cb780ec3184a007034ddf2afcd5a6ce63"
+          }
+        },
+        {
+          "client_id": "205670454949-hhiik60iralkarek582v0j2q8n3qri7r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.monaly",
+            "certificate_hash": "26cc65f6232cf1532465a8291181c534a17ee697"
+          }
+        },
+        {
+          "client_id": "205670454949-ts73kmpvdh5m3bcp7pl7611202po91i7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_x5VRUBqnZJx06KyfL3bFCP5AV74nLko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205670454949-ts73kmpvdh5m3bcp7pl7611202po91i7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

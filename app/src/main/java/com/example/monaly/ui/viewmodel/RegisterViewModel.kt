@@ -99,19 +99,15 @@ class RegisterViewModel : ViewModel() {
     val isPasswordValid: StateFlow<Boolean> = _isPasswordValid.asStateFlow()
 
 
-    // Valida a senha usando Regex para garantir letras, números e no mínimo 8 caracteres :
+    // Valida a senha usando Regex para garantir que tenha apenas letras e números (sem símbolos ou espaços) :
     fun validatePassword(password: String) {
-
 
         updatePassword(password)
 
-
-        // Regra :
-        val passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}\$"
-
+        // Regex que aceita apenas letras (maiúsculas/minúsculas) e números, com tamanho mínimo de 6 caracteres :
+        val passwordRegex = "^[a-zA-Z0-9]{6,}\$"
 
         _isPasswordValid.value = password.matches(passwordRegex.toRegex())
-
 
     }
 

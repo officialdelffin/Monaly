@@ -86,8 +86,8 @@ class RegisterActivity : AppCompatActivity() {
                         progressBar.progress = 25
 
 
-                        // [MUDANÇA 2] Bloqueia ou libera o botão baseado no que o usuário já havia digitado no Cofre :
-                        buttonNext.isEnabled = viewModel.isEmailValid.value
+                        // Atualiza o estado visual do botão baseado no e-mail :
+                        setNextButtonState(buttonNext, viewModel.isEmailValid.value)
 
 
                     }
@@ -103,8 +103,8 @@ class RegisterActivity : AppCompatActivity() {
                         progressBar.progress = 50
 
 
-                        // Libera ou bloqueia o botão com base na validação atual do perfil no Cofre :
-                        buttonNext.isEnabled = viewModel.isProfileValid.value
+                        // Atualiza o estado visual do botão baseado no perfil :
+                        setNextButtonState(buttonNext, viewModel.isProfileValid.value)
 
 
                     }
@@ -120,8 +120,8 @@ class RegisterActivity : AppCompatActivity() {
                         progressBar.progress = 75
 
 
-                        // Libera ou bloqueia o botão com base na validação atual da senha no Cofre :
-                        buttonNext.isEnabled = viewModel.isPasswordValid.value
+                        // Atualiza o estado visual do botão baseado na senha :
+                        setNextButtonState(buttonNext, viewModel.isPasswordValid.value)
 
 
                     }
@@ -143,11 +143,10 @@ class RegisterActivity : AppCompatActivity() {
             viewModel.isEmailValid.collect { isValid ->
 
 
-                // Só interfere no botão se o usuário estiver na Etapa 1 sendo a osição 0 :
                 if (viewPager.currentItem == 0) {
 
 
-                    buttonNext.isEnabled = isValid
+                    setNextButtonState(buttonNext, isValid)
 
 
                 }
@@ -166,11 +165,10 @@ class RegisterActivity : AppCompatActivity() {
             viewModel.isProfileValid.collect { isValid ->
 
 
-                // Só interfere no botão se o usuário estiver na Etapa 2 (Posição 1) :
                 if (viewPager.currentItem == 1) {
 
 
-                    buttonNext.isEnabled = isValid
+                    setNextButtonState(buttonNext, isValid)
 
 
                 }
@@ -189,11 +187,10 @@ class RegisterActivity : AppCompatActivity() {
             viewModel.isPasswordValid.collect { isValid ->
 
 
-                // Só interfere no botão se o usuário estiver na Etapa 3 (Posição 2) :
                 if (viewPager.currentItem == 2) {
 
 
-                    buttonNext.isEnabled = isValid
+                    setNextButtonState(buttonNext, isValid)
 
 
                 }

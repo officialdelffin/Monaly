@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 // A class que vai guardar os dados do usuário durante todas as etapas do cadastro :
@@ -116,6 +118,101 @@ class RegisterViewModel : ViewModel() {
 
 
         _password.value = newPassword
+
+
+    }
+
+
+    // Controla se a tela deve mostrar uma bolinha girando (carregamento) :
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
+
+    // Avisa a Activity sobre o resultado final (Sucesso ou o motivo do Erro) :
+    private val _registrationState = MutableStateFlow<String?>(null)
+    val registrationState: StateFlow<String?> = _registrationState.asStateFlow()
+
+
+    // Função final acionada pelo botão da Etapa 4 :
+    fun createAccount() {
+
+
+        // Acende o carregamento para travar a tela :
+        _isLoading.value = true
+
+
+        val currentEmail = _email.value
+        val currentPassword = _password.value
+
+
+        // Bate na porta do Authentication para criar o login :
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(currentEmail, currentPassword)
+
+
+            .addOnSuccessListener { authResult ->
+
+
+                // Se deu certo, pegamos o ID único gerado para este celular :
+                val uid = authResult.user?.uid
+
+
+                if (uid != null) {
+
+
+                    // Empacotamos os dados do perfil em um mapa para o banco :
+                    val userProfile = hashMapOf(
+
+
+                        "firstName" to _firstName.value,
+                        "lastName" to _lastName.value,
+                        "username" to _username.value,
+                        "email" to currentEmail
+
+
+                    )
+
+
+                    // Bate na porta do Firestore, cria um documento com o UID e salva o perfil :
+                    FirebaseFirestore.getInstance().collection("users").document(uid).set(userProfile)
+
+
+                        .addOnSuccessListener {
+
+
+                            // Tudo perfeito! Apaga o carregamento e avisa a Activity do sucesso :
+                            _isLoading.value = false
+                            _registrationState.value = "SUCESSO"
+
+
+                        }
+
+
+                        .addOnFailureListener { error ->
+
+
+                            // Se o banco falhar, avisamos a Activity :
+                            _isLoading.value = false
+                            _registrationState.value = "Erro ao salvar perfil: ${error.message}"
+
+
+                        }
+
+
+                }
+
+
+            }
+
+
+            .addOnFailureListener { error ->
+
+
+                // Se a criação da conta falhar (ex: email já existe), avisamos a Activity :
+                _isLoading.value = false
+                _registrationState.value = "Erro na conta: ${error.message}"
+
+
+            }
 
 
     }

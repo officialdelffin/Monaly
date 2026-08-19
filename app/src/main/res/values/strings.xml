@@ -39,6 +39,7 @@
     <!-- Textos do Registro : -->
     <string name="register_button_next">Avançar</string>
     <string name="register_button_finish">Criar Conta</string>
+    <string name="register_button_conclude">Concluit</string>
     <string name="summary_label_email">E-MAIL CADASTRADO</string>
     <string name="summary_label_name">NOME COMPLETO</string>
     <string name="summary_label_username">NOME DE USUÁRIO (USERNAME)</string>

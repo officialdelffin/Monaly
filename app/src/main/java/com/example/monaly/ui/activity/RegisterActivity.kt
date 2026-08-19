@@ -202,18 +202,97 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 
-        // Configurando o clique do Botão de Avançar :
+        // Observa o carregamento para travar a tela e dar feedback ao usuário :
+        lifecycleScope.launch {
+
+
+            viewModel.isLoading.collect { loading ->
+
+
+                if (loading) {
+
+
+                    // Trava o botão e avisa que está processando :
+                    buttonNext.isEnabled = false
+                    buttonNext.text = "Aguarde..."
+
+
+                } else {
+
+
+                    // Restaura o botão quando termina :
+                    buttonNext.isEnabled = true
+
+
+                    // Se estiver na última página, o texto volta para Concluir :
+                    if (viewPager.currentItem == 3) {
+
+
+                        buttonNext.text = "Concluir"
+
+
+                    }
+
+
+                }
+
+
+            }
+
+
+        }
+
+
+        // Observa o resultado final que vem do Firebase :
+        lifecycleScope.launch {
+
+
+            viewModel.registrationState.collect { result ->
+
+
+                if (result == "SUCESSO") {
+
+
+                    // Mostra um aviso rápido e encerra a tela de cadastro (voltará para o login) :
+                    android.widget.Toast.makeText(this@RegisterActivity, "Conta criada com sucesso!", android.widget.Toast.LENGTH_LONG).show()
+                    finish()
+
+
+                } else if (result != null) {
+
+
+                    // Se não foi sucesso, mostra o motivo do erro na tela :
+                    android.widget.Toast.makeText(this@RegisterActivity, result, android.widget.Toast.LENGTH_LONG).show()
+
+
+                }
+
+
+            }
+
+
+        }
+
+
+        // Configurando o clique do Botão de Avançar ou Concluir :
         buttonNext.setOnClickListener {
 
 
             val currentItem = viewPager.currentItem
 
 
-            // Limite de etapas, por enquanto são 3, então o índice máximo é 2 :
-            if (currentItem < 2) {
+            // Se estiver nas abas de 0 a 2, apenas avança a página :
+            if (currentItem < 3) {
 
 
                 viewPager.setCurrentItem(currentItem + 1, true)
+
+
+            } else if (currentItem == 3) {
+
+
+                // Se estiver na aba 3 sendo o resumo final, dispara o envio para a nuvem :
+                viewModel.createAccount()
 
 
             }

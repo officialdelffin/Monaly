@@ -18,14 +18,13 @@ import com.example.monaly.ui.auth.AuthViewModel
 import com.example.monaly.ui.auth.GoogleAuthUiClient
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
-import androidx.core.app.ActivityOptionsCompat
 
 
-// Classe responsável pela manipulação dos elementos da activity de login :
+// Tela de login enxuta, focada 100% na entrada pelo Google :
 class LoginActivity : AppCompatActivity() {
 
 
-    // Variáveis que vão guardar o nosso ViewModel e o Cliente do Google :
+    // Preparando as variáveis do meu cérebro viewModel e do cliente do Google :
     private lateinit var authViewModel: AuthViewModel
     private lateinit var googleAuthUiClient: GoogleAuthUiClient
 
@@ -37,17 +36,17 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
 
-        // Inicializando o Firebase e o nosso Repositório sendo a camada data :
+        // Ligando os motores do Firebase e da camada de dados :
         val firebaseAuth = FirebaseAuth.getInstance()
         val authRepository = AuthRepositoryImpl(firebaseAuth)
 
 
-        // Inicializando o Cliente do Google sendo a camada UI :
+        // Instanciando o cliente de credenciais que vai abrir a gaveta do Google na tela :
         val credentialManager = CredentialManager.create(this)
         googleAuthUiClient = GoogleAuthUiClient(this, credentialManager)
 
 
-        // Criando a Fábrica para construir o ViewModel :
+        // Criando a fábrica pra conseguir injetar o repositório dentro do meu ViewModel :
         val factory = object : ViewModelProvider.Factory {
 
 
@@ -64,37 +63,37 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-        // Recebendo o ViewModel pronto :
+        // Pegando o ViewModel prontinho pra usar :
         authViewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
 
 
-        // Mapeando o botão da interface :
+        // Capturando o botão do Google no XML :
         val buttonLogin = findViewById<AppCompatButton>(R.id.buttonLoginGoogle)
 
 
-        // Configurando a ação de clique do botão de Entrar :
+        // Ao clicar no buttonLogin :
         buttonLogin.setOnClickListener {
 
 
             lifecycleScope.launch {
 
 
-                // Abre a bandeja nativa de contas do Google e aguarda a escolha :
+                // Abre a bandeja de contas do Google e espera ele escolher uma :
                 val token = googleAuthUiClient.signIn()
 
 
-                // Se o usuário selecionou uma conta e o Google devolveu o token :
+                // Se ele escolheu uma conta e o Google me devolveu o token de segurança :
                 if (token != null) {
 
 
-                    // Mandamos o nosso ViewModel enviar esse token lá para o Firebase :
+                    // Avisando pro ViewModel mandar isso lá pro servidor do Firebase aprovar :
                     authViewModel.signInWithGoogle(token)
 
 
                 } else {
 
 
-                    // Se o usuário fechou a janela sem escolher nada :
+                    // Se ele clicou fora ou cancelou a janela :
                     Toast.makeText(this@LoginActivity, "Login cancelado", Toast.LENGTH_SHORT).show()
 
 
@@ -107,7 +106,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-        // Observando as mudanças de estado do ViewModel para reagir na tela :
+        // Ficando de olho nas respostas que o Firebase manda pro ViewModel :
         lifecycleScope.launch {
 
 
@@ -117,11 +116,10 @@ class LoginActivity : AppCompatActivity() {
                 when (state) {
 
 
-                    // Estado inicial, não a nada a ser feito ainda :
                     is AuthState.Idle -> { }
 
 
-                    // bloqueamos o clique enquanto carrega para evitar múltiplos logins :
+                    // Enquanto processa ele trava o botão pra ele não clicar mil vezes :
                     is AuthState.Loading -> {
 
 
@@ -132,30 +130,30 @@ class LoginActivity : AppCompatActivity() {
                     }
 
 
-                    // Caso a aprovação for feita :
+                    // Se o firebase pertimir entrar :
                     is AuthState.Success -> {
 
 
-                        // Se o Firebase aprovou, avisamos e navegamos para a tela Principal :
                         Toast.makeText(this@LoginActivity, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show()
 
 
-                        // Definindo o caminho do intent :
+                        // Encaminha o usuário para a tela inicial :
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)
 
 
-                        // Encerramos a tela de login para o usuário não voltar pra cá :
+                        // Fecho a porta do login pra ele não voltar pra cá sem querer :
                         finish()
 
 
                     }
 
 
-                    // Se o Firebase recusou, liberamos o botão novamente e mostramos o erro :
+                    // Se o Firebase barrou :
                     is AuthState.Error -> {
 
 
+                        // Libera o botão de novo pro cara tentar outra vez e mostro o erro :
                         buttonLogin.isEnabled = true
                         buttonLogin.text = getString(R.string.login_button)
                         Toast.makeText(this@LoginActivity, state.message, Toast.LENGTH_LONG).show()
@@ -168,36 +166,6 @@ class LoginActivity : AppCompatActivity() {
 
 
             }
-
-
-        }
-
-
-        // Mapeando o botão de texto para criar uma nova conta :
-        val textCreateAccount = findViewById<android.widget.TextView>(R.id.clickTextCreateAccount)
-
-
-        // Configurando a navegação para a tela de registro :
-        textCreateAccount.setOnClickListener {
-
-
-            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
-
-
-            // Criamos o pacote de animação customizada usando a forma moderna e atualizada do Android :
-            val options = ActivityOptionsCompat.makeCustomAnimation(
-
-
-                this@LoginActivity,
-                android.R.anim.slide_in_left,
-                android.R.anim.slide_out_right
-
-
-            )
-
-
-            // Iniciamos a nova tela passando a intenção e as opções de animação juntas :
-            startActivity(intent, options.toBundle())
 
 
         }

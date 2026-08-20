@@ -1,7 +1,7 @@
 package com.example.monaly.ui.activity
 
 
-// Importações que preciso pra fazer as transições de tela e checar o login :
+// Importações :
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,7 @@ import com.example.monaly.ui.activity.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 
 
-// Minha tela fantasma que decide pra onde o usuário vai antes de carregar qualquer visual :
+// Tela fantasma que decide pra onde o usuário vai antes de carregar qualquer visual :
 class SplashActivity : AppCompatActivity() {
 
 
@@ -19,11 +19,11 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
-        // Vou perguntar pro Firebase se já tem alguém com a sessão ativa nesse celular :
+        // Pergunta o firebase se já tem alguém com a sessão ativa nesse celular :
         val currentUser = FirebaseAuth.getInstance().currentUser
 
 
-        // Se me devolver algo diferente de nulo, o cara já tá logado, mando direto pro feed principal :
+        // Se devolver algo diferente de nulo, o usuário já tá logado, mando direto pro feed principal :
         if (currentUser != null) {
 
 
@@ -43,7 +43,7 @@ class SplashActivity : AppCompatActivity() {
         }
 
 
-        // Mato essa tela da memória pro usuário não conseguir voltar pra ela apertando o botão de voltar do celular :
+        // Destruindo a tela da memória pro usuário não conseguir voltar pra ela apertando o botão de voltar do celular :
         finish()
 
 

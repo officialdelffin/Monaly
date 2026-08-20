@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <!-- Permissão oficial avisando ao Android que o Monaly vai checar o status da rede : -->
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,30 +15,36 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Monaly"
         tools:targetApi="31">
+
         <activity
-            android:name=".ui.activity.RegisterActivity"
-            android:exported="false" />
-        <!-- A SplashActivity agora é a tela principal e deve ser exported="true" para o Android conseguir iniciá-la : -->
-        <activity
+
             android:name=".ui.activity.SplashActivity"
             android:exported="true">
 
-            <!-- Estas duas tags MAIN e LAUNCHER são o que criam o ícone no celular e definem a porta de entrada : -->
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
+
         </activity>
+
         <activity
+
             android:name=".ui.activity.LoginActivity"
-            android:exported="false" /> <!-- O OnboardingActivity perde a tag intent-filter e vira uma tela comum exported="false" : -->
+            android:exported="false" />
+
         <activity
+
             android:name=".ui.activity.OnboardingActivity"
             android:exported="false" />
+
         <activity
+
             android:name=".ui.activity.MainActivity"
             android:exported="false" />
+
     </application>
 
 </manifest>

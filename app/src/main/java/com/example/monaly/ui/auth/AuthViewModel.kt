@@ -1,17 +1,18 @@
 package com.example.monaly.ui.auth
 
 
-// Importações :
+// Importações necessárias para a ViewModel, Corrotinas e Firebase :
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.monaly.domain.repository.AuthRepository
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.tasks.await
 
 
-// Definindo os estados possíveis da nossa tela de login :
+// Definindo os estados possíveis da tela de login :
 sealed class AuthState {
 
 
@@ -28,16 +29,16 @@ sealed class AuthState {
 class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
 
 
-    // Criando a variável de estado que será observada pela nossa Activity :
+    // Criando a variável de estado que será observada pela Activity :
     private val _authState = MutableStateFlow<AuthState>(AuthState.Idle)
     val authState: StateFlow<AuthState> = _authState
 
 
-    // Função responsável por processar o token e criar o perfil invisível :
+    // Função responsável por processar o token e criar o perfil do usuário :
     fun signInWithGoogle(token: String) {
 
 
-        // Atualizando o estado para travar o botão na interface :
+        // Atualizando o estado para indicar carregamento na interface :
         _authState.value = AuthState.Loading
 
 
@@ -47,91 +48,62 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
             try {
 
 
-                // Autenticando o token recebido no repositório do Firebase Auth usando o nome correto da variável :
-                val authResult = repository.signInWithGoogle(token)
-                val user = authResult.user
+                // Autenticando o token diretamente no repositório para obter o usuário :
+                val user = repository.signInWithGoogle(token)
 
 
                 if (user != null) {
 
 
-                    // Instanciando o banco de dados para verificar o perfil :
+                    // Instanciando o Firestore e buscando a referência do documento do usuário :
                     val db = FirebaseFirestore.getInstance()
                     val userRef = db.collection("users").document(user.uid)
 
 
-                    // Verificando a existência do documento do usuário no Firestore :
-                    userRef.get().addOnSuccessListener { document ->
+                    // Lendo o documento de forma suspensa utilizando a extensão await() :
+                    val document = userRef.get().await()
 
 
-                        // Validando se é o primeiro login deste usuário :
-                        if (!document.exists()) {
+                    // Verificando se o perfil ainda não existe no banco de dados :
+                    if (!document.exists()) {
 
 
-                            // Extraindo o nome do Google ou definindo um padrão alternativo :
-                            val displayName = user.displayName ?: "Usuario"
+                        // Extraindo o nome de exibição do Google :
+                        val displayName = user.displayName ?: "Usuario"
 
 
-                            // Formatando o nome para manter apenas letras minúsculas e números :
-                            val baseName = displayName.lowercase().replace(Regex("[^a-z0-9]"), "")
+                        // Formatando o nome para manter apenas caracteres alfanuméricos :
+                        val baseName = displayName.lowercase().replace(Regex("[^a-z0-9]"), "")
 
 
-                            // Gerando um sufixo aleatório de 4 dígitos para garantir exclusividade :
-                            val randomSuffix = (1000..9999).random()
-                            val generatedUsername = "@$baseName$randomSuffix"
+                        // Gerando o sufixo numérico aleatório para compor o username :
+                        val randomSuffix = (1000..9999).random()
+                        val generatedUsername = "@$baseName$randomSuffix"
 
 
-                            // Empacotando os dados extraídos para salvar no banco :
-                            val newUserProfile = hashMapOf(
-                                "name" to displayName,
-                                "username" to generatedUsername,
-                                "email" to user.email
-                            )
+                        // Mapeando as informações do novo perfil :
+                        val newUserProfile = hashMapOf(
+                            "name" to displayName,
+                            "username" to generatedUsername,
+                            "email" to user.email
+                        )
 
 
-                            // Salvando o novo perfil no Firestore e liberando o acesso em seguida :
-                            userRef.set(newUserProfile)
-                                .addOnSuccessListener {
-
-
-                                    _authState.value = AuthState.Success
-
-
-                                }
-                                .addOnFailureListener { error ->
-
-
-                                    // Tratando falhas na gravação dos dados iniciais :
-                                    _authState.value = AuthState.Error("Erro ao criar perfil: ${error.message}")
-
-
-                                }
-
-
-                        } else {
-
-
-                            // Aprovando o login diretamente caso o usuário já possua perfil salvo :
-                            _authState.value = AuthState.Success
-
-
-                        }
-
-
-                    }.addOnFailureListener { error ->
-
-
-                        // Tratando falhas de conexão com o banco de dados durante a leitura :
-                        _authState.value = AuthState.Error("Erro de conexão: ${error.message}")
+                        // Salvando o novo perfil no Firestore de forma suspensa :
+                        userRef.set(newUserProfile).await()
 
 
                     }
 
 
+                    // Notificando o sucesso da operação para a interface :
+                    _authState.value = AuthState.Success
+
+
                 } else {
 
 
-                    // Tratando a falha de retorno nulo do Firebase Auth :
+                    // Notificando erro caso o retorno do usuário seja nulo :
                     _authState.value = AuthState.Error("Erro ao obter dados da conta Google.")
 
 
@@ -141,7 +113,7 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
             } catch (e: Exception) {
 
 
-                // Capturando e exibindo exceções não mapeadas durante a requisição :
+                // Capturando e exibindo qualquer erro ocorrido durante o processo :
                 _authState.value = AuthState.Error(e.message ?: "Erro desconhecido no login.")
 
 

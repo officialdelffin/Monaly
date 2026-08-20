@@ -67,7 +67,7 @@
         android:layout_width="0dp"
         android:layout_height="57dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="160dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/drawable_background_button_gray_dark_10_dp"
         android:fontFamily="sans-serif"

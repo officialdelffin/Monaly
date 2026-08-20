@@ -40,7 +40,7 @@
         android:layout_marginBottom="15dp"
         android:text=""
         android:textColor="@color/bage_neutral"
-        android:textSize="22dp"
+        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/textDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -54,7 +54,7 @@
         android:layout_marginBottom="30dp"
         android:text=""
         android:textColor="@color/gray_medium"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

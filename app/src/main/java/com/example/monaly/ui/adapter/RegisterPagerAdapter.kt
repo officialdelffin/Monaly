@@ -8,17 +8,24 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.monaly.ui.fragment.register.RegisterEmailFragment
 import com.example.monaly.ui.fragment.register.RegisterPasswordFragment
 import com.example.monaly.ui.fragment.register.RegisterProfileFragment
+import com.example.monaly.ui.fragment.RegisterSummaryFragment
 
 
-// Adaptador seguro para o ViewPager2 do cadastro progressivo :
+// O Adaptador que gerencia a troca de telas do cadastro :
 class RegisterPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
 
 
-    // Por enquanto, temos 3 etapas construídas :
-    override fun getItemCount(): Int = 3
+    // Agora temos 4 etapas no total :
+    override fun getItemCount(): Int {
 
 
-    // O sistema cria as etapas de forma isolada na memória conforme a posição :
+        return 4
+
+
+    }
+
+
+    // Retorna o Fragment correto para cada posição, incluindo o Resumo na posição 3 :
     override fun createFragment(position: Int): Fragment {
 
 
@@ -28,7 +35,10 @@ class RegisterPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(ac
             0 -> RegisterEmailFragment()
             1 -> RegisterProfileFragment()
             2 -> RegisterPasswordFragment()
-            else -> RegisterEmailFragment() // Fallback de segurança :
+            3 -> RegisterSummaryFragment()
+
+
+            else -> throw IllegalArgumentException("Posição inválida no ViewPager")
 
 
         }

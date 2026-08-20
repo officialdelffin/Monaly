@@ -58,7 +58,7 @@ class RegisterActivity : AppCompatActivity() {
         val viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
 
 
-        // Bloqueia o arrasto do dedo na tela e injeta o Adaptador com as 3 etapas :
+        // Bloqueia o arrasto do dedo na tela e injeta o Adaptador com as 4 etapas agora :
         viewPager.isUserInputEnabled = false
         viewPager.adapter = RegisterPagerAdapter(this)
 
@@ -84,9 +84,9 @@ class RegisterActivity : AppCompatActivity() {
                         textDesc.text = getString(R.string.register_desc_email)
                         buttonBack.visibility = View.INVISIBLE
                         progressBar.progress = 25
+                        buttonNext.text = getString(R.string.register_button_next)
 
 
-                        // Atualiza o estado visual do botão baseado no e-mail :
                         setNextButtonState(buttonNext, viewModel.isEmailValid.value)
 
 
@@ -101,9 +101,9 @@ class RegisterActivity : AppCompatActivity() {
                         textDesc.text = getString(R.string.register_desc_profile)
                         buttonBack.visibility = View.VISIBLE
                         progressBar.progress = 50
+                        buttonNext.text = getString(R.string.register_button_next)
 
 
-                        // Atualiza o estado visual do botão baseado no perfil :
                         setNextButtonState(buttonNext, viewModel.isProfileValid.value)
 
 
@@ -118,10 +118,27 @@ class RegisterActivity : AppCompatActivity() {
                         textDesc.text = getString(R.string.register_desc_password)
                         buttonBack.visibility = View.VISIBLE
                         progressBar.progress = 75
+                        buttonNext.text = getString(R.string.register_button_next)
 
 
-                        // Atualiza o estado visual do botão baseado na senha :
                         setNextButtonState(buttonNext, viewModel.isPasswordValid.value)
+
+
+                    }
+
+
+                    // Adicionamos o estado para a Etapa 4 (Resumo Final) :
+                    3 -> {
+
+
+                        textTitle.text = getString(R.string.register_title_summary)
+                        textDesc.text = getString(R.string.register_desc_summary)
+                        buttonBack.visibility = View.VISIBLE
+                        progressBar.progress = 100
+
+                        // O botão muda para "Concluir" e fica sempre liberado para enviar :
+                        buttonNext.text = "Concluir"
+                        setNextButtonState(buttonNext, true)
 
 
                     }
@@ -136,7 +153,7 @@ class RegisterActivity : AppCompatActivity() {
         })
 
 
-        // Fica observando a validação do e-mail em tempo real em milissegundos :
+        // Fica observando a validação do e-mail em tempo real :
         lifecycleScope.launch {
 
 
@@ -158,7 +175,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 
-        // Fica observando a validação do perfil Nome e Username em tempo real :
+        // Fica observando a validação do perfil em tempo real :
         lifecycleScope.launch {
 
 
@@ -212,7 +229,6 @@ class RegisterActivity : AppCompatActivity() {
                 if (loading) {
 
 
-                    // Trava o botão e avisa que está processando :
                     buttonNext.isEnabled = false
                     buttonNext.text = "Aguarde..."
 
@@ -220,11 +236,9 @@ class RegisterActivity : AppCompatActivity() {
                 } else {
 
 
-                    // Restaura o botão quando termina :
                     buttonNext.isEnabled = true
 
 
-                    // Se estiver na última página, o texto volta para Concluir :
                     if (viewPager.currentItem == 3) {
 
 
@@ -243,25 +257,23 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 
-        // Observa o resultado final que vem do Firebase :
+        // Atualizamos o observador para ler o SUCESSO_VERIFICACAO :
         lifecycleScope.launch {
 
 
             viewModel.registrationState.collect { result ->
 
 
-                if (result == "SUCESSO") {
+                if (result == "SUCESSO_VERIFICACAO") {
 
 
-                    // Mostra um aviso rápido e encerra a tela de cadastro (voltará para o login) :
-                    android.widget.Toast.makeText(this@RegisterActivity, "Conta criada com sucesso!", android.widget.Toast.LENGTH_LONG).show()
+                    android.widget.Toast.makeText(this@RegisterActivity, "Conta criada! Verifique seu e-mail antes de fazer o login.", android.widget.Toast.LENGTH_LONG).show()
                     finish()
 
 
                 } else if (result != null) {
 
 
-                    // Se não foi sucesso, mostra o motivo do erro na tela :
                     android.widget.Toast.makeText(this@RegisterActivity, result, android.widget.Toast.LENGTH_LONG).show()
 
 
@@ -281,7 +293,6 @@ class RegisterActivity : AppCompatActivity() {
             val currentItem = viewPager.currentItem
 
 
-            // Se estiver nas abas de 0 a 2, apenas avança a página :
             if (currentItem < 3) {
 
 
@@ -291,7 +302,6 @@ class RegisterActivity : AppCompatActivity() {
             } else if (currentItem == 3) {
 
 
-                // Se estiver na aba 3 sendo o resumo final, dispara o envio para a nuvem :
                 viewModel.createAccount()
 
 
@@ -333,7 +343,6 @@ class RegisterActivity : AppCompatActivity() {
         if (isValid) {
 
 
-            // Botão Aceso / Validado :
             buttonNext.setBackgroundResource(R.drawable.drawable_background_button_bage_10_dp)
             buttonNext.backgroundTintList = getColorStateList(R.color.bage_neutral)
             buttonNext.setTextColor(getColor(R.color.gray_dark))
@@ -342,7 +351,6 @@ class RegisterActivity : AppCompatActivity() {
         } else {
 
 
-            // Botão Apagado / Desativado :
             buttonNext.setBackgroundResource(R.drawable.drawable_background_button_gray_deep_10_dp)
             buttonNext.backgroundTintList = null
             buttonNext.setTextColor(getColor(R.color.gray_dark))

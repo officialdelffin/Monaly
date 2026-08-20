@@ -1,7 +1,7 @@
 package com.example.monaly.ui.activity
 
 
-// Importações :
+// Importações que preciso pra fazer as transições de tela e checar o login :
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,7 @@ import com.example.monaly.ui.activity.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 
 
-// Tela inicial que atua fazendo a conferencia se há login feito ou não :
+// Minha tela fantasma que decide pra onde o usuário vai antes de carregar qualquer visual :
 class SplashActivity : AppCompatActivity() {
 
 
@@ -19,11 +19,11 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
-        // O Firebase gerencia os tokens de sessão automaticamente e o currentUser verifica se há um token válido salvo e criptografado no celular :
+        // Vou perguntar pro Firebase se já tem alguém com a sessão ativa nesse celular :
         val currentUser = FirebaseAuth.getInstance().currentUser
 
 
-        // Se não for nulo, tem usuário, roteamos direto para a MainActivity pulando Onboarding e Login :
+        // Se me devolver algo diferente de nulo, o cara já tá logado, mando direto pro feed principal :
         if (currentUser != null) {
 
 
@@ -33,7 +33,7 @@ class SplashActivity : AppCompatActivity() {
         }
 
 
-        // Se for nulo, ninguém logado, mandamos para o fluxo inicial do Onboarding :
+        // Se for nulo, é usuário novo ou deslogado, então jogo pro fluxo de boas vindas :
         else {
 
 
@@ -43,7 +43,7 @@ class SplashActivity : AppCompatActivity() {
         }
 
 
-        // Encerramos a Splash para destruí-la da memória assim impedindo que o usuário volte para essa tela preta se apertar o botão 'Voltar' do celular :
+        // Mato essa tela da memória pro usuário não conseguir voltar pra ela apertando o botão de voltar do celular :
         finish()
 
 

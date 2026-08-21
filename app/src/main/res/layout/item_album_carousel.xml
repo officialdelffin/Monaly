@@ -64,7 +64,7 @@
         android:layout_marginBottom="15dp"
         android:text="Título do Álbum"
         android:textColor="@color/bage_neutral"
-        android:textSize="22sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textAlbumDescription"
         app:layout_constraintEnd_toEndOf="parent"

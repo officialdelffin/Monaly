@@ -1,6 +1,5 @@
 <resources>
 
-
     <!-- Nome do aplicativo : -->
     <string name="app_name">Monaly</string>
 
@@ -35,6 +34,5 @@
     <string name="feed_title_albuns">álbuns</string>
     <string name="feed_title_conections">conexões</string>
     <string name="feed__defaut_number">0</string>
-
 
 </resources>

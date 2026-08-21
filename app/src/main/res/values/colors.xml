@@ -3,7 +3,7 @@
 <resources>
 
     <color name="bage_neutral">#fffee7</color>
-    <color name="gray_medium">#9E9E9E</color>
+    <color name="gray_medium">#C8C8C8</color>
     <color name="gray_dark">#424242</color>
     <color name="gray_deep">#1A1A1A</color>
     <color name="black">#000000</color>

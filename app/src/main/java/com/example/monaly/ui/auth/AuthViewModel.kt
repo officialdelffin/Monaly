@@ -1,10 +1,11 @@
 package com.example.monaly.ui.auth
 
 
-// Importações necessárias para a ViewModel, Corrotinas e Firebase :
+// Importações :
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.monaly.domain.repository.AuthRepository
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -48,16 +49,21 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
             try {
 
 
-                // Autenticando o token diretamente no repositório para obter o usuário :
-                val user = repository.signInWithGoogle(token)
+                // Solicitando ao repositório a execução da autenticação com o token :
+                repository.signInWithGoogle(token)
 
 
-                if (user != null) {
+                // Buscando o usuário logado diretamente da fonte oficial do Firebase :
+                val firebaseUser = FirebaseAuth.getInstance().currentUser
+
+
+                // Verificando se o usuário foi carregado com sucesso na sessão ativa :
+                if (firebaseUser != null) {
 
 
                     // Instanciando o Firestore e buscando a referência do documento do usuário :
                     val db = FirebaseFirestore.getInstance()
-                    val userRef = db.collection("users").document(user.uid)
+                    val userRef = db.collection("users").document(firebaseUser.uid)
 
 
                     // Lendo o documento de forma suspensa utilizando a extensão await() :
@@ -68,24 +74,28 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
                     if (!document.exists()) {
 
 
-                        // Extraindo o nome de exibição do Google :
-                        val displayName = user.displayName ?: "Usuario"
+                        // Extraindo o nome de exibição do Google ou definindo um padrão :
+                        val displayName = firebaseUser.displayName ?: "Usuario"
 
 
-                        // Formatando o nome para manter apenas caracteres alfanuméricos :
+                        // Formatando o nome para manter apenas letras minúsculas e números :
                         val baseName = displayName.lowercase().replace(Regex("[^a-z0-9]"), "")
 
 
-                        // Gerando o sufixo numérico aleatório para compor o username :
+                        // Gerando o sufixo numérico aleatório para compor o username exclusivo :
                         val randomSuffix = (1000..9999).random()
                         val generatedUsername = "@$baseName$randomSuffix"
 
 
                         // Mapeando as informações do novo perfil :
                         val newUserProfile = hashMapOf(
+
+
                             "name" to displayName,
                             "username" to generatedUsername,
-                            "email" to user.email
+                            "email" to firebaseUser.email
+
+
                         )
 
 
@@ -96,14 +106,14 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
                     }
 
 
-                    // Notificando o sucesso da operação para a interface :
+                    // Notificando o sucesso da operação para a interface reagir e avançar de tela :
                     _authState.value = AuthState.Success
 
 
                 } else {
 
 
-                    // Notificando erro caso o retorno do usuário seja nulo :
+                    // Notificando erro caso a sessão do usuário continue nula após a autenticação :
                     _authState.value = AuthState.Error("Erro ao obter dados da conta Google.")
 
 
@@ -113,7 +123,7 @@ class AuthViewModel(private val repository: AuthRepository) : ViewModel() {
             } catch (e: Exception) {
 
 
-                // Capturando e exibindo qualquer erro ocorrido durante o processo :
+                // Capturando e exibindo qualquer erro ocorrido durante todo o fluxo :
                 _authState.value = AuthState.Error(e.message ?: "Erro desconhecido no login.")
 
 

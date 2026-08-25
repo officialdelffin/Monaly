@@ -14,18 +14,13 @@
     <!-- Tela Onboarding Three : -->
     <string name="onboarding_history"><b>Sua História, Sempre à Mão</b></string>
     <string name="onboarding_description_three">A Galeria unificada exibe todas as suas mídias por ordem cronológica. Pesquise por título, nome do álbum ou por quem postou aquela foto.</string>
-    <string name="onboarding_bottom_next"><b>Próximo</b></string>
-    <string name="onboarding_bottom_login_in"><b>Entrar</b></string>
+    <string name="onboarding_bottom_next">Próximo</string>
+    <string name="onboarding_bottom_login_in">Entrar</string>
 
     <!-- Textos do Login : -->
     <string name="login_title"><b>De volta às suas memórias Monaly</b></string>
     <string name="login_description">Suas coleções em grupo e conexões privadas estão esperando por você. Acesse para ver as novidades nos seus álbuns.</string>
-    <string name="logint_hint_email">Digite seu e-mail:</string>
-    <string name="login_hint_password">Digite a sua senha:</string>
-    <string name="login_content_description">Botão de entrar</string>
-    <string name="login_button"><b>Entrar com o Google</b></string>
-    <string name="login_click_text_forgot_password">esqueci a minha senha</string>
-    <string name="login_click_text_create_account">criar uma conta</string>
+    <string name="login_button">Entrar com o Google</string>
 
     <!-- Textos do Fragment Feed : -->
     <string name="feed_button_to_add">Adicionar mídia</string>

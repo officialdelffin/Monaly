@@ -69,7 +69,7 @@
         android:layout_marginBottom="30dp"
         android:text="@string/feed__defaut_number"
         android:textColor="@color/bage_neutral"
-        android:textSize="25sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -81,7 +81,7 @@
         android:layout_marginStart="100dp"
         android:text="@string/feed__defaut_number"
         android:textColor="@color/bage_neutral"
-        android:textSize="25sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/textDefaultAlbun"
         app:layout_constraintStart_toEndOf="@+id/textDefaultAlbun" />
 
@@ -92,7 +92,7 @@
         android:layout_marginEnd="100dp"
         android:text="@string/feed__defaut_number"
         android:textColor="@color/bage_neutral"
-        android:textSize="25sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/textDefaultAlbun"
         app:layout_constraintEnd_toStartOf="@+id/textDefaultAlbun" />
 
@@ -103,7 +103,7 @@
         android:layout_marginBottom="15dp"
         android:text="@string/feed_title_albuns"
         android:textColor="@color/bage_neutral"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/textDefaultAlbun"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -115,7 +115,7 @@
         android:layout_marginBottom="15dp"
         android:text="@string/feed_title_conections"
         android:textColor="@color/bage_neutral"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/textDefaultConection"
         app:layout_constraintEnd_toEndOf="@+id/textDefaultConection"
         app:layout_constraintStart_toStartOf="@+id/textDefaultConection" />
@@ -127,7 +127,7 @@
         android:layout_marginBottom="15dp"
         android:text="@string/feed_title_midia"
         android:textColor="@color/bage_neutral"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/textDefaultMidia"
         app:layout_constraintEnd_toEndOf="@+id/textDefaultMidia"
         app:layout_constraintStart_toStartOf="@+id/textDefaultMidia" />

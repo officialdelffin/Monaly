@@ -47,6 +47,17 @@ android {
 
     }
 
+    applicationVariants.configureEach {
+
+        outputs.configureEach {
+
+            val outputImpl = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+            outputImpl.outputFileName = "Monaly.apk"
+
+        }
+
+    }
+
 }
 
 kotlin {

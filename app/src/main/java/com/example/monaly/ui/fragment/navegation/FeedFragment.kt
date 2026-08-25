@@ -2,6 +2,7 @@ package com.example.monaly.ui.fragment.navegation
 
 
 // Importações :
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -19,27 +20,31 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
-// Fragmento do Feed principal preparado com ciclo de vida seguro e seletor de mídia :
+// Fragmento do Feed principal preparado com ciclo de vida seguro e seletor múltiplo :
 class FeedFragment : Fragment(R.layout.fragment_feed) {
 
 
-    // Registrando o contrato do Android para abrir a galeria nativa com segurança :
-    private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+    // Registrando o contrato para permitir a seleção de múltiplas mídias com limite de segurança de 20 arquivos :
+    private val pickMultipleMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(20)) { uris: List<Uri> ->
 
 
-        // Verificando se o usuário selecionou uma imagem ou fechou a galeria :
-        if (uri != null) {
+        // Verificando se a lista retornada contém arquivos ou se o usuário fechou a galeria vazia :
+        if (uris.isNotEmpty()) {
 
 
-            // O arquivo foi selecionado com sucesso indicando que a URI está pronta para o upload :
-            Log.d("PhotoPicker", "Mídia selecionada: $uri")
-            Toast.makeText(requireContext(), "Mídia selecionada com sucesso!", Toast.LENGTH_SHORT).show()
+            // Contabilizando e registrando o sucesso da seleção múltipla :
+            val totalSelected = uris.size
+            Log.d("PhotoPicker", "Total de mídias selecionadas: $totalSelected")
+            Toast.makeText(requireContext(), "$totalSelected mídias selecionadas prontas para upload!", Toast.LENGTH_SHORT).show()
+
+
+            // O próximo passo será enviar esta lista 'uris' para a ViewModel processar o upload no álbum temporário :
 
 
         } else {
 
 
-            // Ação caso o usuário cancele a seleção e volte para a tela do Feed :
+            // Ação caso o usuário cancele a seleção :
             Log.d("PhotoPicker", "Nenhuma mídia selecionada")
 
 
@@ -55,17 +60,17 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        // Encontrando os componentes de interface no layout através dos IDs definidos no XML :
+        // Encontrando os componentes de interface no layout :
         val viewPager = view.findViewById<ViewPager2>(R.id.viewPagerFeedAlbums)
         val buttonAdd = view.findViewById<MaterialButton>(R.id.buttonAdd)
 
 
-        // Configurando a ação de clique do botão centralizado de adicionar mídia :
+        // Configurando a ação de clique do botão de adicionar mídia :
         buttonAdd.setOnClickListener {
 
 
-            // Lançando o seletor nativo configurado para exibir apenas imagens e vídeos :
-            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageAndVideo))
+            // Lançando o seletor múltiplo nativo filtrado para exibir apenas imagens e vídeos :
+            pickMultipleMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageAndVideo))
 
 
         }
@@ -95,11 +100,11 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
     }
 
 
-    // Função privada que executa o loop infinito de troca de tela de forma segura usando Coroutines :
+    // Função privada que executa o loop infinito de troca de tela de forma segura :
     private fun startAutoScroll(viewPager: ViewPager2, totalItems: Int) {
 
 
-        // viewLifecycleOwner garante que o loop seja destruído assim que a tela não estiver visível :
+        // Garantindo que o loop seja destruído assim que a tela não estiver visível :
         viewLifecycleOwner.lifecycleScope.launch {
 
 

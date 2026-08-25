@@ -1,7 +1,7 @@
 package com.example.monaly.ui.fragment.navegation
 
 
-// Importações :
+// Importações necessárias :
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.monaly.R
@@ -20,32 +21,23 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
-// Fragmento do Feed principal preparado com ciclo de vida seguro e seletor múltiplo :
+// Fragmento do Feed conectado à ViewModel de upload :
 class FeedFragment : Fragment(R.layout.fragment_feed) {
 
 
-    // Registrando o contrato para permitir a seleção de múltiplas mídias com limite de segurança de 20 arquivos :
-    private val pickMultipleMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(20)) { uris: List<Uri> ->
+    // Instanciando a ViewModel de forma tardia (lazy) :
+    private lateinit var viewModel: FeedViewModel
 
 
-        // Verificando se a lista retornada contém arquivos ou se o usuário fechou a galeria vazia :
+    // Registrando o contrato para seleção múltipla :
+    private val pickMultipleMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)) { uris: List<Uri> ->
+
+
         if (uris.isNotEmpty()) {
 
 
-            // Contabilizando e registrando o sucesso da seleção múltipla :
-            val totalSelected = uris.size
-            Log.d("PhotoPicker", "Total de mídias selecionadas: $totalSelected")
-            Toast.makeText(requireContext(), "$totalSelected mídias selecionadas prontas para upload!", Toast.LENGTH_SHORT).show()
-
-
-            // O próximo passo será enviar esta lista 'uris' para a ViewModel processar o upload no álbum temporário :
-
-
-        } else {
-
-
-            // Ação caso o usuário cancele a seleção :
-            Log.d("PhotoPicker", "Nenhuma mídia selecionada")
+            // Disparando o upload em lote diretamente para a ViewModel :
+            viewModel.uploadMediaBatch(uris)
 
 
         }
@@ -60,23 +52,77 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        // Encontrando os componentes de interface no layout :
+        // Conectando a ViewModel ao ciclo de vida do Fragmento :
+        viewModel = ViewModelProvider(this)[FeedViewModel::class.java]
+
+
         val viewPager = view.findViewById<ViewPager2>(R.id.viewPagerFeedAlbums)
         val buttonAdd = view.findViewById<MaterialButton>(R.id.buttonAdd)
 
 
-        // Configurando a ação de clique do botão de adicionar mídia :
         buttonAdd.setOnClickListener {
 
 
-            // Lançando o seletor múltiplo nativo filtrado para exibir apenas imagens e vídeos :
             pickMultipleMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageAndVideo))
 
 
         }
 
 
-        // Criação de Dados Simulados Mock para testar o carrossel visualmente :
+        // Observando os estados da ViewModel para atualizar a interface em tempo real :
+        viewLifecycleOwner.lifecycleScope.launch {
+
+
+            viewModel.uploadState.collect { state ->
+
+
+                when (state) {
+
+
+                    // Estado neutro aguardando ação :
+                    is UploadState.Idle -> {}
+
+
+                    is UploadState.Uploading -> {
+
+
+                        // Exibindo o progresso do lote para o usuário :
+                        Toast.makeText(requireContext(), "Enviando ${state.current} de ${state.total}...", Toast.LENGTH_SHORT).show()
+
+
+                    }
+
+
+                    is UploadState.Success -> {
+
+
+                        // Avisando a conclusão e limpando a área :
+                        Toast.makeText(requireContext(), "Upload concluído com sucesso!", Toast.LENGTH_LONG).show()
+
+
+                    }
+
+
+                    is UploadState.Error -> {
+
+
+                        // Exibindo a falha amigavelmente :
+                        Toast.makeText(requireContext(), "Erro: ${state.message}", Toast.LENGTH_LONG).show()
+
+
+                    }
+
+
+                }
+
+
+            }
+
+
+        }
+
+
+        // Criação de Dados Mock :
         val fakeAlbums = listOf(
 
 
@@ -88,39 +134,26 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         )
 
 
-        // Conectando o Adaptador com os dados ao ViewPager2 :
         val adapter = AlbumCarouselAdapter(fakeAlbums)
         viewPager.adapter = adapter
-
-
-        // Iniciando o motor seguro de auto-rolagem :
         startAutoScroll(viewPager, fakeAlbums.size)
 
 
     }
 
 
-    // Função privada que executa o loop infinito de troca de tela de forma segura :
     private fun startAutoScroll(viewPager: ViewPager2, totalItems: Int) {
 
 
-        // Garantindo que o loop seja destruído assim que a tela não estiver visível :
         viewLifecycleOwner.lifecycleScope.launch {
 
 
             while (true) {
 
 
-                // Pausa de 5 segundos antes de trocar para o próximo card :
                 delay(5000)
-
-
-                // Descobrindo a posição atual e calculando o próximo índice :
                 val currentItem = viewPager.currentItem
                 val nextItem = if (currentItem < totalItems - 1) currentItem + 1 else 0
-
-
-                // Alterando a visualização com uma animação de transição suave :
                 viewPager.setCurrentItem(nextItem, true)
 
 

@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.example.monaly" />
-                  <option name="mobileSdkAppId" value="1:205670454949:android:ee2cbe0c112badf3e55f4c" />
-                  <option name="projectId" value="official-monaly" />
-                  <option name="projectNumber" value="205670454949" />
+                  <option name="appId" value="com.example.monaly.app" />
+                  <option name="mobileSdkAppId" value="1:588360233050:android:83c70ce28222ad2118a863" />
+                  <option name="projectId" value="monaly-official" />
+                  <option name="projectNumber" value="588360233050" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

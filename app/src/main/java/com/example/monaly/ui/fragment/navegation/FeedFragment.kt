@@ -113,8 +113,11 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
                     }
 
 
-                }
+                    else -> {}
 
+
+                }
+    
 
             }
 

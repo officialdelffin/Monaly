@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
 
-        applicationId = "com.example.monaly"
+        applicationId = "com.example.monaly.app"
         minSdk = 34
         targetSdk = 35
         versionCode = 1

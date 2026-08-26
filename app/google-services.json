@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "205670454949",
-    "project_id": "official-monaly",
-    "storage_bucket": "official-monaly.firebasestorage.app"
+    "project_number": "588360233050",
+    "project_id": "monaly-official",
+    "storage_bucket": "monaly-official.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:205670454949:android:ee2cbe0c112badf3e55f4c",
+        "mobilesdk_app_id": "1:588360233050:android:83c70ce28222ad2118a863",
         "android_client_info": {
-          "package_name": "com.example.monaly"
+          "package_name": "com.example.monaly.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "205670454949-hhiik60iralkarek582v0j2q8n3qri7r.apps.googleusercontent.com",
+          "client_id": "588360233050-qspc5r6d4adn1blob6krkp3ims55mahu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.monaly",
+            "package_name": "com.example.monaly.app",
             "certificate_hash": "26cc65f6232cf1532465a8291181c534a17ee697"
           }
         },
         {
-          "client_id": "205670454949-ts73kmpvdh5m3bcp7pl7611202po91i7.apps.googleusercontent.com",
+          "client_id": "588360233050-792u41iqtfe7unkp9ik2livrdacu2pv5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA_x5VRUBqnZJx06KyfL3bFCP5AV74nLko"
+          "current_key": "AIzaSyDOQeWEfuU5orRceZRvrl93QdhwBdkzAEA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "205670454949-ts73kmpvdh5m3bcp7pl7611202po91i7.apps.googleusercontent.com",
+              "client_id": "588360233050-792u41iqtfe7unkp9ik2livrdacu2pv5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

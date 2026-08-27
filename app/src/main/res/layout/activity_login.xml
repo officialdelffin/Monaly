@@ -13,10 +13,9 @@
         android:id="@+id/imageBackgroundLogin"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="250dp"
         android:scaleType="centerCrop"
         android:src="@drawable/img_background_login"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textTitleLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -60,14 +59,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageBackgroundLogin" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonLoginGoogle"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/drawable_background_button_gray_dark_10_dp"
         android:fontFamily="sans-serif"
@@ -77,7 +76,7 @@
         android:text="@string/login_button"
         android:textAllCaps="false"
         android:textColor="@color/bage_neutral"
-        android:textFontWeight="400"
+        android:textFontWeight="450"
         android:textSize="20sp"
         android:textStyle="normal"
         app:backgroundTint="@null"

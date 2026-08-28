@@ -27,8 +27,8 @@
         android:background="@drawable/drawable_background_button_gray_deep_10_dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="30dp"
-        android:paddingEnd="30dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

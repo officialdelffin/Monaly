@@ -1,12 +1,12 @@
 package com.example.monaly.ui.fragment.navegation
 
 
-// Importações :
+// Importações necessárias :
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.monaly.R
@@ -20,16 +20,20 @@ class AlbumsFragment : Fragment() {
 
 
     override fun onCreateView(
+
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
+
     ): View? {
 
 
-        // Inflando o layout principal :
+        // Inflando o layout principal da tela :
         val view = inflater.inflate(R.layout.fragment_albums, container, false)
 
 
-        // Instanciando uma lista completamente vazia para representar o estado inicial do banco de dados :
+        // Instanciando uma lista completamente vazia para representar o estado inicial :
         val emptyAlbumList = emptyList<AlbumMockModel>()
 
 
@@ -38,22 +42,31 @@ class AlbumsFragment : Fragment() {
         rvAlbums.adapter = AlbumsAdapter(emptyAlbumList)
 
 
-        // Lógica de Empty State protegendo a experiência do usuário :
+        // Localizando o texto de estado vazio recém-criado na interface XML :
+        val tvEmptyState = view.findViewById<TextView>(R.id.tvEmptyState)
+
+
+        // Lógica visual para exibir o texto central quando não houver dados :
         if (emptyAlbumList.isEmpty()) {
 
 
-            // Esconde a lista para evitar espaços em branco :
+            // Escondendo a lista para não ocupar espaço invisível :
             rvAlbums.visibility = View.GONE
 
-            // Exibindo um Toast provisório com a nova String centralizada para validar o estado vazio :
-            Toast.makeText(requireContext(), getString(R.string.albums_empty_state_message), Toast.LENGTH_LONG).show()
+
+            // Exibindo o componente de texto no centro da tela :
+            tvEmptyState.visibility = View.VISIBLE
 
 
         } else {
 
 
-            // Garante que a lista apareça caso haja itens :
+            // Garantindo que a lista apareça caso haja itens :
             rvAlbums.visibility = View.VISIBLE
+
+
+            // Ocultando a mensagem de estado vazio :
+            tvEmptyState.visibility = View.GONE
 
 
         }

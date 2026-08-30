@@ -19,14 +19,29 @@
 
         <!-- Área reservada para a capa do álbum : -->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clCoverArea"
+            android:id="@+id/CoverAlbum"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="#1A1A1A">
+            android:background="#1A1A1A"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
+
+            <ImageView
+                android:id="@+id/imageGradientEffect"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/bg_gradient_black" />
 
             <TextView
-                android:id="@+id/tvCoverPlaceholder"
+                android:id="@+id/CoverPlaceholder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/create_album_cover_empty"
@@ -37,16 +52,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed" />
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/bg_gradient_black" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -55,8 +60,9 @@
 
 
         <!-- Campo de Descrição com limite de 350 caracteres : -->
+
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilTitle"
+            android:id="@+id/TitleField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -66,25 +72,26 @@
             app:counterMaxLength="50"
             app:counterTextColor="#80FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnAddCover">
+            app:layout_constraintTop_toBottomOf="@+id/buttonCoverAlbum">
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etAlbumTitle"
+                android:id="@+id/EditTitleField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/drawable_background_button_gray_dark_10_dp"
                 android:hint="@string/create_album_hint_title"
                 android:maxLength="50"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#80FFFFFF" />
+                android:textColor="@color/bage_neutral"
+                android:textColorHint="@color/bage_neutral"/>
 
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilDescription"
+            android:id="@+id/DescriptionField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -94,11 +101,11 @@
             app:counterTextColor="#80FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilTitle">
+            app:layout_constraintTop_toBottomOf="@+id/TitleField">
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etAlbumDescription"
+                android:id="@+id/EditDescriptionField"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:background="@drawable/drawable_background_button_gray_dark_10_dp"
@@ -112,18 +119,28 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddCover"
+            android:id="@+id/buttonCoverAlbum"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
+            android:background="@drawable/drawable_background_button_gray_dark_10_dp"
+            android:gravity="start|center_vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:text="@string/create_album_button_add_cover"
             android:textAllCaps="false"
+            android:textColor="@color/gray_dark"
+            android:textSize="20sp"
             app:backgroundTint="@color/bage_neutral"
+            app:icon="@drawable/ic_add_gray_dark"
+            app:iconGravity="end"
+            app:iconSize="24dp"
+            app:iconTint="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/clCoverArea" />
+            app:layout_constraintTop_toBottomOf="@+id/CoverAlbum" />
 
 
         <!-- A estrutura dos Switches e Participantes será inserida aqui na próxima etapa : -->

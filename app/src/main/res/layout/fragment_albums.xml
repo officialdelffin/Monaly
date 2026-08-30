@@ -36,7 +36,7 @@
         android:layout_marginBottom="20dp"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddAlbum"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCoverAlbum"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,7 @@
         tools:listitem="@layout/item_album" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnAddAlbum"
+        android:id="@+id/buttonCoverAlbum"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"

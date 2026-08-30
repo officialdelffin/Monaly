@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<!-- Container rolável para telas de formulário : -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:fillViewport="true">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp">
+
+
+        <!-- Área reservada para a capa do álbum : -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clCoverArea"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="#1A1A1A">
+
+
+            <TextView
+                android:id="@+id/tvCoverPlaceholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create_album_cover_empty"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/bg_gradient_black" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!-- Campo de Título com limite de 50 caracteres : -->
+
+
+        <!-- Campo de Descrição com limite de 350 caracteres : -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="50"
+            app:counterTextColor="#80FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnAddCover">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAlbumTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/drawable_background_button_gray_dark_10_dp"
+                android:hint="@string/create_album_hint_title"
+                android:maxLength="50"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#80FFFFFF" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="350"
+            app:counterTextColor="#80FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilTitle">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAlbumDescription"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/drawable_background_button_gray_dark_10_dp"
+                android:gravity="top|start"
+                android:hint="@string/create_album_hint_description"
+                android:maxLength="350"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#80FFFFFF" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddCover"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/create_album_button_add_cover"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/bage_neutral"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clCoverArea" />
+
+
+        <!-- A estrutura dos Switches e Participantes será inserida aqui na próxima etapa : -->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

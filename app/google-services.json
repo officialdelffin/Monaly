@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "588360233050-qspc5r6d4adn1blob6krkp3ims55mahu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.monaly.app",
+            "certificate_hash": "26cc65f6232cf1532465a8291181c534a17ee697"
+          }
+        },
+        {
           "client_id": "588360233050-792u41iqtfe7unkp9ik2livrdacu2pv5.apps.googleusercontent.com",
           "client_type": 3
         }

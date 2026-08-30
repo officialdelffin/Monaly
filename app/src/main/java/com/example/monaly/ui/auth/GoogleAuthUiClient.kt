@@ -6,6 +6,7 @@ import android.content.Context
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
+import com.example.monaly.R
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 
@@ -21,12 +22,12 @@ class GoogleAuthUiClient(private val context: Context, private val credentialMan
         return try {
 
 
-            // Configura as opções do Google :
+            // Configura as opções do Google puxando a chave dinamicamente do JSON gerado :
             val googleIdOption = GetGoogleIdOption.Builder()
 
 
                 .setFilterByAuthorizedAccounts(false)
-                .setServerClientId("205670454949-ts73kmpvdh5m3bcp7pl7611202po91i7.apps.googleusercontent.com")
+                .setServerClientId(context.getString(R.string.default_web_client_id))
                 .setAutoSelectEnabled(true)
                 .build()
 
@@ -39,7 +40,7 @@ class GoogleAuthUiClient(private val context: Context, private val credentialMan
                 .build()
 
 
-            // Executa a requisição, fazendo a bandeja deslizar na tela do usuário :
+            // Executa a requisição fazendo a bandeja deslizar na tela do usuário :
             val result = credentialManager.getCredential(context, request)
 
 
@@ -69,8 +70,11 @@ class GoogleAuthUiClient(private val context: Context, private val credentialMan
         } catch (e: Exception) {
 
 
-            // Em caso de erro (como o usuário fechar a bandeja sem logar), retornamos nulo :
-            e.printStackTrace()
+            // Imprimindo o erro real em vermelho no Logcat do Android Studio para facilitar diagnósticos :
+            android.util.Log.e("AuthError", "Falha na credencial do Google: ${e.message}")
+
+
+            // Em caso de erro retornamos nulo mantendo a estabilidade da interface :
             null
 
 

@@ -3,6 +3,8 @@
     <!-- Nome do aplicativo : -->
     <string name="app_name">Monaly</string>
 
+    <string name="default_web_client_id">588360233050-792u41iqtfe7unkp9ik2livrdacu2pv5.apps.googleusercontent.com</string>
+
     <!-- Tela Ondoarding Um : -->
     <string name="onboarding_label_welcome"><b>Bem-vindo ao Monaly</b></string>
     <string name="onboarding_description_one">Seu novo lar para fotos e vídeos. Organize, crie álbuns colaborativos e guarde memórias com total privacidade. Comece a criar sua história hoje.</string>
@@ -20,7 +22,7 @@
     <!-- Textos do Login : -->
     <string name="login_title"><b>De volta às suas memórias Monaly</b></string>
     <string name="login_description">Suas coleções em grupo e conexões privadas estão esperando por você. Acesse para ver as novidades nos seus álbuns.</string>
-    <string name="login_button">Entrar com o Google</string>
+    <string name="login_button"><b>Entrar com o Google</b></string>
 
     <!-- Textos do Fragment Feed : -->
     <string name="feed_button_to_add">Adicionar mídia</string>

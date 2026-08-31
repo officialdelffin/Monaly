@@ -24,7 +24,7 @@
             android:textAllCaps="false"
             android:textColor="@color/gray_dark"
             app:backgroundTint="@color/bage_neutral"
-            android:textSize="18sp"
+            android:textSize="20sp"
             app:cornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/switchDownload" />
@@ -39,9 +39,16 @@
             android:text="@string/create_album_button_add_participants"
             android:textAllCaps="false"
             android:textColor="@color/gray_dark"
-            android:textSize="18sp"
+            android:textSize="20sp"
+            android:gravity="start|center_vertical"
             app:backgroundTint="@color/bage_neutral"
             app:cornerRadius="10dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:icon="@drawable/ic_add_gray_dark"
+            app:iconGravity="end"
+            app:iconSize="24dp"
+            app:iconTint="@null"
             app:layout_constraintEnd_toStartOf="@+id/btnSaveAlbum"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btnSaveAlbum" />
@@ -84,7 +91,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonCoverAlbum">
+            app:layout_constraintTop_toBottomOf="@+id/buttonAddNewAlbum">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EditTitleField"
@@ -131,7 +138,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonCoverAlbum"
+            android:id="@+id/buttonAddNewAlbum"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginStart="20dp"

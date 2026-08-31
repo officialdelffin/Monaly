@@ -72,6 +72,25 @@ class AlbumsFragment : Fragment() {
         }
 
 
+        // Localizando o botão de adicionar álbum na interface :
+        val btnAddAlbum = view.findViewById<View>(R.id.buttonAddNewAlbum)
+
+
+        // Configurando a ação de clique para abrir a nova tela :
+        btnAddAlbum.setOnClickListener {
+
+
+            // Iniciando a transação de fragmentos para exibir a tela de Criação sobrepondo a atual :
+            parentFragmentManager.beginTransaction()
+                .add(R.id.main, CreateAlbumFragment())
+                .addToBackStack(null)
+                .commit()
+
+
+        }
+
+
+        // O retorno da view finaliza o desenho da tela :
         return view
 
 

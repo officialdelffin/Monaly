@@ -36,7 +36,7 @@
         android:layout_marginBottom="20dp"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCoverAlbum"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAddNewAlbum"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,13 +55,13 @@
         android:textColor="#B3FFFFFF"
         android:textSize="16sp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCoverAlbum"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAddNewAlbum"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etSearchAlbum" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonCoverAlbum"
+        android:id="@+id/buttonAddNewAlbum"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"

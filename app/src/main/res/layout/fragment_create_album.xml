@@ -13,11 +13,44 @@
         android:layout_height="wrap_content"
         android:paddingBottom="20dp">
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveAlbum"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
+            android:text="@string/create_album_button_save"
+            android:textAllCaps="false"
+            android:textColor="@color/gray_dark"
+            app:backgroundTint="@color/bage_neutral"
+            android:textSize="18sp"
+            app:cornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switchDownload" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddParticipants"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
+            android:text="@string/create_album_button_add_participants"
+            android:textAllCaps="false"
+            android:textColor="@color/gray_dark"
+            android:textSize="18sp"
+            app:backgroundTint="@color/bage_neutral"
+            app:cornerRadius="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/btnSaveAlbum"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnSaveAlbum" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/CoverAlbum"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:background="#1A1A1A"
+            android:background="@color/bage_neutral"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -33,18 +66,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/bg_gradient_black" />
-
-            <TextView
-                android:id="@+id/CoverPlaceholder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/create_album_cover_empty"
-                android:textColor="#FFFFFF"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -71,8 +92,8 @@
                 android:background="@drawable/drawable_background_button_gray_dark_10_dp"
                 android:hint="@string/create_album_hint_title"
                 android:maxLength="50"
-                android:textColor="@color/gray_medium"
-                android:textColorHint="@color/gray_medium"/>
+                android:textColor="@color/bage_neutral"
+                android:textColorHint="@color/bage_neutral"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,7 +113,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EditDescriptionField"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="250dp"
                 android:background="@drawable/drawable_background_button_gray_dark_10_dp"
                 android:gravity="top|start"
                 android:hint="@string/create_album_hint_description"
@@ -125,6 +146,97 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/CoverAlbum" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvParticipantsMock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            app:cardBackgroundColor="#262626"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/DescriptionField">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="30dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:text="@string/create_album_participants_title"
+                    android:textColor="@color/bage_neutral"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/drawable_background_button_gray_dark_10_dp"
+                        android:src="@drawable/ic_profile_bage_neutral" />
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/drawable_background_button_gray_dark_10_dp"
+                        android:src="@drawable/ic_profile_bage_neutral" />
+
+                    <TextView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/drawable_background_button_gray_dark_10_dp"
+                        android:gravity="center"
+                        android:text="..."
+                        android:textColor="@color/bage_neutral"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchPublic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            android:text="@string/create_album_switch_public"
+            android:textColor="@color/bage_neutral"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cvParticipantsMock" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchDownload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="40dp"
+            android:text="@string/create_album_switch_download"
+            android:textColor="@color/bage_neutral"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switchPublic" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

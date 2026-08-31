@@ -67,7 +67,6 @@
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/bg_gradient_black" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -87,7 +86,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonCoverAlbum">
 
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EditTitleField"
                 android:layout_width="match_parent"
@@ -99,7 +97,6 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:textColor="@color/bage_neutral" />
-
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,7 +114,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TitleField">
-
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EditDescriptionField"

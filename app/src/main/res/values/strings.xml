@@ -40,7 +40,7 @@
     <!-- Textos da futura tela de Criar Álbum : -->
     <string name="create_album_cover_empty">Atualmente o álbum está sem capa</string>
     <string name="create_album_button_add_cover">Adicionar capa no álbum</string>
-    <string name="create_album_hint_title">Adicionar título ao álbum</string>
+    <string name="create_album_hint_title">Título</string>
     <string name="create_album_hint_description">Descrição</string>
     <string name="create_album_participants_title">Participantes</string>
     <string name="create_album_participants_see_more">Ver mais</string>

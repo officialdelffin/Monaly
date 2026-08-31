@@ -56,25 +56,23 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/CoverAlbum"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="250dp"
             android:background="@color/bage_neutral"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imageGradientEffect"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/bg_gradient_black" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/imageGradientEffect"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/CoverAlbum"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/CoverAlbum"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bg_gradient_black" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/TitleField"
@@ -97,13 +95,13 @@
                 android:id="@+id/EditTitleField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/drawable_background_button_gray_dark_10_dp"
+                android:background="@drawable/drawable_background_button_gray_deep_10_dp"
                 android:hint="@string/create_album_hint_title"
                 android:maxLength="50"
-                android:textSize="18sp"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
-                android:textColor="@color/bage_neutral" />
+                android:textColor="@color/bage_neutral"
+                android:textSize="18sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -126,14 +124,14 @@
                 android:id="@+id/EditDescriptionField"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:background="@drawable/drawable_background_button_gray_dark_10_dp"
+                android:background="@drawable/drawable_background_button_gray_deep_10_dp"
                 android:gravity="top|start"
                 android:hint="@string/create_album_hint_description"
-                android:textSize="18sp"
                 android:maxLength="350"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
-                android:textColor="@color/gray_medium" />
+                android:textColor="@color/gray_medium"
+                android:textSize="18sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

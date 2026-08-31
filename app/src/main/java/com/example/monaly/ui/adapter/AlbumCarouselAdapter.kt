@@ -53,8 +53,8 @@ class AlbumCarouselAdapter(private val albums: List<AlbumModel>) : RecyclerView.
 
         holder.textTitle.text = album.title
         holder.textDescription.text = album.description
-        holder.textTag.text = album.tag
-        holder.imageCover.setImageResource(album.imageResId)
+        holder.textTag.text = album.title
+        holder.imageCover.setImageResource(album.coverUrl)
 
 
     }

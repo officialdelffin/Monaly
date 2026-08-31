@@ -17,7 +17,7 @@ import com.google.android.material.button.MaterialButton
 class CreateAlbumFragment : Fragment() {
 
 
-    // Criando variáveis globais temporárias. O TextView foi removido pois não existe mais no XML :
+    // Criando variáveis globais temporárias :
     private lateinit var ivCoverBackground: ImageView
     private lateinit var btnAddCover: MaterialButton
 
@@ -30,12 +30,16 @@ class CreateAlbumFragment : Fragment() {
         if (uri != null) {
 
 
-            // Aplicando a foto escolhida no fundo escuro do card :
+            // Aplicando a foto escolhida no fundo do card :
             ivCoverBackground.setImageURI(uri)
 
 
-            // Escondendo apenas o botão de "Adicionar capa" já que o texto foi removido do design :
-            btnAddCover.visibility = View.GONE
+            // Alterando o texto do botão para indicar a possibilidade de substituição :
+            btnAddCover.text = getString(R.string.create_album_button_change_cover)
+
+
+            // Trocando o ícone de '+' pelo ícone de lápis nativo do Android :
+            btnAddCover.setIconResource(android.R.drawable.ic_menu_edit)
 
 
         }
@@ -58,8 +62,11 @@ class CreateAlbumFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_create_album, container, false)
 
 
-        // Conectando as variáveis Kotlin com os IDs corretos do arquivo XML atualizado :
-        ivCoverBackground = view.findViewById(R.id.imageGradientEffect)
+        // ATENÇÃO: Conectando a variável ao NOVO ID da foto (e não mais ao gradiente) :
+        ivCoverBackground = view.findViewById(R.id.ivCoverPhoto)
+
+
+        // Conectando o botão :
         btnAddCover = view.findViewById(R.id.buttonAddNewAlbum)
 
 
@@ -76,7 +83,7 @@ class CreateAlbumFragment : Fragment() {
 
 
         // Funcionalidade de clique no topo para fechar a tela :
-        val topArea = view.findViewById<View>(R.id.CoverAlbum)
+        val topArea = view.findViewById<View>(R.id.ivCoverPhoto)
         topArea.setOnClickListener {
 
 

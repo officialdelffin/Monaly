@@ -49,7 +49,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/CoverAlbum"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="350dp"
             android:background="@color/bage_neutral"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,10 +80,13 @@
             app:counterEnabled="true"
             app:counterMaxLength="50"
             app:counterTextColor="@color/bage_neutral"
+            android:textColorHint="@color/bage_neutral"
+            app:hintTextColor="@color/bage_neutral"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonCoverAlbum">
+
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EditTitleField"
@@ -92,8 +95,8 @@
                 android:background="@drawable/drawable_background_button_gray_dark_10_dp"
                 android:hint="@string/create_album_hint_title"
                 android:maxLength="50"
-                android:textColor="@color/bage_neutral"
-                android:textColorHint="@color/bage_neutral"/>
+                android:textColor="@color/bage_neutral" />
+
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,9 +109,12 @@
             app:counterEnabled="true"
             app:counterMaxLength="350"
             app:counterTextColor="@color/bage_neutral"
+            android:textColorHint="@color/bage_neutral"
+            app:hintTextColor="@color/bage_neutral"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TitleField">
+
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EditDescriptionField"
@@ -118,8 +124,7 @@
                 android:gravity="top|start"
                 android:hint="@string/create_album_hint_description"
                 android:maxLength="350"
-                android:textColor="@color/gray_medium"
-                android:textColorHint="@color/gray_medium" />
+                android:textColor="@color/gray_medium" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -47,6 +47,6 @@
     <string name="create_album_switch_public">Álbum público</string>
     <string name="create_album_switch_download">Permitir download de mídias</string>
     <string name="create_album_button_add_participants">Adicionar participantes</string>
-    <string name="create_album_button_save">Salvar álbum</string>
+    <string name="create_album_button_save">Salvar</string>
 
 </resources>

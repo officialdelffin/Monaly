@@ -53,24 +53,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btnSaveAlbum" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/CoverAlbum"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:background="@color/bage_neutral"
+        <ImageView
+            android:id="@+id/ivCoverPhoto"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageGradientEffect"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/CoverAlbum"
+            app:layout_constraintBottom_toBottomOf="@+id/ivCoverPhoto"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/CoverAlbum"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/bg_gradient_black" />
 
@@ -81,10 +79,10 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
+            android:textColorHint="@color/bage_neutral"
             app:counterEnabled="true"
             app:counterMaxLength="50"
             app:counterTextColor="@color/bage_neutral"
-            android:textColorHint="@color/bage_neutral"
             app:hintTextColor="@color/bage_neutral"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -156,15 +154,16 @@
             app:iconSize="24dp"
             app:iconTint="@null"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/CoverAlbum" />
+            app:layout_constraintTop_toBottomOf="@+id/ivCoverPhoto" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvParticipantsMock"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             app:cardBackgroundColor="#262626"
             app:cardCornerRadius="10dp"
@@ -174,10 +173,11 @@
             app:layout_constraintTop_toBottomOf="@+id/DescriptionField">
 
             <LinearLayout
+                android:background="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="30dp">
+                android:padding="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"

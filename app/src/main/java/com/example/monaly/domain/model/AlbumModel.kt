@@ -1,6 +1,7 @@
 package com.example.monaly.domain.model
 
-// Importações
+
+// Importações :
 import java.util.Date
 
 
@@ -9,9 +10,9 @@ data class AlbumModel(
 
 
     val title: String = "",
-    val description: String,
+    val description: String = "",
     val id: String = "",
-    val imageResId: Int,
+    val imageResId: Int = 0,
     val ownerId: String = "",
     val coverUrl: String = "",
     val isPublic: Boolean = false,

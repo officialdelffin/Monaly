@@ -51,7 +51,7 @@
     <string name="create_album_status_solo_shared">Album solo</string>
     <string name="create_album_space"> - </string>
     <string name="create_album_status_private_public">Privado</string>
-    <string name="create_album_title_field">Campo título do álbum</string>
-    <string name="create_album_description_field">Campo da descrição do álbum ...</string>
+    <string name="create_album_title_field">Título do seu álbum</string>
+    <string name="create_album_description_field">Aqui será exibida a descrição do seu álbum para contextualizar o tema e compartilhar detalhes sobre as memórias guardadas</string>
 
 </resources>

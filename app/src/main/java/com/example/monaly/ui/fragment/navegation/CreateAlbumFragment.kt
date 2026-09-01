@@ -11,7 +11,11 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.monaly.R
+import com.example.monaly.domain.model.AlbumModel
+import com.example.monaly.ui.viewmodel.CreateAlbumViewModel
+import com.example.monaly.ui.viewmodel.UploadState
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputEditText
@@ -29,6 +33,7 @@ class CreateAlbumFragment : Fragment() {
     private lateinit var etDescription: TextInputEditText
     private lateinit var switchPublic: SwitchMaterial
     private lateinit var switchDownload: SwitchMaterial
+    private lateinit var viewModel: CreateAlbumViewModel
 
 
     // Variável para armazenar temporariamente o endereço (URI) da imagem escolhida :
@@ -39,19 +44,12 @@ class CreateAlbumFragment : Fragment() {
     private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
 
 
-        // Verificando se a seleção foi bem-sucedida :
         if (uri != null) {
 
 
-            // Armazenando o link da imagem na variável global para a validação no salvamento :
+            // Armazenando o link e atualizando a interface :
             selectedCoverUri = uri
-
-
-            // Aplicando a foto escolhida no fundo do card :
             ivCoverBackground.setImageURI(uri)
-
-
-            // Alterando o texto e ícone do botão para indicar a possibilidade de edição :
             btnAddCover.text = getString(R.string.create_album_button_change_cover)
             btnAddCover.setIconResource(android.R.drawable.ic_menu_edit)
 
@@ -63,16 +61,23 @@ class CreateAlbumFragment : Fragment() {
 
 
     override fun onCreateView(
+
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
+
     ): View? {
 
 
-        // Inflando o layout da tela de criação :
         val view = inflater.inflate(R.layout.fragment_create_album, container, false)
 
 
-        // Conectando as variáveis Kotlin com os IDs do arquivo XML atualizado :
+        // Instanciando o ViewModel de forma segura respeitando o ciclo de vida da tela :
+        viewModel = ViewModelProvider(this).get(CreateAlbumViewModel::class.java)
+
+
+        // Conectando as variáveis Kotlin com os IDs do arquivo XML :
         ivCoverBackground = view.findViewById(R.id.ivCoverPhoto)
         btnAddCover = view.findViewById(R.id.buttonAddNewAlbum)
         btnSaveAlbum = view.findViewById(R.id.btnSaveAlbum)
@@ -82,59 +87,53 @@ class CreateAlbumFragment : Fragment() {
         switchDownload = view.findViewById(R.id.switchDownload)
 
 
-        // Atribuindo a ação de clique no botão para disparar a abertura da galeria de fotos :
-        btnAddCover.setOnClickListener {
+        // Observando as respostas da nuvem emitidas pelo ViewModel em tempo real :
+        viewModel.uploadState.observe(viewLifecycleOwner) { state ->
 
 
-            // Solicitando ao sistema que abra a janela filtrando apenas por imagens :
-            val request = androidx.activity.result.PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-            pickMedia.launch(request)
+            when (state) {
 
 
-        }
+                is UploadState.Loading -> {
 
 
-        // Configurando a ação do botão de salvar álbum :
-        btnSaveAlbum.setOnClickListener {
+                    // Bloqueando os botões e alterando o texto para indicar o processamento :
+                    btnSaveAlbum.isEnabled = false
+                    btnSaveAlbum.text = "Salvando..."
+                    btnAddCover.isEnabled = false
+                    etTitle.isEnabled = false
+                    etDescription.isEnabled = false
 
 
-            // Extraindo os textos digitados e removendo espaços vazios acidentais nas pontas (trim) :
-            val titleText = etTitle.text.toString().trim()
-            val descriptionText = etDescription.text.toString().trim()
+                }
 
 
-            // Verificando hierarquicamente se todos os campos obrigatórios foram preenchidos :
-            if (selectedCoverUri == null) {
+                is UploadState.Success -> {
 
 
-                // Disparando alerta caso a foto de capa não tenha sido escolhida :
-                Toast.makeText(requireContext(), "Por favor, adicione uma capa ao álbum.", Toast.LENGTH_SHORT).show()
+                    // Avisando o sucesso e fechando a tela de criação automaticamente :
+                    Toast.makeText(requireContext(), "Álbum criado com sucesso!", Toast.LENGTH_LONG).show()
+                    parentFragmentManager.popBackStack()
 
 
-            } else if (titleText.isEmpty()) {
+                }
 
 
-                // Disparando alerta caso o título esteja vazio :
-                Toast.makeText(requireContext(), "Por favor, insira um título para o álbum.", Toast.LENGTH_SHORT).show()
+                is UploadState.Error -> {
 
 
-            } else if (descriptionText.isEmpty()) {
+                    // Restaurando os botões caso a internet falhe ou ocorra um erro :
+                    btnSaveAlbum.isEnabled = true
+                    btnSaveAlbum.text = getString(R.string.create_album_button_save)
+                    btnAddCover.isEnabled = true
+                    etTitle.isEnabled = true
+                    etDescription.isEnabled = true
+
+                    // Exibindo o motivo do erro para o usuário :
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
 
 
-                // Disparando alerta caso a descrição esteja vazia :
-                Toast.makeText(requireContext(), "Por favor, insira uma descrição.", Toast.LENGTH_SHORT).show()
-
-
-            } else {
-
-
-                // Capturando os estados finais das configurações do álbum (booleanos) :
-                val isAlbumPublic = switchPublic.isChecked
-                val canDownload = switchDownload.isChecked
-
-
-                // Feedback temporário confirmando que o formulário está perfeito :
-                Toast.makeText(requireContext(), "Validação concluída! Pronto para subir para a nuvem.", Toast.LENGTH_LONG).show()
+                }
 
 
             }
@@ -143,19 +142,76 @@ class CreateAlbumFragment : Fragment() {
         }
 
 
-        // Funcionalidade de clique no topo para fechar a tela de forma rápida :
+        // Abrir galeria ao clicar no botão da capa :
+        btnAddCover.setOnClickListener {
+
+
+            val request = androidx.activity.result.PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+            pickMedia.launch(request)
+
+
+        }
+
+
+        // Disparar o salvamento e a validação :
+        btnSaveAlbum.setOnClickListener {
+
+
+            val titleText = etTitle.text.toString().trim()
+            val descriptionText = etDescription.text.toString().trim()
+
+
+            // Validação de segurança :
+            if (selectedCoverUri == null) {
+
+
+                Toast.makeText(requireContext(), "Por favor, adicione uma capa ao álbum.", Toast.LENGTH_SHORT).show()
+
+
+            } else if (titleText.isEmpty()) {
+
+
+                Toast.makeText(requireContext(), "Por favor, insira um título para o álbum.", Toast.LENGTH_SHORT).show()
+
+
+            } else if (descriptionText.isEmpty()) {
+
+
+                Toast.makeText(requireContext(), "Por favor, insira uma descrição.", Toast.LENGTH_SHORT).show()
+
+
+            } else {
+
+
+                // Tudo validado! Criando o pacote do álbum e pedindo ao ViewModel para subir para a nuvem :
+                val newAlbum = AlbumModel(
+                    title = titleText,
+                    description = descriptionText,
+                    isPublic = switchPublic.isChecked,
+                    allowDownload = switchDownload.isChecked
+                )
+
+                // Entregando os dados brutos para o cérebro processar :
+                viewModel.createAlbum(newAlbum, selectedCoverUri!!)
+
+
+            }
+
+
+        }
+
+
+        // Voltar na seta ou topo :
         val topArea = view.findViewById<View>(R.id.ivCoverPhoto)
         topArea.setOnClickListener {
 
 
-            // Retornando para a tela principal de álbuns :
             parentFragmentManager.popBackStack()
 
 
         }
 
 
-        // O retorno da view finaliza o desenho da tela :
         return view
 
 

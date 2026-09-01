@@ -48,5 +48,10 @@
     <string name="create_album_switch_download">Permitir download de mídias</string>
     <string name="create_album_button_add_participants">Adicionar participantes</string>
     <string name="create_album_button_save">Salvar</string>
+    <string name="create_album_status_solo_shared">Album solo</string>
+    <string name="create_album_space"> - </string>
+    <string name="create_album_status_private_public">Privado</string>
+    <string name="create_album_title_field">Campo título do álbum</string>
+    <string name="create_album_description_field">Campo da descrição do álbum ...</string>
 
 </resources>

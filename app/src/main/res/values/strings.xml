@@ -22,7 +22,7 @@
     <!-- Textos do Login : -->
     <string name="login_title"><b>De volta às suas memórias Monaly</b></string>
     <string name="login_description">Suas coleções em grupo e conexões privadas estão esperando por você. Acesse para ver as novidades nos seus álbuns.</string>
-    <string name="login_button"><b>Entrar com o Google</b></string>
+    <string name="login_button">Entrar com o Google</string>
 
     <!-- Textos do Fragment Feed : -->
     <string name="feed_button_to_add">Adicionar mídia</string>

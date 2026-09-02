@@ -12,7 +12,7 @@
         android:id="@+id/imageBackground"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="50dp"
         android:scaleType="centerCrop"
         android:src="@color/design_default_color_on_primary"
         app:layout_constraintBottom_toTopOf="@+id/textTitle"

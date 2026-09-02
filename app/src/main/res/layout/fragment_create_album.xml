@@ -1,317 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
-    android:fillViewport="true">
+    android:background="#000000">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSaveAlbum2"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+        android:text="@string/create_album_button_save"
+        android:textAllCaps="false"
+        android:textColor="@color/gray_dark"
+        android:textSize="20sp"
+        app:backgroundTint="@color/bage_neutral"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAddParticipants"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+        android:gravity="start|center_vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="@string/create_album_button_add_participants"
+        android:textAllCaps="false"
+        android:textColor="@color/gray_dark"
+        android:textSize="20sp"
+        app:backgroundTint="@color/bage_neutral"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_add_gray_dark"
+        app:iconGravity="end"
+        app:iconSize="24dp"
+        app:iconTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSaveAlbum2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollForm"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="20dp">
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddParticipants"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSaveAlbum"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_weight="1"
-            android:text="@string/create_album_button_save"
-            android:textAllCaps="false"
-            android:textColor="@color/gray_dark"
-            app:backgroundTint="@color/bage_neutral"
-            android:textSize="20sp"
-            app:cornerRadius="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/switchDownload" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddParticipants"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_weight="1"
-            android:text="@string/create_album_button_add_participants"
-            android:textAllCaps="false"
-            android:textColor="@color/gray_dark"
-            android:textSize="20sp"
-            android:gravity="start|center_vertical"
-            app:backgroundTint="@color/bage_neutral"
-            app:cornerRadius="10dp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            app:icon="@drawable/ic_add_gray_dark"
-            app:iconGravity="end"
-            app:iconSize="24dp"
-            app:iconTint="@null"
-            app:layout_constraintEnd_toStartOf="@+id/btnSaveAlbum"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnSaveAlbum" />
-
-        <ImageView
-            android:id="@+id/ivCoverPhoto"
-            android:layout_width="0dp"
-            android:layout_height="400dp"
-            android:background="@color/bage_neutral"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageGradientEffect"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/ivCoverPhoto"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/bg_gradient_black" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/TitleField"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:textColorHint="@color/bage_neutral"
-            app:counterEnabled="true"
-            app:counterMaxLength="50"
-            app:counterTextColor="@color/bage_neutral"
-            app:hintTextColor="@color/bage_neutral"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonAddNewAlbum">
+            android:paddingBottom="20dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/EditTitleField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/drawable_background_button_gray_deep_10_dp"
-                android:hint="@string/create_album_hint_title"
-                android:maxLength="50"
+            <ImageView
+                android:id="@+id/ivCoverPhoto"
+                android:layout_width="0dp"
+                android:layout_height="400dp"
+                android:background="@color/bage_neutral"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageGradientEffect"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivCoverPhoto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/bg_gradient_black" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonAddNewAlbum"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/drawable_background_button_gray_dark_10_dp"
+                android:gravity="start|center_vertical"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
-                android:textColor="@color/bage_neutral"
-                android:textSize="18sp" />
+                android:text="@string/create_album_button_add_cover"
+                android:textAllCaps="false"
+                android:textColor="@color/gray_dark"
+                android:textSize="20sp"
+                app:backgroundTint="@color/bage_neutral"
+                app:icon="@drawable/ic_add_gray_dark"
+                app:iconGravity="end"
+                app:iconSize="24dp"
+                app:iconTint="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivCoverPhoto" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/DescriptionField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:counterEnabled="true"
-            app:counterMaxLength="350"
-            app:counterTextColor="@color/bage_neutral"
-            android:textColorHint="@color/bage_neutral"
-            app:hintTextColor="@color/bage_neutral"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleField">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/EditDescriptionField"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:background="@drawable/drawable_background_button_gray_deep_10_dp"
-                android:gravity="top|start"
-                android:hint="@string/create_album_hint_description"
-                android:maxLength="350"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:textColor="@color/gray_medium"
-                android:textSize="18sp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonAddNewAlbum"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/drawable_background_button_gray_dark_10_dp"
-            android:gravity="start|center_vertical"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="@string/create_album_button_add_cover"
-            android:textAllCaps="false"
-            android:textColor="@color/gray_dark"
-            android:textSize="20sp"
-            app:backgroundTint="@color/bage_neutral"
-            app:icon="@drawable/ic_add_gray_dark"
-            app:iconGravity="end"
-            app:iconSize="24dp"
-            app:iconTint="@null"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivCoverPhoto" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cvParticipantsMock"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
-            app:cardBackgroundColor="#262626"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/DescriptionField">
-
-            <LinearLayout
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TitleField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:textColorHint="@color/bage_neutral"
+                app:counterEnabled="true"
+                app:counterMaxLength="50"
+                app:counterTextColor="@color/bage_neutral"
+                app:hintTextColor="@color/bage_neutral"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonAddNewAlbum">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/EditTitleField"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="30dp"
-                    android:text="@string/create_album_participants_title"
+                    android:background="@drawable/drawable_background_button_gray_deep_10_dp"
+                    android:hint="@string/create_album_hint_title"
+                    android:maxLength="50"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
                     android:textColor="@color/bage_neutral"
                     android:textSize="18sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/DescriptionField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:textColorHint="@color/bage_neutral"
+                app:counterEnabled="true"
+                app:counterMaxLength="350"
+                app:counterTextColor="@color/bage_neutral"
+                app:hintTextColor="@color/bage_neutral"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleField">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/EditDescriptionField"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@drawable/drawable_background_button_gray_deep_10_dp"
+                    android:gravity="top|start"
+                    android:hint="@string/create_album_hint_description"
+                    android:maxLength="350"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:textColor="@color/gray_medium"
+                    android:textSize="18sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvParticipantsMock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                app:cardBackgroundColor="#262626"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/DescriptionField">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="15dp"
-                        android:background="@drawable/drawable_background_button_gray_dark_10_dp"
-                        android:src="@drawable/ic_profile_bage_neutral" />
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="15dp"
-                        android:background="@drawable/drawable_background_button_gray_dark_10_dp"
-                        android:src="@drawable/ic_profile_bage_neutral" />
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
                     <TextView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/drawable_background_button_gray_dark_10_dp"
-                        android:gravity="center"
-                        android:text="..."
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
+                        android:text="@string/create_album_participants_title"
                         android:textColor="@color/bage_neutral"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/drawable_background_button_gray_dark_10_dp"
+                            android:src="@drawable/ic_profile_bage_neutral" />
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/drawable_background_button_gray_dark_10_dp"
+                            android:src="@drawable/ic_profile_bage_neutral" />
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/drawable_background_button_gray_dark_10_dp"
+                            android:gravity="center"
+                            android:text="..."
+                            android:textColor="@color/bage_neutral"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchPublic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="40dp"
+                android:text="@string/create_album_switch_public"
+                android:textColor="@color/bage_neutral"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cvParticipantsMock" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switchPublic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="40dp"
-            android:text="@string/create_album_switch_public"
-            android:textColor="@color/bage_neutral"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cvParticipantsMock" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchDownload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                android:text="@string/create_album_switch_download"
+                android:textColor="@color/bage_neutral"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/switchPublic" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switchDownload"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="40dp"
-            android:text="@string/create_album_switch_download"
-            android:textColor="@color/bage_neutral"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/switchPublic" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/create_album_description_field"
+                android:textColor="@color/gray_medium"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivCoverPhoto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/ivCoverPhoto" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="@string/create_album_description_field"
-            android:textColor="@color/gray_medium"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/ivCoverPhoto"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/ivCoverPhoto" />
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/create_album_title_field"
+                android:textColor="@color/bage_neutral"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView3"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/create_album_title_field"
-            android:textColor="@color/bage_neutral"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView3"
-            app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/create_album_status_solo_shared"
+                android:textColor="@color/gray_medium"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView6"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/create_album_status_solo_shared"
-            android:textColor="@color/gray_medium"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView6"
-            app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/create_album_space"
+                android:textColor="@color/gray_medium"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView6"
+                app:layout_constraintStart_toEndOf="@+id/textView7" />
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/create_album_space"
-            android:textColor="@color/gray_medium"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView6"
-            app:layout_constraintStart_toEndOf="@+id/textView7" />
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/create_album_status_private_public"
+                android:textColor="@color/gray_medium"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView6"
+                app:layout_constraintStart_toEndOf="@+id/textView8" />
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/create_album_status_private_public"
-            android:textColor="@color/gray_medium"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView6"
-            app:layout_constraintStart_toEndOf="@+id/textView8" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,6 +29,7 @@ class CreateAlbumFragment : Fragment() {
     private lateinit var ivCoverBackground: ImageView
     private lateinit var btnAddCover: MaterialButton
     private lateinit var btnSaveAlbum: MaterialButton
+    private lateinit var btnBack : ImageView
     private lateinit var etTitle: TextInputEditText
     private lateinit var etDescription: TextInputEditText
     private lateinit var switchPublic: SwitchMaterial
@@ -81,6 +82,7 @@ class CreateAlbumFragment : Fragment() {
         ivCoverBackground = view.findViewById(R.id.ivCoverPhoto)
         btnAddCover = view.findViewById(R.id.buttonAddNewAlbum)
         btnSaveAlbum = view.findViewById(R.id.buttomSaveAlbum)
+        btnBack = view.findViewById<ImageView>(R.id.btnBack)
         etTitle = view.findViewById(R.id.EditTitleField)
         etDescription = view.findViewById(R.id.EditDescriptionField)
         switchPublic = view.findViewById(R.id.switchPublic)
@@ -206,6 +208,17 @@ class CreateAlbumFragment : Fragment() {
         topArea.setOnClickListener {
 
 
+            parentFragmentManager.popBackStack()
+
+
+        }
+
+
+        // Funcionalidade de clique explícito na seta para voltar e fechar a tela :
+        btnBack.setOnClickListener {
+
+
+            // Removendo o fragmento atual e retornando para a lista de álbuns :
             parentFragmentManager.popBackStack()
 
 

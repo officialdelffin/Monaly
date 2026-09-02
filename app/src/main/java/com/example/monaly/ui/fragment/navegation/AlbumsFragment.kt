@@ -80,9 +80,9 @@ class AlbumsFragment : Fragment() {
         btnAddAlbum.setOnClickListener {
 
 
-            // Iniciando a transação de fragmentos para exibir a tela de Criação sobrepondo a atual :
-            parentFragmentManager.beginTransaction()
-                .add(R.id.main, CreateAlbumFragment())
+            // Utilizando o gerente interno para abrir a tela dentro da aba atual, preservando a barra inferior :
+            childFragmentManager.beginTransaction()
+                .add(R.id.albumsRootContainer, CreateAlbumFragment())
                 .addToBackStack(null)
                 .commit()
 

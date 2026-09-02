@@ -9,29 +9,6 @@
     tools:context=".ui.activity.LoginActivity"
     android:background="@color/black">
 
-    <ImageView
-        android:id="@+id/imageBackgroundLogin"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="200dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/img_background_login"
-        app:layout_constraintBottom_toTopOf="@+id/textTitleLogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageGradientEffect"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/bg_gradient_black"
-        app:layout_constraintBottom_toBottomOf="@+id/imageBackgroundLogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textTitleLogin"
         android:layout_width="0dp"
@@ -76,7 +53,7 @@
         android:text="@string/login_button"
         android:textAllCaps="false"
         android:textColor="@color/bage_neutral"
-        android:textFontWeight="450"
+        android:textFontWeight="420"
         android:textSize="20sp"
         android:textStyle="normal"
         app:backgroundTint="@null"

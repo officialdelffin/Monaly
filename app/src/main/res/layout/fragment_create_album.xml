@@ -149,7 +149,7 @@
                     android:paddingEnd="20dp"
                     android:textColor="@color/bage_neutral"
                     android:textSize="18sp"
-                    android:inputType="textCapSentences"
+                    android:inputType="textMultiLine|textCapSentences"
                     android:maxLines="1"
                     android:imeOptions="actionNext" />
 
@@ -182,7 +182,7 @@
                     android:paddingEnd="20dp"
                     android:textColor="@color/gray_medium"
                     android:textSize="18sp"
-                    android:inputType="textCapSentences"
+                    android:inputType="textMultiLine|textCapSentences"
                     android:imeOptions="actionDone" />
 
             </com.google.android.material.textfield.TextInputLayout>

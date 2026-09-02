@@ -19,6 +19,9 @@ import com.example.monaly.ui.viewmodel.UploadState
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputEditText
+import android.content.Context
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 
 
 // Fragmento responsável pela tela de criação e configuração de novos álbuns :
@@ -87,6 +90,42 @@ class CreateAlbumFragment : Fragment() {
         etDescription = view.findViewById(R.id.EditDescriptionField)
         switchPublic = view.findViewById(R.id.switchPublic)
         switchDownload = view.findViewById(R.id.switchDownload)
+        etDescription = view.findViewById(R.id.EditDescriptionField)
+        switchPublic = view.findViewById(R.id.switchPublic)
+        switchDownload = view.findViewById(R.id.switchDownload)
+
+
+        // Interceptando o clique no botão "Concluído" do teclado virtual no campo de descrição :
+        etDescription.setOnEditorActionListener { _, actionId, _ ->
+
+
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+
+
+                // Removendo o cursor piscante e o foco do campo de texto :
+                etDescription.clearFocus()
+
+
+                // Solicitando ao sistema operacional que esconda o teclado virtual da tela :
+                val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(etDescription.windowToken, 0)
+
+
+                // Retornando verdadeiro para avisar que a ação foi consumida com sucesso :
+                true
+
+
+            } else {
+
+
+                // Retornando falso caso outra tecla tenha sido pressionada :
+                false
+
+
+            }
+
+
+        }
 
 
         // Observando as respostas da nuvem emitidas pelo ViewModel em tempo real :

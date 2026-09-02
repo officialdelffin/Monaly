@@ -80,7 +80,7 @@ class CreateAlbumFragment : Fragment() {
         // Conectando as variáveis Kotlin com os IDs do arquivo XML :
         ivCoverBackground = view.findViewById(R.id.ivCoverPhoto)
         btnAddCover = view.findViewById(R.id.buttonAddNewAlbum)
-        btnSaveAlbum = view.findViewById(R.id.btnSaveAlbum)
+        btnSaveAlbum = view.findViewById(R.id.buttomSaveAlbum)
         etTitle = view.findViewById(R.id.EditTitleField)
         etDescription = view.findViewById(R.id.EditDescriptionField)
         switchPublic = view.findViewById(R.id.switchPublic)

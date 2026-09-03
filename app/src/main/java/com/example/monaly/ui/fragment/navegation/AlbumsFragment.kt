@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.monaly.R
-import com.example.monaly.ui.adapter.AlbumMockModel
+import com.example.monaly.domain.model.AlbumModel
 import com.example.monaly.ui.adapter.AlbumsAdapter
 import java.util.Collections.emptyList
 
@@ -33,8 +33,8 @@ class AlbumsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_albums, container, false)
 
 
-        // Instanciando uma lista completamente vazia para representar o estado inicial :
-        val emptyAlbumList = emptyList<AlbumMockModel>()
+        // Instanciando uma lista completamente vazia apontando para o modelo real de dados :
+        val emptyAlbumList = emptyList<AlbumModel>()
 
 
         // Conectando o Adaptador à RecyclerView usando a lista vazia :
@@ -80,7 +80,7 @@ class AlbumsFragment : Fragment() {
         btnAddAlbum.setOnClickListener {
 
 
-            // Utilizando o gerente interno para abrir a tela dentro da aba atual, preservando a barra inferior :
+            // Utilizando o gerente interno para abrir a tela dentro da aba atual :
             childFragmentManager.beginTransaction()
                 .add(R.id.albumsRootContainer, CreateAlbumFragment())
                 .addToBackStack(null)

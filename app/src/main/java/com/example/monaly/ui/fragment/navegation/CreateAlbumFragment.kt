@@ -338,10 +338,14 @@ class CreateAlbumFragment : Fragment() {
 
                 // Tudo validado! Criando o pacote do álbum e pedindo ao ViewModel para subir para a nuvem :
                 val newAlbum = AlbumModel(
+
+
                     title = titleText,
                     description = descriptionText,
                     isPublic = switchPublic.isChecked,
                     allowDownload = switchDownload.isChecked
+
+
                 )
 
                 // Entregando os dados brutos para o cérebro processar :

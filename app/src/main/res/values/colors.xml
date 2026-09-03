@@ -2,6 +2,8 @@
 
 <resources>
 
+
+    <color name="red">#FF0000</color>
     <color name="bage_neutral">#fffee7</color>
     <color name="gray_medium">#9A9A9A</color>
     <color name="gray_dark">#424242</color>

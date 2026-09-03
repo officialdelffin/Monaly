@@ -16,9 +16,9 @@
         android:layout_weight="1"
         android:text="@string/create_album_button_save"
         android:textAllCaps="false"
-        android:textColor="@color/gray_dark"
+        android:textColor="@color/bage_neutral"
         android:textSize="20sp"
-        app:backgroundTint="@color/bage_neutral"
+        app:backgroundTint="@color/red"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -180,7 +180,7 @@
                     android:maxLength="350"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
-                    android:textColor="@color/gray_medium"
+                    android:textColor="@color/bage_neutral"
                     android:textSize="18sp"
                     android:inputType="textMultiLine|textCapSentences"
                     android:imeOptions="actionDone" />

@@ -10,7 +10,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttomSaveAlbum"
         android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:layout_height="65dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:layout_weight="1"
@@ -26,7 +26,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttomAddParticipants"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="65dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
@@ -68,7 +68,7 @@
                 android:id="@+id/ivCoverPhoto"
                 android:layout_width="0dp"
                 android:layout_height="400dp"
-                android:background="@color/gray_medium"
+                android:background="@color/gray_dark"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -141,17 +141,17 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/EditTitleField"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:background="@drawable/drawable_background_button_gray_deep_10_dp"
                     android:hint="@string/create_album_hint_title"
+                    android:imeOptions="actionNext"
+                    android:inputType="textMultiLine|textCapSentences"
                     android:maxLength="50"
+                    android:maxLines="1"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
                     android:textColor="@color/bage_neutral"
-                    android:textSize="18sp"
-                    android:inputType="textMultiLine|textCapSentences"
-                    android:maxLines="1"
-                    android:imeOptions="actionNext" />
+                    android:textSize="18sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

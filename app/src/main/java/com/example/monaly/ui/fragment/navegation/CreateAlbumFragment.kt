@@ -22,6 +22,8 @@ import com.google.android.material.textfield.TextInputEditText
 import android.content.Context
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
+import androidx.core.widget.doOnTextChanged
 
 
 // Fragmento responsável pela tela de criação e configuração de novos álbuns :
@@ -38,6 +40,10 @@ class CreateAlbumFragment : Fragment() {
     private lateinit var switchPublic: SwitchMaterial
     private lateinit var switchDownload: SwitchMaterial
     private lateinit var viewModel: CreateAlbumViewModel
+    private lateinit var tvPreviewTitle : TextView
+    private lateinit var tvPreviewDescription : TextView
+    private lateinit var tvPreviewStatus : TextView
+    private lateinit var tvPreviewPrivacy : TextView
 
 
     // Variável para armazenar temporariamente o endereço (URI) da imagem escolhida :
@@ -93,6 +99,112 @@ class CreateAlbumFragment : Fragment() {
         etDescription = view.findViewById(R.id.EditDescriptionField)
         switchPublic = view.findViewById(R.id.switchPublic)
         switchDownload = view.findViewById(R.id.switchDownload)
+        tvPreviewTitle = view.findViewById<TextView>(R.id.textView6)
+        tvPreviewDescription = view.findViewById<TextView>(R.id.textView3)
+        tvPreviewStatus = view.findViewById<TextView>(R.id.textView7)
+        tvPreviewPrivacy = view.findViewById<TextView>(R.id.textView9)
+
+
+        // Atualizando o título da capa em tempo real durante a digitação :
+        etTitle.doOnTextChanged { text, _, _, _ ->
+
+
+            // Verificando se o texto está vazio para manter o valor padrão ou atualizar com o texto digitado :
+            if (text.isNullOrEmpty()) {
+
+
+                tvPreviewTitle.text = getString(R.string.create_album_title_field)
+
+
+            }
+
+
+            else {
+
+
+                tvPreviewTitle.text = text.toString()
+
+
+            }
+
+
+        }
+
+
+        // Atualizando a descrição da capa em tempo real durante a digitação :
+        etDescription.doOnTextChanged { text, _, _, _ ->
+
+
+            // Mantendo a descrição genérica caso o usuário apague tudo :
+            if (text.isNullOrEmpty()) {
+
+
+                tvPreviewDescription.text = getString(R.string.create_album_description_field)
+
+
+            }
+
+
+            else {
+
+
+                tvPreviewDescription.text = text.toString()
+
+
+            }
+
+
+        }
+
+
+        // Escutando a mudança da chave de público/privado para atualizar o texto correspondente :
+        switchPublic.setOnCheckedChangeListener { _, isChecked ->
+
+
+            // Atualizando a palavra exibida na capa com base no estado do interruptor :
+            if (isChecked) {
+
+
+                tvPreviewPrivacy.text = "Público"
+
+
+            }
+
+
+            else {
+
+
+                tvPreviewPrivacy.text = "Privado"
+
+
+            }
+
+
+        }
+
+
+        // Lógica preparada e isolada para o futuro sistema de participantes :
+        val mockParticipantsCount = 0
+
+
+        if (mockParticipantsCount > 0) {
+
+
+            // Alternando para álbum compartilhado caso existam convidados na lista :
+            tvPreviewStatus.text = "Álbum compartilhado"
+
+
+        }
+
+
+        else {
+
+
+            // Mantendo o status padrão para álbuns sem convidados :
+            tvPreviewStatus.text = "Álbum solo"
+
+
+        }
 
 
         // Interceptando o clique no botão "Concluído" do teclado virtual no campo de descrição :

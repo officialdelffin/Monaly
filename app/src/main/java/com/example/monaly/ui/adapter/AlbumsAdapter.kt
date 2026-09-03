@@ -2,25 +2,22 @@ package com.example.monaly.ui.adapter
 
 
 // Importações :
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.monaly.R
+import com.example.monaly.domain.model.AlbumModel
 
 
-// Criando um modelo simples de dados para representar um álbum :
-data class AlbumMockModel(val title: String, val status: String, val description: String, val colorHex: String)
+// Adaptador responsável por ligar a lista de dados reais ao layout do RecyclerView :
+class AlbumsAdapter(private val albums: List<AlbumModel>) : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
 
 
-// Adaptador responsável por ligar a lista de dados ao layout do RecyclerView :
-class AlbumsAdapter(private val albums: List<AlbumMockModel>) : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
-
-
-    // Classe interna que segura as referências do layout do card para melhorar a performance :
+    // Classe interna que segura as referências do layout do card :
     class AlbumViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
@@ -44,7 +41,6 @@ class AlbumsAdapter(private val albums: List<AlbumMockModel>) : RecyclerView.Ada
     }
 
 
-    // Verificando a quantidade total de itens que a lista precisará desenhar :
     override fun getItemCount(): Int {
 
 
@@ -54,7 +50,7 @@ class AlbumsAdapter(private val albums: List<AlbumMockModel>) : RecyclerView.Ada
     }
 
 
-    // Preenchendo os dados do modelo no ViewHolder correto de acordo com a posição da rolagem :
+    // Preenchendo os dados do modelo no ViewHolder correto :
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
 
 
@@ -63,12 +59,21 @@ class AlbumsAdapter(private val albums: List<AlbumMockModel>) : RecyclerView.Ada
 
         // Injetando os textos nos componentes visuais :
         holder.tvTitle.text = album.title
-        holder.tvStatus.text = album.status
         holder.tvDescription.text = album.description
 
 
-        // Aplicando uma cor sólida simulando uma imagem de capa diferente para cada card :
-        holder.ivCover.setBackgroundColor(Color.parseColor(album.colorHex))
+        // Lógica para transformar o estado booleano em texto visual :
+        val privacyText = if (album.isPublic) "Público" else "Privado"
+        holder.tvStatus.text = "Álbum solo - $privacyText"
+
+
+        // Utilizando o Glide para carregar a imagem da URL diretamente para o ImageView de forma assíncrona :
+        Glide.with(holder.itemView.context)
+
+
+            .load(album.coverUrl)
+            .centerCrop()
+            .into(holder.ivCover)
 
 
     }

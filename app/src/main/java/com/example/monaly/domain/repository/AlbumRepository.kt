@@ -73,4 +73,44 @@ class AlbumRepository {
     }
 
 
+    // Função para buscar a lista completa de álbuns no Firestore :
+    suspend fun getAlbums(): List<AlbumModel> {
+
+
+        return try {
+
+
+            // Consultando a coleção e ordenando pela data de criação decrescente :
+            val snapshot = firestore.collection("albums")
+                .orderBy("createdAt", com.google.firebase.firestore.Query.Direction.DESCENDING)
+                .get()
+                .await()
+
+
+            // Convertendo os documentos brutos da nuvem para o modelo oficial do aplicativo :
+            snapshot.documents.mapNotNull { document ->
+
+
+                document.toObject(AlbumModel::class.java)
+
+
+            }
+
+
+        }
+
+
+        // Em caso de falha de rede retorna uma lista vazia para evitar fechamentos inesperados :
+        catch (e: Exception) {
+
+
+            emptyList()
+
+
+        }
+
+
+    }
+
+
 }

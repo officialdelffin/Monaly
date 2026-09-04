@@ -1,11 +1,15 @@
 package com.example.monaly.domain.repository
 
+
+// Importações
 import android.net.Uri
 import com.example.monaly.domain.model.AlbumModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 import java.util.UUID
+
 
 // Repositório exclusivo para gerenciar as operações de álbuns no banco de dados :
 class AlbumRepository {
@@ -22,6 +26,10 @@ class AlbumRepository {
 
         // Tentando executar o fluxo de envio :
         return try {
+
+
+            // NOVO: Obtendo o ID do usuário autenticado no momento exato da criação :
+            val currentUserId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
 
 
             // Gerando um nome único para a imagem e fazendo o upload para o Storage :
@@ -41,12 +49,13 @@ class AlbumRepository {
             val newAlbumId = firestore.collection("albums").document().id
 
 
-            // Fazendo uma cópia do álbum recebido injetando o novo ID e o link da foto :
+            // ATENÇÃO: Injetando o ID do usuário (ownerId), além do ID do álbum e URL da foto :
             val finalAlbum = album.copy(
 
 
                 id = newAlbumId,
-                coverUrl = downloadUrl
+                coverUrl = downloadUrl,
+                ownerId = currentUserId
 
 
             )
@@ -73,21 +82,28 @@ class AlbumRepository {
     }
 
 
-    // Função para buscar a lista completa de álbuns no Firestore :
+    // Função atualizada para buscar a lista filtrada de álbuns no Firestore :
     suspend fun getAlbums(): List<AlbumModel> {
 
 
         return try {
 
 
-            // Consultando a coleção e ordenando pela data de criação decrescente :
+            // Obtendo o ID único do usuário autenticado no aplicativo :
+            val currentUserId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+
+
+            // Consultando a coleção exigindo que o dono seja o usuário atual :
             val snapshot = firestore.collection("albums")
+
+
+                .whereEqualTo("ownerId", currentUserId)
                 .orderBy("createdAt", com.google.firebase.firestore.Query.Direction.DESCENDING)
                 .get()
                 .await()
 
 
-            // Convertendo os documentos brutos da nuvem para o modelo oficial do aplicativo :
+            // Convertendo os documentos filtrados para o modelo oficial :
             snapshot.documents.mapNotNull { document ->
 
 
@@ -97,13 +113,10 @@ class AlbumRepository {
             }
 
 
-        }
+        } catch (e: Exception) {
 
 
-        // Em caso de falha de rede retorna uma lista vazia para evitar fechamentos inesperados :
-        catch (e: Exception) {
-
-
+            // Retornando lista vazia em caso de falha de segurança ou rede :
             emptyList()
 
 

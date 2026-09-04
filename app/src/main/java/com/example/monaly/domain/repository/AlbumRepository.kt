@@ -116,7 +116,11 @@ class AlbumRepository {
         } catch (e: Exception) {
 
 
-            // Retornando lista vazia em caso de falha de segurança ou rede :
+            // Imprimindo o erro real no console do Android Studio para investigação :
+            android.util.Log.e("FirebaseError", "Falha ao buscar álbuns", e)
+
+
+            // Retornando lista vazia para evitar fechamentos inesperados na tela :
             emptyList()
 
 

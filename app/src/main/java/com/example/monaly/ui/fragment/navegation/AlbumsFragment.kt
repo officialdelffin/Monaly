@@ -8,15 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.monaly.R
-import com.example.monaly.domain.model.AlbumModel
 import com.example.monaly.ui.adapter.AlbumsAdapter
-import java.util.Collections.emptyList
+import com.example.monaly.ui.viewmodel.AlbumsViewModel
 
 
 // Fragmento que exibe a tela principal de Álbuns :
 class AlbumsFragment : Fragment() {
+
+
+    // Declarando o gerenciador que trará os dados da nuvem :
+    private lateinit var viewModel: AlbumsViewModel
 
 
     override fun onCreateView(
@@ -33,61 +37,67 @@ class AlbumsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_albums, container, false)
 
 
-        // Instanciando uma lista completamente vazia apontando para o modelo real de dados :
-        val emptyAlbumList = emptyList<AlbumModel>()
+        // Instanciando o ViewModel respeitando o ciclo de vida da tela atual :
+        viewModel = ViewModelProvider(this).get(AlbumsViewModel::class.java)
 
 
-        // Conectando o Adaptador à RecyclerView usando a lista vazia :
+        // Conectando os componentes visuais com os IDs do arquivo XML :
         val rvAlbums = view.findViewById<RecyclerView>(R.id.rvAlbums)
-        rvAlbums.adapter = AlbumsAdapter(emptyAlbumList)
-
-
-        // Localizando o texto de estado vazio recém-criado na interface XML :
         val tvEmptyState = view.findViewById<TextView>(R.id.tvEmptyState)
+        val btnAddAlbum = view.findViewById<View>(R.id.buttonAddNewAlbum)
 
 
-        // Lógica visual para exibir o texto central quando não houver dados :
-        if (emptyAlbumList.isEmpty()) {
+        // Observando a lista de álbuns vinda do banco de dados em tempo real :
+        viewModel.albumsList.observe(viewLifecycleOwner) { albums ->
 
 
-            // Escondendo a lista para não ocupar espaço invisível :
-            rvAlbums.visibility = View.GONE
+            // Atualizando o adaptador da RecyclerView com os dados reais baixados da nuvem :
+            rvAlbums.adapter = AlbumsAdapter(albums)
 
 
-            // Exibindo o componente de texto no centro da tela :
-            tvEmptyState.visibility = View.VISIBLE
+            // Lógica visual dinâmica para exibir a lista ou o estado de tela vazia :
+            if (albums.isEmpty()) {
 
 
-        } else {
+                // Escondendo a lista e mostrando o texto central caso não existam álbuns :
+                rvAlbums.visibility = View.GONE
+                tvEmptyState.visibility = View.VISIBLE
 
 
-            // Garantindo que a lista apareça caso haja itens :
-            rvAlbums.visibility = View.VISIBLE
+            }
+
+            else {
 
 
-            // Ocultando a mensagem de estado vazio :
-            tvEmptyState.visibility = View.GONE
+                // Exibindo a lista e ocultando a mensagem caso existam álbuns baixados :
+                rvAlbums.visibility = View.VISIBLE
+                tvEmptyState.visibility = View.GONE
+
+
+            }
 
 
         }
 
 
-        // Localizando o botão de adicionar álbum na interface :
-        val btnAddAlbum = view.findViewById<View>(R.id.buttonAddNewAlbum)
-
-
-        // Configurando a ação de clique para abrir a nova tela :
+        // Configurando a ação de clique para abrir a nova tela de criação :
         btnAddAlbum.setOnClickListener {
 
 
-            // Utilizando o gerente interno para abrir a tela dentro da aba atual :
+            // Utilizando o gerente interno para abrir a tela sobrepondo o conteúdo atual :
             childFragmentManager.beginTransaction()
+
+
                 .add(R.id.albumsRootContainer, CreateAlbumFragment())
                 .addToBackStack(null)
                 .commit()
 
 
         }
+
+
+        // Solicitando ao ViewModel que busque os dados mais recentes na nuvem :
+        viewModel.fetchAlbums()
 
 
         // O retorno da view finaliza o desenho da tela :

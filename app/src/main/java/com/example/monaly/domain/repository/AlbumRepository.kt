@@ -9,6 +9,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 import java.util.UUID
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 
 
 // Repositório exclusivo para gerenciar as operações de álbuns no banco de dados :
@@ -82,46 +85,62 @@ class AlbumRepository {
     }
 
 
-    // Função atualizada para buscar a lista filtrada de álbuns no Firestore :
-    suspend fun getAlbums(): List<AlbumModel> {
+    // Função atualizada para observar a lista de álbuns em tempo real :
+    fun observeAlbums(): Flow<List<AlbumModel>> = callbackFlow {
 
 
-        return try {
+        // Obtendo o ID único do usuário autenticado no aplicativo :
+        val currentUserId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
 
 
-            // Obtendo o ID único do usuário autenticado no aplicativo :
-            val currentUserId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+        // Criando o ouvinte no Firestore com a regra de filtro e ordenação :
+        val listenerRegistration = firestore.collection("albums")
 
 
-            // Consultando a coleção exigindo que o dono seja o usuário atual :
-            val snapshot = firestore.collection("albums")
+            .whereEqualTo("ownerId", currentUserId)
+            .orderBy("createdAt", com.google.firebase.firestore.Query.Direction.DESCENDING)
+            .addSnapshotListener { snapshot, error ->
 
 
-                .whereEqualTo("ownerId", currentUserId)
-                .orderBy("createdAt", com.google.firebase.firestore.Query.Direction.DESCENDING)
-                .get()
-                .await()
+                // Tratando possíveis erros na comunicação em tempo real :
+                if (error != null) {
 
 
-            // Convertendo os documentos filtrados para o modelo oficial :
-            snapshot.documents.mapNotNull { document ->
+                    trySend(emptyList())
+                    return@addSnapshotListener
 
 
-                document.toObject(AlbumModel::class.java)
+                }
+
+
+                // Convertendo o instantâneo de dados contínuos para a lista oficial :
+                if (snapshot != null) {
+
+
+                    val albums = snapshot.documents.mapNotNull { document ->
+
+
+                        document.toObject(AlbumModel::class.java)
+
+
+                    }
+
+
+                    // Enviando a lista atualizada pelo canal de fluxo :
+                    trySend(albums)
+
+
+                }
 
 
             }
 
 
-        } catch (e: Exception) {
+        // Garantindo que o ouvinte seja destruído automaticamente quando o fluxo for cancelado :
+        awaitClose {
 
 
-            // Imprimindo o erro real no console do Android Studio para investigação :
-            android.util.Log.e("FirebaseError", "Falha ao buscar álbuns", e)
-
-
-            // Retornando lista vazia para evitar fechamentos inesperados na tela :
-            emptyList()
+            listenerRegistration.remove()
 
 
         }

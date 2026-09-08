@@ -96,10 +96,6 @@ class AlbumsFragment : Fragment() {
         }
 
 
-        // Solicitando ao ViewModel que busque os dados mais recentes na nuvem :
-        viewModel.fetchAlbums()
-
-
         // O retorno da view finaliza o desenho da tela :
         return view
 

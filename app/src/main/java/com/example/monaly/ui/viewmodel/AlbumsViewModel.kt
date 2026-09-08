@@ -1,4 +1,4 @@
-package com.example.monaly.ui.viewmodel // Ajustar para o pacote correto do projeto :
+package com.example.monaly.ui.viewmodel
 
 
 // Importações :
@@ -19,7 +19,7 @@ class AlbumsViewModel : ViewModel() {
     private val repository = AlbumRepository()
 
 
-    // Variável observável que guardará a lista de álbuns baixada da nuvem :
+    // Variável observável que guardará a lista de álbuns em constante atualização :
     private val _albumsList = MutableLiveData<List<AlbumModel>>()
     val albumsList: LiveData<List<AlbumModel>> = _albumsList
 
@@ -33,32 +33,35 @@ class AlbumsViewModel : ViewModel() {
     init {
 
 
-        // Disparar a busca na nuvem imediatamente :
-        fetchAlbums()
+        // Iniciar a observação contínua assim que o gerenciador for instanciado :
+        startObservingAlbums()
 
 
     }
 
 
-    // Função responsável por acionar o trabalho em segundo plano :
-    fun fetchAlbums() {
+    // Função que conecta o fluxo contínuo do repositório com a interface visual :
+    private fun startObservingAlbums() {
 
 
-        // Avisar a interface que o carregamento começou :
+        // Avisando a interface que o carregamento inicial começou :
         _isLoading.value = true
 
 
-        // Abrir túnel seguro para tarefas pesadas :
+        // Abrindo túnel seguro para escutar o banco de dados respeitando o ciclo de vida :
         viewModelScope.launch {
 
 
-            // Aguardar a resposta do Firebase :
-            val result = repository.getAlbums()
+            // Coletando as atualizações em tempo real emitidas pelo repositório :
+            repository.observeAlbums().collect { result ->
 
 
-            // Entregar a lista pronta e desligar o aviso de carregamento :
-            _albumsList.value = result
-            _isLoading.value = false
+                // Entregando a lista pronta e desligando o aviso de carregamento :
+                _albumsList.value = result
+                _isLoading.value = false
+
+
+            }
 
 
         }

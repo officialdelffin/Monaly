@@ -3,9 +3,9 @@
 <resources>
 
 
-    <color name="red">#FF0000</color>
+    <color name="red">#900000</color>
     <color name="bage_neutral">#fffee7</color>
-    <color name="gray_medium">#9A9A9A</color>
+    <color name="gray_medium">#BEBEBE</color>
     <color name="gray_dark">#424242</color>
     <color name="gray_deep">#1A1A1A</color>
     <color name="black">#000000</color>

@@ -27,11 +27,19 @@
         android:background="@drawable/drawable_background_button_gray_deep_10_dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="40dp"
-        android:paddingEnd="40dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/navCamera"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_camera_bage_neutral" />
 
         <ImageView
             android:id="@+id/navHome"

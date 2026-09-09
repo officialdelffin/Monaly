@@ -45,7 +45,7 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/tvAlbumTitle"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="Álbum compartilhado - Público" />
+            tools:text="@string/create_album_status_solo_shared" />
 
         <TextView
             android:id="@+id/tvAlbumTitle"
@@ -55,12 +55,12 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
             android:textColor="#FFFFFF"
-            android:textSize="25sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvAlbumDescription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="Acampamento em Santa Penha" />
+            tools:text="@string/create_album_title_field" />
 
         <TextView
             android:id="@+id/tvAlbumDescription"
@@ -76,7 +76,31 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="O registro da nossa aventura em Santa Penha. Foram dias de pé no chão, pouca bateria e muita história para contar." />
+            tools:text="@string/create_album_description_field" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/create_album_space"
+            android:textColor="@color/gray_medium"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvAlbumStatus"
+            app:layout_constraintStart_toEndOf="@+id/tvAlbumStatus"
+            app:layout_constraintTop_toTopOf="@+id/tvAlbumStatus" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/create_album_status_solo_shared"
+            android:textColor="@color/gray_medium"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView11"
+            app:layout_constraintStart_toEndOf="@+id/textView11"
+            app:layout_constraintTop_toTopOf="@+id/textView11" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

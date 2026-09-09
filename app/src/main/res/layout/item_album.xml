@@ -79,7 +79,7 @@
             tools:text="@string/create_album_description_field" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/textSpaceItemAlbum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -91,16 +91,16 @@
             app:layout_constraintTop_toTopOf="@+id/tvAlbumStatus" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/textStatusItemAlbum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="@string/create_album_status_solo_shared"
             android:textColor="@color/gray_medium"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView11"
-            app:layout_constraintStart_toEndOf="@+id/textView11"
-            app:layout_constraintTop_toTopOf="@+id/textView11" />
+            app:layout_constraintBottom_toBottomOf="@+id/textSpaceItemAlbum"
+            app:layout_constraintStart_toEndOf="@+id/textSpaceItemAlbum"
+            app:layout_constraintTop_toTopOf="@+id/textSpaceItemAlbum" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -13,19 +13,29 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.monaly.R
-import com.example.monaly.domain.model.AlbumModel
 import com.example.monaly.ui.adapter.AlbumCarouselAdapter
+import com.example.monaly.ui.viewmodel.AlbumsViewModel
+import com.example.monaly.ui.viewmodel.UploadState
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
-// Fragmento do Feed conectado à ViewModel de upload :
+// Fragmento do Feed conectado à ViewModel de upload e álbuns :
 class FeedFragment : Fragment(R.layout.fragment_feed) {
 
 
-    // Instanciando a ViewModel de forma tardia (lazy) :
-    private lateinit var viewModel: FeedViewModel
+    // Instanciando as ViewModels de forma tardia (lazy) :
+    private lateinit var feedViewModel: FeedViewModel
+    private lateinit var albumsViewModel: AlbumsViewModel
+
+
+    // Declarando o adaptador do carrossel para atualização futura :
+    private lateinit var carouselAdapter: AlbumCarouselAdapter
+
+
+    // Controle para evitar múltiplas chamadas de rolagem automática :
+    private var isAutoScrollStarted = false
 
 
     // Registrando o contrato para seleção múltipla :
@@ -36,7 +46,7 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
 
 
             // Disparando o upload em lote diretamente para a ViewModel :
-            viewModel.uploadMediaBatch(uris)
+            feedViewModel.uploadMediaBatch(uris)
 
 
         }
@@ -51,12 +61,18 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        // Conectando a ViewModel ao ciclo de vida do Fragmento :
-        viewModel = ViewModelProvider(this)[FeedViewModel::class.java]
+        // Conectando as ViewModels ao ciclo de vida do Fragmento :
+        feedViewModel = ViewModelProvider(this)[FeedViewModel::class.java]
+        albumsViewModel = ViewModelProvider(this)[AlbumsViewModel::class.java]
 
 
         val viewPager = view.findViewById<ViewPager2>(R.id.viewPagerFeedAlbums)
         val buttonAdd = view.findViewById<MaterialButton>(R.id.buttonAdd)
+
+
+        // Inicializando o carrossel com uma lista vazia :
+        carouselAdapter = AlbumCarouselAdapter(emptyList())
+        viewPager.adapter = carouselAdapter
 
 
         buttonAdd.setOnClickListener {
@@ -68,11 +84,11 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         }
 
 
-        // Observando os estados da ViewModel para atualizar a interface em tempo real :
+        // Observando os estados de upload da FeedViewModel :
         viewLifecycleOwner.lifecycleScope.launch {
 
 
-            viewModel.uploadState.collect { state ->
+            feedViewModel.uploadState.collect { state ->
 
 
                 when (state) {
@@ -116,7 +132,7 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
 
 
                 }
-    
+
 
             }
 
@@ -124,27 +140,46 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         }
 
 
-        // Criação de Dados Mock :
-        val fakeAlbums = listOf(
+        // Observando os álbuns reais vindos da AlbumsViewModel :
+        albumsViewModel.albumsList.observe(viewLifecycleOwner) { albums ->
 
 
-            AlbumModel("Acampamento em Santa Penha", "O registro da nossa aventura...", "Álbum - Público", R.color.gray_dark),
-            AlbumModel("Aniversário de 25 anos", "Festa surpresa organizada...", "Álbum - Privado", R.color.gray_dark),
-            AlbumModel("Viagem para a Praia", "Lembranças inesquecíveis...", "Álbum - Público", R.color.gray_dark)
+            if (albums.isEmpty()) {
 
 
-        )
+                // Ocultando o carrossel se não houver álbuns para exibir :
+                viewPager.visibility = View.GONE
 
 
-        val adapter = AlbumCarouselAdapter(fakeAlbums)
-        viewPager.adapter = adapter
-        startAutoScroll(viewPager, fakeAlbums.size)
+            } else {
+
+
+                // Exibindo o carrossel e atualizando os dados do adaptador :
+                viewPager.visibility = View.VISIBLE
+                carouselAdapter.updateAlbums(albums)
+
+
+                // Iniciando a rolagem automática de forma segura (apenas uma vez) :
+                if (!isAutoScrollStarted) {
+
+
+                    isAutoScrollStarted = true
+                    startAutoScroll(viewPager)
+
+
+                }
+
+
+            }
+
+
+        }
 
 
     }
 
 
-    private fun startAutoScroll(viewPager: ViewPager2, totalItems: Int) {
+    private fun startAutoScroll(viewPager: ViewPager2) {
 
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -154,9 +189,21 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
 
 
                 delay(5000)
-                val currentItem = viewPager.currentItem
-                val nextItem = if (currentItem < totalItems - 1) currentItem + 1 else 0
-                viewPager.setCurrentItem(nextItem, true)
+
+
+                // Obtendo a quantidade atualizada de itens no carrossel :
+                val totalItems = carouselAdapter.itemCount
+
+
+                if (totalItems > 0) {
+
+
+                    val currentItem = viewPager.currentItem
+                    val nextItem = if (currentItem < totalItems - 1) currentItem + 1 else 0
+                    viewPager.setCurrentItem(nextItem, true)
+
+
+                }
 
 
             }

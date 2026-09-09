@@ -48,7 +48,6 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="20dp"
         android:ellipsize="end"
-        android:maxLines="4"
         android:text="@string/create_album_description_field"
         android:textColor="@color/gray_medium"
         android:textSize="18sp"

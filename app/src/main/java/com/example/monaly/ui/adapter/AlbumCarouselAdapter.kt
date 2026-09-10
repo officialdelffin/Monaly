@@ -2,6 +2,8 @@ package com.example.monaly.ui.adapter
 
 
 // Importações :
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,16 +12,19 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.monaly.R
 import com.example.monaly.domain.model.AlbumModel
-import android.graphics.Color
 
 
 // Adaptador inteligente que recicla a memória das visualizações do carrossel e carrega imagens da nuvem :
 class AlbumCarouselAdapter(private var albums: List<AlbumModel>) : RecyclerView.Adapter<AlbumCarouselAdapter.AlbumViewHolder>() {
 
 
-    // Classe interna que segura as referências dos componentes visuais do XML :
+    // Classe interna que segura as referências dos componentes visuais do XML, incluindo textos estáticos :
     class AlbumViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
@@ -28,12 +33,12 @@ class AlbumCarouselAdapter(private var albums: List<AlbumModel>) : RecyclerView.
         val textDescription: TextView = view.findViewById(R.id.textAlbumDescription)
         val textTag: TextView = view.findViewById(R.id.textAlbumTag)
         val textStatusPrivatePublic: TextView = view.findViewById(R.id.textStatusPrivatePublic)
+        val textSpaceDisplay: TextView = view.findViewById(R.id.textSpaceDisplay)
 
 
     }
 
 
-    // Infla o XML que criamos para cada item da lista :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
 
 
@@ -44,31 +49,21 @@ class AlbumCarouselAdapter(private var albums: List<AlbumModel>) : RecyclerView.
     }
 
 
-    // Informa ao Android quantos álbuns existem na lista :
     override fun getItemCount(): Int = albums.size
 
 
-    // Injeta os dados da nuvem diretamente nos textos e usa o Glide para a imagem :
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
 
 
         val album = albums[position]
-
-
-        // Extraindo o contexto da tela para acessar o arquivo de strings e o Glide :
         val context = holder.itemView.context
 
 
-        // Preenchendo os textos principais :
         holder.textTitle.text = album.title
         holder.textDescription.text = album.description
-
-
-        // Utilizando o contexto para buscar os textos padrões no arquivo strings.xml :
         holder.textTag.text = context.getString(R.string.create_album_status_solo_shared)
 
 
-        // Lógica para transformar o estado booleano em texto visual puxando recursos do sistema :
         holder.textStatusPrivatePublic.text = if (album.isPublic) {
 
 
@@ -84,35 +79,93 @@ class AlbumCarouselAdapter(private var albums: List<AlbumModel>) : RecyclerView.
         }
 
 
-        // Criando a animação circular nativa do Android para servir de espaço reservado :
+        // Ocultando todos os textos através da transparência para manter o layout intacto durante o carregamento :
+        holder.textTitle.alpha = 0f
+
+        holder.textDescription.alpha = 0f
+
+        holder.textTag.alpha = 0f
+
+        holder.textStatusPrivatePublic.alpha = 0f
+
+        holder.textSpaceDisplay.alpha = 0f
+
+
         val circularProgressDrawable = CircularProgressDrawable(context)
-
-
-        // Ajustando a espessura do traço e o tamanho do círculo :
         circularProgressDrawable.strokeWidth = 5f
         circularProgressDrawable.centerRadius = 30f
-
-
-        // Pintando a animação de branco para garantir um alto contraste com o fundo escuro :
         circularProgressDrawable.setColorSchemeColors(Color.WHITE)
-
-
-        // Iniciando o giro infinito da animação :
         circularProgressDrawable.start()
 
 
-        // Carregando a imagem da URL e exibindo a animação enquanto o download acontece :
+        // Carregando a imagem e instalando o ouvinte para sincronizar a visibilidade :
         Glide.with(context)
+
+
             .load(album.coverUrl)
             .placeholder(circularProgressDrawable)
             .centerCrop()
+            .listener(object : RequestListener<Drawable> {
+
+
+                override fun onLoadFailed(
+
+
+                    p0: GlideException?,
+                    p1: Any?,
+                    p2: Target<Drawable?>,
+                    p3: Boolean
+
+
+                ): Boolean {
+
+
+                    holder.textTitle.alpha = 1f
+                    holder.textDescription.alpha = 1f
+                    holder.textTag.alpha = 1f
+                    holder.textStatusPrivatePublic.alpha = 1f
+                    holder.textSpaceDisplay.alpha = 1f
+
+                    return false
+
+
+                }
+
+
+                override fun onResourceReady(
+
+
+                    p0: Drawable,
+                    p1: Any,
+                    p2: Target<Drawable?>?,
+                    p3: DataSource,
+                    p4: Boolean
+
+
+                ): Boolean {
+
+
+                    val duration = 400L
+                    holder.textTitle.animate().alpha(1f).setDuration(duration).start()
+                    holder.textDescription.animate().alpha(1f).setDuration(duration).start()
+                    holder.textTag.animate().alpha(1f).setDuration(duration).start()
+                    holder.textStatusPrivatePublic.animate().alpha(1f).setDuration(duration).start()
+                    holder.textSpaceDisplay.animate().alpha(1f).setDuration(duration).start()
+                    return false
+
+
+                }
+
+
+            })
+
+
             .into(holder.imageCover)
 
 
     }
 
 
-    // Função responsável por receber dados atualizados em tempo real e repintar o carrossel :
     fun updateAlbums(newAlbums: List<AlbumModel>) {
 
 

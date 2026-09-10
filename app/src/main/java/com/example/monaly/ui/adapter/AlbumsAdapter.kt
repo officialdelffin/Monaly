@@ -75,13 +75,9 @@ class AlbumsAdapter(private val albums: List<AlbumModel>) : RecyclerView.Adapter
 
         // Deixando todos os campos de texto 100% transparentes antes de solicitar a imagem :
         holder.tvTitle.alpha = 0f
-
         holder.tvDescription.alpha = 0f
-
         holder.tvStatus.alpha = 0f
-
         holder.textSpaceItemAlbum.alpha = 0f
-
         holder.textStatusItemAlbum.alpha = 0f
 
 
@@ -92,8 +88,10 @@ class AlbumsAdapter(private val albums: List<AlbumModel>) : RecyclerView.Adapter
         circularProgressDrawable.start()
 
 
-        // Solicitando a imagem e implementando o ouvinte para disparar as animações de sincronia :
+        // Solicitando a imagem e implementando o ouvinte com as variáveis corretas do AlbumsAdapter :
         Glide.with(context)
+
+
             .load(album.coverUrl)
             .placeholder(circularProgressDrawable)
             .centerCrop()
@@ -112,11 +110,12 @@ class AlbumsAdapter(private val albums: List<AlbumModel>) : RecyclerView.Adapter
                 ): Boolean {
 
 
-                    holder.textTitle.alpha = 1f
-                    holder.textDescription.alpha = 1f
-                    holder.textTag.alpha = 1f
-                    holder.textStatusPrivatePublic.alpha = 1f
-                    holder.textSpaceDisplay.alpha = 1f
+                    // Restaurando a opacidade dos textos em caso de falha na rede :
+                    holder.tvTitle.alpha = 1f
+                    holder.tvDescription.alpha = 1f
+                    holder.tvStatus.alpha = 1f
+                    holder.textSpaceItemAlbum.alpha = 1f
+                    holder.textStatusItemAlbum.alpha = 1f
                     return false
 
 
@@ -136,13 +135,13 @@ class AlbumsAdapter(private val albums: List<AlbumModel>) : RecyclerView.Adapter
                 ): Boolean {
 
 
+                    // Aninhando a animação de Fade In utilizando as variáveis reais do card de álbuns :
                     val duration = 400L
-                    holder.textTitle.animate().alpha(1f).setDuration(duration).start()
-                    holder.textDescription.animate().alpha(1f).setDuration(duration).start()
-                    holder.textTag.animate().alpha(1f).setDuration(duration).start()
-                    holder.textStatusPrivatePublic.animate().alpha(1f).setDuration(duration).start()
-                    holder.textSpaceDisplay.animate().alpha(1f).setDuration(duration).start()
-
+                    holder.tvTitle.animate().alpha(1f).setDuration(duration).start()
+                    holder.tvDescription.animate().alpha(1f).setDuration(duration).start()
+                    holder.tvStatus.animate().alpha(1f).setDuration(duration).start()
+                    holder.textSpaceItemAlbum.animate().alpha(1f).setDuration(duration).start()
+                    holder.textStatusItemAlbum.animate().alpha(1f).setDuration(duration).start()
                     return false
 
 

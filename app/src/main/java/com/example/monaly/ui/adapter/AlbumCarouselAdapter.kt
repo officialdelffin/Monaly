@@ -120,12 +120,12 @@ class AlbumCarouselAdapter(private var albums: List<AlbumModel>) : RecyclerView.
                 ): Boolean {
 
 
+                    // Restaurando a opacidade dos textos em caso de falha na rede :
                     holder.textTitle.alpha = 1f
                     holder.textDescription.alpha = 1f
                     holder.textTag.alpha = 1f
                     holder.textStatusPrivatePublic.alpha = 1f
                     holder.textSpaceDisplay.alpha = 1f
-
                     return false
 
 
@@ -145,6 +145,7 @@ class AlbumCarouselAdapter(private var albums: List<AlbumModel>) : RecyclerView.
                 ): Boolean {
 
 
+                    // Aninhando a animação de Fade In utilizando as variáveis reais do card de álbuns :
                     val duration = 400L
                     holder.textTitle.animate().alpha(1f).setDuration(duration).start()
                     holder.textDescription.animate().alpha(1f).setDuration(duration).start()

@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.example.monaly.R
 import com.example.monaly.domain.model.AlbumModel
+import android.graphics.Color
 
 
 // Adaptador inteligente que recicla a memória das visualizações do carrossel e carrega imagens da nuvem :
@@ -90,6 +91,10 @@ class AlbumCarouselAdapter(private var albums: List<AlbumModel>) : RecyclerView.
         // Ajustando a espessura do traço e o tamanho do círculo :
         circularProgressDrawable.strokeWidth = 5f
         circularProgressDrawable.centerRadius = 30f
+
+
+        // Pintando a animação de branco para garantir um alto contraste com o fundo escuro :
+        circularProgressDrawable.setColorSchemeColors(Color.WHITE)
 
 
         // Iniciando o giro infinito da animação :

@@ -358,17 +358,6 @@ class CreateAlbumFragment : Fragment() {
         }
 
 
-        // Voltar na seta ou topo :
-        val topArea = view.findViewById<View>(R.id.ivCoverPhoto)
-        topArea.setOnClickListener {
-
-
-            parentFragmentManager.popBackStack()
-
-
-        }
-
-
         // Funcionalidade de clique explícito na seta para voltar e fechar a tela :
         btnBack.setOnClickListener {
 

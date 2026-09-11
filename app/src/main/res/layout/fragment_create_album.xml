@@ -202,11 +202,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/DescriptionField">
 
                 <LinearLayout
-                    android:background="@color/gray_deep"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/gray_deep"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="25dp">
 
                     <TextView
                         android:layout_width="wrap_content"

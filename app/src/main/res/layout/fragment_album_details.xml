@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000">
-
-
-    <!-- Área de rolagem para englobar o cabeçalho e a grade de mídias sem cobrir o botão base : -->
-
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollAlbumDetails"
@@ -23,32 +17,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <!-- Contêiner interno organizando os elementos de topo para baixo : -->
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="20dp">
 
-
-            <!-- Imagem de capa do álbum ocupando o topo : -->
-
-
             <ImageView
                 android:id="@+id/ivDetailCover"
                 android:layout_width="0dp"
                 android:layout_height="400dp"
-                android:background="@color/gray_dark"
+                android:background="@drawable/img_empty_state_album"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-
-            <!-- Gradiente escuro garantindo a leitura dos textos sobrepostos : -->
-
 
             <View
                 android:id="@+id/viewGradientDetail"
@@ -59,10 +41,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/ivDetailCover" />
-
-
-            <!-- Botão de voltar no canto superior esquerdo : -->
-
 
             <ImageView
                 android:id="@+id/btnBackDetail"
@@ -76,10 +54,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="#FFFFFF" />
 
-
-            <!-- Status do álbum exibido acima do título : -->
-
-
             <TextView
                 android:id="@+id/tvDetailStatus"
                 android:layout_width="wrap_content"
@@ -91,13 +65,6 @@
                 app:layout_constraintBottom_toTopOf="@+id/tvDetailTitle"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="Álbum compartilhado - Privado" />
-
-
-            <!-- Menu de opções de três pontos no canto direito : -->
-
-
-            <!-- Título principal do álbum : -->
-
 
             <ImageView
                 android:id="@+id/btnDetailMenu"
@@ -124,10 +91,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="Visita aos campos de Girassóis" />
 
-
-            <!-- Descrição textual do álbum : -->
-
-
             <TextView
                 android:id="@+id/tvDetailDescription"
                 android:layout_width="0dp"
@@ -142,10 +105,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="Sobre o dia entre os girassóis..." />
 
-
-            <!-- Título da seção de participantes : -->
-
-
             <TextView
                 android:id="@+id/tvParticipantsTitle"
                 android:layout_width="wrap_content"
@@ -159,10 +118,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ivDetailCover" />
 
-
-            <!-- Mock visual representando a área de participantes : -->
-
-
             <LinearLayout
                 android:id="@+id/llParticipantsMock"
                 android:layout_width="match_parent"
@@ -175,10 +130,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvParticipantsTitle">
 
-
-                <!-- Espaço reservado para os avatares arredondados da equipe : -->
-
-
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -186,17 +137,12 @@
                     android:background="@drawable/drawable_background_button_gray_deep_10_dp"
                     android:src="@drawable/ic_profile_bage_neutral" />
 
-
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/drawable_background_button_gray_deep_10_dp"
                     android:src="@drawable/ic_profile_bage_neutral" />
-
-
-                <!-- Indicador visual para visualizar o restante da lista : -->
-
 
                 <TextView
                     android:layout_width="50dp"
@@ -208,12 +154,7 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-
             </LinearLayout>
-
-
-            <!-- Lista principal estruturada para receber as mídias e datas dinâmicas : -->
-
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvAlbumMedia"
@@ -227,15 +168,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/llParticipantsMock" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </androidx.core.widget.NestedScrollView>
-
-
-    <!-- Botão de adição fixado acima da barra de navegação principal : -->
-
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonAddMedia"
@@ -260,6 +195,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

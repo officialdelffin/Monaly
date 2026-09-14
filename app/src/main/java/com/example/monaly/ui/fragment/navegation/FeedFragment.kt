@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.monaly.R
+import com.example.monaly.domain.model.AlbumModel
 import com.example.monaly.ui.adapter.AlbumCarouselAdapter
 import com.example.monaly.ui.viewmodel.AlbumsViewModel
 import com.example.monaly.ui.viewmodel.UploadState
@@ -25,27 +26,18 @@ import kotlinx.coroutines.launch
 class FeedFragment : Fragment(R.layout.fragment_feed) {
 
 
-    // Instanciando as ViewModels de forma tardia (lazy) :
     private lateinit var feedViewModel: FeedViewModel
     private lateinit var albumsViewModel: AlbumsViewModel
-
-
-    // Declarando o adaptador do carrossel para atualização futura :
     private lateinit var carouselAdapter: AlbumCarouselAdapter
-
-
-    // Controle para evitar múltiplas chamadas de rolagem automática :
     private var isAutoScrollStarted = false
 
 
-    // Registrando o contrato para seleção múltipla :
     private val pickMultipleMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)) { uris: List<Uri> ->
 
 
         if (uris.isNotEmpty()) {
 
 
-            // Disparando o upload em lote diretamente para a ViewModel :
             feedViewModel.uploadMediaBatch(uris)
 
 
@@ -61,7 +53,6 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        // Conectando as ViewModels ao ciclo de vida do Fragmento :
         feedViewModel = ViewModelProvider(this)[FeedViewModel::class.java]
         albumsViewModel = ViewModelProvider(this)[AlbumsViewModel::class.java]
 
@@ -70,8 +61,16 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         val buttonAdd = view.findViewById<MaterialButton>(R.id.buttonAdd)
 
 
-        // Inicializando o carrossel com uma lista vazia :
-        carouselAdapter = AlbumCarouselAdapter(emptyList())
+        // Instanciando o adaptador e implementando o comportamento de clique para abrir os detalhes :
+        carouselAdapter = AlbumCarouselAdapter(emptyList()) { clickedAlbum ->
+
+
+            openAlbumDetails(clickedAlbum)
+
+
+        }
+
+
         viewPager.adapter = carouselAdapter
 
 
@@ -84,7 +83,6 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         }
 
 
-        // Observando os estados de upload da FeedViewModel :
         viewLifecycleOwner.lifecycleScope.launch {
 
 
@@ -94,38 +92,10 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
                 when (state) {
 
 
-                    // Estado neutro aguardando ação :
                     is UploadState.Idle -> {}
-
-
-                    is UploadState.Uploading -> {
-
-
-                        // Exibindo o progresso do lote para o usuário :
-                        Toast.makeText(requireContext(), "Enviando ${state.current} de ${state.total}...", Toast.LENGTH_SHORT).show()
-
-
-                    }
-
-
-                    is UploadState.Success -> {
-
-
-                        // Avisando a conclusão e limpando a área :
-                        Toast.makeText(requireContext(), "Upload concluído com sucesso!", Toast.LENGTH_LONG).show()
-
-
-                    }
-
-
-                    is UploadState.Error -> {
-
-
-                        // Exibindo a falha amigavelmente :
-                        Toast.makeText(requireContext(), "Erro: ${state.message}", Toast.LENGTH_LONG).show()
-
-
-                    }
+                    is UploadState.Uploading -> Toast.makeText(requireContext(), "Enviando ${state.current} de ${state.total}...", Toast.LENGTH_SHORT).show()
+                    is UploadState.Success -> Toast.makeText(requireContext(), "Upload concluído com sucesso!", Toast.LENGTH_LONG).show()
+                    is UploadState.Error -> Toast.makeText(requireContext(), "Erro: ${state.message}", Toast.LENGTH_LONG).show()
 
 
                     else -> {}
@@ -140,26 +110,22 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         }
 
 
-        // Observando os álbuns reais vindos da AlbumsViewModel :
         albumsViewModel.albumsList.observe(viewLifecycleOwner) { albums ->
 
 
             if (albums.isEmpty()) {
 
 
-                // Ocultando o carrossel se não houver álbuns para exibir :
                 viewPager.visibility = View.GONE
 
 
             } else {
 
 
-                // Exibindo o carrossel e atualizando os dados do adaptador :
                 viewPager.visibility = View.VISIBLE
                 carouselAdapter.updateAlbums(albums)
 
 
-                // Iniciando a rolagem automática de forma segura (apenas uma vez) :
                 if (!isAutoScrollStarted) {
 
 
@@ -179,6 +145,44 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
     }
 
 
+    // Função responsável por empacotar os dados e realizar a transição de tela de forma segura :
+    private fun openAlbumDetails(album: AlbumModel) {
+
+
+        // Empacotando as informações essenciais para a próxima tela desenhar o cabeçalho rapidamente :
+        val bundle = Bundle().apply {
+
+
+            putString("ALBUM_ID", album.id)
+            putString("ALBUM_TITLE", album.title)
+            putString("ALBUM_DESCRIPTION", album.description)
+            putString("ALBUM_COVER_URL", album.coverUrl)
+            putBoolean("ALBUM_IS_PUBLIC", album.isPublic)
+
+
+        }
+
+
+        // Instanciando o novo fragmento e anexando o pacote de dados :
+        val detailsFragment = AlbumDetailsFragment().apply {
+
+
+            arguments = bundle
+
+
+        }
+
+
+        // Solicitando ao gerenciador principal que sobreponha a tela atual adicionando à pilha de navegação :
+        parentFragmentManager.beginTransaction()
+            .add(R.id.viewPagerMain, detailsFragment)
+            .addToBackStack(null)
+            .commit()
+
+
+    }
+
+
     private fun startAutoScroll(viewPager: ViewPager2) {
 
 
@@ -189,9 +193,6 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
 
 
                 delay(5000)
-
-
-                // Obtendo a quantidade atualizada de itens no carrossel :
                 val totalItems = carouselAdapter.itemCount
 
 

@@ -37,6 +37,10 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         val layoutManager = GridLayoutManager(requireContext(), 3)
 
 
+        // Definindo a quantidade de colunas :
+        val spanCount = 5
+
+
         // Aplicando a inteligência da quebra de linha para o cabeçalho de data :
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
 
@@ -47,7 +51,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
                 return when (adapter.getItemViewType(position)) {
 
 
-                    AlbumDetailsAdapter.TYPE_HEADER -> 3
+                    AlbumDetailsAdapter.TYPE_HEADER -> spanCount
                     AlbumDetailsAdapter.TYPE_MEDIA -> 1
                     else -> 1
 

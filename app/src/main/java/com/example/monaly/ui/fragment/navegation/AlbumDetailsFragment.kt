@@ -1,24 +1,30 @@
 package com.example.monaly.ui.fragment.navegation
 
 
-// Importações :
+// Importacoes necessarias :
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.monaly.R
-import com.example.monaly.domain.model.AlbumDetailItem
-import com.example.monaly.domain.model.MediaModel
 import com.example.monaly.ui.adapter.AlbumDetailsAdapter
-import java.util.Date
 
 
-// Fragmento responsável por exibir todos os detalhes e mídias de um álbum específico :
+// Fragmento responsavel por exibir os detalhes injetando apenas dados reais :
 class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
 
 
-    // Declarando o adaptador em escopo global para permitir atualizações futuras :
     private lateinit var adapter: AlbumDetailsAdapter
 
 
@@ -26,19 +32,118 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
 
 
         super.onViewCreated(view, savedInstanceState)
+
+
+        // Mapeando todos os componentes, incluindo os tres campos da linha de status :
+        val tvTitle = view.findViewById<TextView>(R.id.tvDetailTitle)
+        val tvDescription = view.findViewById<TextView>(R.id.tvDetailDescription)
+        val tvStatusType = view.findViewById<TextView>(R.id.tvDetailStatus)
+        val tvStatusSeparator = view.findViewById<TextView>(R.id.tvDetailSeparator)
+        val tvStatusPrivacy = view.findViewById<TextView>(R.id.tvDetailPrivacySolo)
+        val ivCover = view.findViewById<ImageView>(R.id.ivDetailCover)
+        val btnBack = view.findViewById<ImageView>(R.id.btnBackDetail)
         val rvAlbumMedia = view.findViewById<RecyclerView>(R.id.rvAlbumMedia)
 
 
-        // Iniciando o adaptador passando a nossa lista de dados falsos (Mocks) para teste visual :
-        adapter = AlbumDetailsAdapter(generateMockData())
+        // Extraindo parametros repassados pelo clique nas telas anteriores :
+        val albumTitle = arguments?.getString("ALBUM_TITLE") ?: ""
+        val albumDesc = arguments?.getString("ALBUM_DESCRIPTION") ?: ""
+        val coverUrl = arguments?.getString("ALBUM_COVER_URL") ?: ""
+        val isPublic = arguments?.getBoolean("ALBUM_IS_PUBLIC") ?: false
 
 
-        // Definindo a quantidade de colunas
+        // Povoando os textos dinamicos principais :
+        tvTitle.text = albumTitle
+        tvDescription.text = albumDesc
+
+
+        // Montando a frase do status de forma contínua utilizando os tres espacos :
+        tvStatusType.text = "Álbum solo"
+        tvStatusSeparator.text = "-"
+        tvStatusPrivacy.text = if (isPublic) "Público" else "Privado"
+
+
+        // Configurando botao de retrocesso para fechar a tela atual :
+        btnBack.setOnClickListener {
+
+
+            parentFragmentManager.popBackStack()
+
+
+        }
+
+
+        // Configuracao da animacao de carregamento :
+        val circularProgressDrawable = CircularProgressDrawable(requireContext())
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.setColorSchemeColors(Color.WHITE)
+        circularProgressDrawable.start()
+
+
+        ivCover.alpha = 0f
+
+
+        // Gerenciamento da imagem de capa via biblioteca de terceiros :
+        Glide.with(this)
+            .load(coverUrl)
+            .placeholder(circularProgressDrawable)
+            .centerCrop()
+            .listener(object : RequestListener<Drawable> {
+
+
+                override fun onLoadFailed(
+
+
+                    p0: GlideException?,
+                    p1: Any?,
+                    p2: Target<Drawable?>,
+                    p3: Boolean
+
+
+                ): Boolean {
+
+
+                    ivCover.alpha = 1f
+                    return false
+
+
+                }
+
+
+                override fun onResourceReady(
+
+
+                    p0: Drawable,
+                    p1: Any,
+                    p2: Target<Drawable?>?,
+                    p3: DataSource,
+                    p4: Boolean
+
+
+                ): Boolean {
+
+
+                    ivCover.animate().alpha(1f).setDuration(400L).start()
+                    return false
+
+
+                }
+
+
+            })
+            .into(ivCover)
+
+
+        // Inicializando o adaptador com uma lista totalmente vazia, eliminando dados ficticios :
+        adapter = AlbumDetailsAdapter(emptyList())
+
+
         val spanCount = 5
         val layoutManager = GridLayoutManager(requireContext(), spanCount)
 
 
-        // Aplicando a inteligência da quebra de linha para o cabeçalho de data :
+        // Orientando o comportamento do grid com base no tipo de conteudo retornado :
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
 
 
@@ -62,52 +167,8 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         }
 
 
-        // Conectando a configuração e o adaptador ao XML da tela :
         rvAlbumMedia.layoutManager = layoutManager
         rvAlbumMedia.adapter = adapter
-
-
-    }
-
-
-    // Função privada para gerar dados fictícios e testar o comportamento visual da lista :
-    private fun generateMockData(): List<AlbumDetailItem> {
-
-
-        val mockList = mutableListOf<AlbumDetailItem>()
-
-
-        // Criando o primeiro cabeçalho de data :
-        mockList.add(AlbumDetailItem.DateHeader("Atualizado em 14 de Setembro de 2026"))
-
-
-        // Injetando 4 fotos de teste (Natureza) vinculadas à data acima :
-        for (i in 1..4) {
-
-
-            val fakeMedia = MediaModel(mediaUrl = "https://images.unsplash.com/photo-1506744626753-140130541708?q=80&w=500&auto=format&fit=crop")
-            mockList.add(AlbumDetailItem.Media(fakeMedia))
-
-
-        }
-
-
-        // Criando o segundo cabeçalho de data simulando uma atualização mais antiga :
-        mockList.add(AlbumDetailItem.DateHeader("Atualizado em 10 de Setembro de 2026"))
-
-
-        // Injetando 7 fotos de teste (Arquitetura) vinculadas à segunda data :
-        for (i in 1..7) {
-
-
-            val fakeMedia = MediaModel(mediaUrl = "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=500&auto=format&fit=crop")
-            mockList.add(AlbumDetailItem.Media(fakeMedia))
-
-
-        }
-
-
-        return mockList
 
 
     }

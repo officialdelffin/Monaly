@@ -173,7 +173,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/llParticipantsMock" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tvDetailSeparator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -185,16 +185,16 @@
                 app:layout_constraintTop_toTopOf="@+id/tvDetailStatus" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/tvDetailPrivacySolo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:text="@string/create_album_status_private_public"
                 android:textColor="@color/gray_medium"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvDetailStatus"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="@+id/tvDetailStatus" />
+                app:layout_constraintStart_toEndOf="@+id/tvDetailSeparator"
+                app:layout_constraintTop_toTopOf="@+id/tvDetailStatus"
+                tools:text="@string/create_album_status_private_public" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

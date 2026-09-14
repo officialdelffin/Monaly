@@ -21,7 +21,7 @@ import com.example.monaly.domain.model.AlbumModel
 
 
 // Adaptador responsável por ligar a lista de dados reais ao layout do RecyclerView :
-class AlbumsAdapter(private val albums: List<AlbumModel>) : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
+class AlbumsAdapter(private var albums: List<AlbumModel>, private val onAlbumClick: (AlbumModel) -> Unit) : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
 
 
     // Classe interna mapeando todos os textos do XML para garantir controle visual total :

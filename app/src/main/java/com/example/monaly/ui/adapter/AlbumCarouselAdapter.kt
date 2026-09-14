@@ -21,7 +21,7 @@ import com.example.monaly.domain.model.AlbumModel
 
 
 // Adaptador inteligente que recicla a memória das visualizações do carrossel e carrega imagens da nuvem :
-class AlbumCarouselAdapter(private var albums: List<AlbumModel>) : RecyclerView.Adapter<AlbumCarouselAdapter.AlbumViewHolder>() {
+class AlbumCarouselAdapter(private var albums: List<AlbumModel>, private val onAlbumClick: (AlbumModel) -> Unit) : RecyclerView.Adapter<AlbumCarouselAdapter.AlbumViewHolder>() {
 
 
     // Classe interna que segura as referências dos componentes visuais do XML, incluindo textos estáticos :

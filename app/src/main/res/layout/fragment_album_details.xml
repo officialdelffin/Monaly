@@ -64,7 +64,7 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/tvDetailTitle"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:text="@string/create_album_status_solo_shared" />
+                tools:text="@string/create_album_status_solo" />
 
             <ImageView
                 android:id="@+id/btnDetailMenu"
@@ -194,7 +194,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tvDetailStatus"
                 app:layout_constraintStart_toEndOf="@+id/tvDetailSeparator"
                 app:layout_constraintTop_toTopOf="@+id/tvDetailStatus"
-                tools:text="@string/create_album_status_private_public" />
+                tools:text="@string/create_album_status_private" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

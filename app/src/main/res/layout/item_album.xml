@@ -45,7 +45,7 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/tvAlbumTitle"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="@string/create_album_status_solo_shared" />
+            tools:text="@string/create_album_status_solo" />
 
         <TextView
             android:id="@+id/tvAlbumTitle"
@@ -95,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="@string/create_album_status_solo_shared"
+            android:text="@string/create_album_status_solo"
             android:textColor="@color/gray_medium"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/textSpaceItemAlbum"

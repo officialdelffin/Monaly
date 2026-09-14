@@ -61,7 +61,7 @@ class AlbumCarouselAdapter(private var albums: List<AlbumModel>, private val onA
 
         holder.textTitle.text = album.title
         holder.textDescription.text = album.description
-        holder.textTag.text = context.getString(R.string.create_album_status_solo_shared)
+        holder.textTag.text = context.getString(R.string.create_album_status_solo)
 
 
         holder.textStatusPrivatePublic.text = if (album.isPublic) {
@@ -73,7 +73,7 @@ class AlbumCarouselAdapter(private var albums: List<AlbumModel>, private val onA
         } else {
 
 
-            context.getString(R.string.create_album_status_private_public)
+            context.getString(R.string.create_album_status_private)
 
 
         }

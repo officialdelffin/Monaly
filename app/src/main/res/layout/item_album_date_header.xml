@@ -7,5 +7,5 @@
     android:paddingTop="20dp"
     android:paddingBottom="10dp"
     android:textColor="@color/gray_medium"
-    android:textSize="14sp"
+    android:textSize="16sp"
     tools:text="Atualizado em 28/12/2025" />

@@ -44,8 +44,8 @@
 
             <ImageView
                 android:id="@+id/btnBackDetail"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="40dp"
                 android:padding="12dp"
@@ -64,16 +64,15 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/tvDetailTitle"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:text="Álbum compartilhado - Privado" />
+                tools:text="@string/create_album_status_solo_shared" />
 
             <ImageView
                 android:id="@+id/btnDetailMenu"
-                android:layout_width="48dp"
-                android:layout_height="0dp"
-                android:layout_marginEnd="30dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="28dp"
                 android:padding="12dp"
-                android:src="@android:drawable/ic_menu_more"
-                app:layout_constraintBottom_toBottomOf="@+id/tvDetailTitle"
+                android:src="@drawable/ic_kebab_menu_bage_neutral"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tvDetailTitle"
                 app:tint="#FFFFFF" />
@@ -90,7 +89,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/tvDetailDescription"
                 app:layout_constraintEnd_toStartOf="@+id/btnDetailMenu"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:text="Visita aos campos de Girassóis" />
+                tools:text="@string/create_album_title_field" />
 
             <TextView
                 android:id="@+id/tvDetailDescription"
@@ -104,7 +103,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/ivDetailCover"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:text="Sobre o dia entre os girassóis..." />
+                tools:text="@string/create_album_description_field" />
 
             <TextView
                 android:id="@+id/tvParticipantsTitle"
@@ -172,6 +171,30 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/llParticipantsMock" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@string/create_album_space"
+                android:textColor="@color/gray_medium"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvDetailStatus"
+                app:layout_constraintStart_toEndOf="@+id/tvDetailStatus"
+                app:layout_constraintTop_toTopOf="@+id/tvDetailStatus" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@string/create_album_status_private_public"
+                android:textColor="@color/gray_medium"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvDetailStatus"
+                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="@+id/tvDetailStatus" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

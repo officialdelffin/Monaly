@@ -33,12 +33,9 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         adapter = AlbumDetailsAdapter(generateMockData())
 
 
-        // Configurando a grade para ter exatas 3 colunas :
-        val layoutManager = GridLayoutManager(requireContext(), 3)
-
-
-        // Definindo a quantidade de colunas :
+        // Definindo a quantidade de colunas
         val spanCount = 5
+        val layoutManager = GridLayoutManager(requireContext(), spanCount)
 
 
         // Aplicando a inteligência da quebra de linha para o cabeçalho de data :

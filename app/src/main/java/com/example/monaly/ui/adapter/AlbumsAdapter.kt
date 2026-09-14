@@ -154,6 +154,17 @@ class AlbumsAdapter(private var albums: List<AlbumModel>, private val onAlbumCli
             .into(holder.ivCover)
 
 
+        // Configurando o escutador de cliques no cartão inteiro :
+        holder.itemView.setOnClickListener {
+
+
+            // Avisando o Fragmento qual álbum foi tocado :
+            onAlbumClick(album)
+
+
+        }
+
+
     }
 
 

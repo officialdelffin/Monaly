@@ -164,6 +164,17 @@ class AlbumCarouselAdapter(private var albums: List<AlbumModel>, private val onA
             .into(holder.imageCover)
 
 
+        // Configurando o escutador de cliques no cartão inteiro :
+        holder.itemView.setOnClickListener {
+
+
+            // Avisando o Fragmento qual álbum foi tocado :
+            onAlbumClick(album)
+
+
+        }
+
+
     }
 
 

@@ -149,7 +149,6 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
     private fun openAlbumDetails(album: AlbumModel) {
 
 
-        // Empacotando as informações essenciais para a próxima tela desenhar o cabeçalho rapidamente :
         val bundle = Bundle().apply {
 
 
@@ -163,7 +162,6 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         }
 
 
-        // Instanciando o novo fragmento e anexando o pacote de dados :
         val detailsFragment = AlbumDetailsFragment().apply {
 
 
@@ -173,9 +171,9 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         }
 
 
-        // Solicitando ao gerenciador principal que sobreponha a tela atual adicionando à pilha de navegação :
-        parentFragmentManager.beginTransaction()
-            .add(R.id.viewPagerMain, detailsFragment)
+        // Correção: Usando o childFragmentManager e o ID da raiz do Feed para não quebrar o ViewPager :
+        childFragmentManager.beginTransaction()
+            .add(R.id.feedRootContainer, detailsFragment)
             .addToBackStack(null)
             .commit()
 

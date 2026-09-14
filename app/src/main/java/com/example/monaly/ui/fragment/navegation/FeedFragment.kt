@@ -171,9 +171,11 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         }
 
 
-        // Correção: Usando o childFragmentManager e o ID da raiz do Feed para não quebrar o ViewPager :
+        // Utilizando o gerenciador filho para injetar a tela no recipiente de sobreposicao isolado :
         childFragmentManager.beginTransaction()
-            .add(R.id.feedRootContainer, detailsFragment)
+
+
+            .add(R.id.feedOverlayContainer, detailsFragment)
             .addToBackStack(null)
             .commit()
 

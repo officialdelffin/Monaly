@@ -25,7 +25,7 @@
             <ImageView
                 android:id="@+id/ivDetailCover"
                 android:layout_width="0dp"
-                android:layout_height="400dp"
+                android:layout_height="500dp"
                 android:background="@drawable/img_empty_state_album"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"

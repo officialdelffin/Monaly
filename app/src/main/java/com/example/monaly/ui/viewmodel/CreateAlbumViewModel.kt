@@ -12,18 +12,6 @@ import com.example.monaly.domain.repository.AlbumRepository
 import kotlinx.coroutines.launch
 
 
-// Classe auxiliar blindada para mapear os três estados possíveis da tela :
-sealed class UploadState {
-
-
-    object Loading : UploadState()
-    object Success : UploadState()
-    data class Error(val message: String) : UploadState()
-
-
-}
-
-
 // ViewModel responsável por gerenciar os dados e a lógica da tela de Criação de Álbuns :
 class CreateAlbumViewModel : ViewModel() {
 

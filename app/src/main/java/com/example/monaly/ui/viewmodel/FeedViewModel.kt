@@ -8,25 +8,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.monaly.data.repository.MediaRepositoryImplementation
 import com.example.monaly.domain.repository.MediaRepository
 import com.google.firebase.auth.FirebaseAuth
+import com.example.monaly.ui.viewmodel.UploadState // Adicionando a importação do arquivo centralizado :
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 
-// Definindo os estados possíveis da tela durante o envio das mídias :
-sealed class UploadState {
-
-
-    object Idle : UploadState()
-    data class Uploading(val current: Int, val total: Int) : UploadState()
-    object Success : UploadState()
-    data class Error(val message: String) : UploadState()
-
-
-}
-
-
-// ViewModel responsável por orquestrar o envio em lote (batch) conectando UI e Repositório e utilizando um valor padrão no construtor para facilitar a injeção do repositório :
+// ViewModel responsável por orquestrar o envio em lote (batch) conectando UI e Repositório :
 class FeedViewModel(private val repository: MediaRepository = MediaRepositoryImplementation()) : ViewModel() {
 
 

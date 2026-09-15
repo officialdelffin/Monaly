@@ -76,7 +76,22 @@ class AlbumsFragment : Fragment() {
         btnAddAlbum.setOnClickListener {
 
 
+            // Aplicando as animações customizadas antes de adicionar a tela :
             childFragmentManager.beginTransaction()
+
+
+                .setCustomAnimations(
+
+
+                    R.anim.slide_in_right,      // Animação de entrada da nova tela :
+                    R.anim.slide_out_left,       // Animação de saída da tela atual :
+                    R.anim.slide_in_left,    // Animação de retorno da tela atual :
+                    R.anim.slide_out_right    // Animação de saída da tela que está fechando :
+
+
+                )
+
+
                 .add(R.id.albumsRootContainer, CreateAlbumFragment())
                 .addToBackStack(null)
                 .commit()

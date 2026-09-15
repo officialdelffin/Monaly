@@ -89,6 +89,10 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         val isPublic = arguments?.getBoolean("ALBUM_IS_PUBLIC") ?: false
 
 
+        // Solicitando ao ViewModel que busque as fotos no banco de dados assim que a tela possuir o ID do álbum :
+        viewModel.loadMedia(currentAlbumId)
+
+
         // Povoando os textos dinâmicos principais :
         tvTitle.text = albumTitle
         tvDescription.text = albumDesc
@@ -218,7 +222,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         }
 
 
-        // Observando os estados emitidos pelo ViewModel para atualizar a interface em tempo real :
+        // Observando os estados emitidos pelo ViewModel para atualizar a interface de carregamento :
         viewLifecycleOwner.lifecycleScope.launch {
 
 
@@ -285,6 +289,22 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
 
 
                 }
+
+
+            }
+
+
+        }
+
+
+        // Observador isolado para escutar a lista de mídias e desenhar a grade visualmente :
+        viewLifecycleOwner.lifecycleScope.launch {
+
+
+            viewModel.mediaList.collect { items ->
+
+
+                adapter.updateItems(items)
 
 
             }

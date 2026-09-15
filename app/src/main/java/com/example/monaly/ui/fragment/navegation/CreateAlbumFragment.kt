@@ -247,6 +247,13 @@ class CreateAlbumFragment : Fragment() {
             when (state) {
 
 
+                is UploadState.Idle -> {
+
+
+                    // Estado livre que não exige alteração visual nesta tela :
+                }
+
+
                 is UploadState.Loading -> {
 
 
@@ -258,6 +265,13 @@ class CreateAlbumFragment : Fragment() {
                     etDescription.isEnabled = false
 
 
+                }
+
+
+                is UploadState.Uploading -> {
+
+
+                    // Estado não utilizado pela criação de álbum :
                 }
 
 

@@ -17,7 +17,7 @@ class MediaRepositoryImplementation : MediaRepository {
 
 
     // Função que executa o upload duplo no Storage e depois no Firestore de forma segura :
-    override suspend fun uploadMedia(uri: Uri, userId: String, mediaType: String, sizeInBytes: Long): MediaModel {
+    override suspend fun uploadMedia(uri: Uri, userId: String, mediaType: String, sizeInBytes: Long, albumId: String?): MediaModel {
 
 
         // Gerando um nome único para o arquivo para evitar colisões :
@@ -41,12 +41,13 @@ class MediaRepositoryImplementation : MediaRepository {
         val mediaDocRef = db.collection("users").document(userId).collection("media").document()
 
 
-        // Montando o modelo de dados com todas as informações reunidas :
+        // Montando o modelo de dados repassando o ID do álbum para criar o vínculo correto :
         val mediaModel = MediaModel(
 
 
             id = mediaDocRef.id,
             userId = userId,
+            albumId = albumId,
             mediaUrl = downloadUrl,
             mediaType = mediaType,
             sizeInBytes = sizeInBytes,

@@ -1,5 +1,6 @@
 package com.example.monaly.domain.repository
 
+
 // Importações :
 import android.net.Uri
 import com.example.monaly.domain.model.MediaModel
@@ -9,8 +10,8 @@ import com.example.monaly.domain.model.MediaModel
 interface MediaRepository {
 
 
-    // Função responsável por enviar a mídia e retornar o modelo salvo :
-    suspend fun uploadMedia(uri: Uri, userId: String, mediaType: String, sizeInBytes: Long): MediaModel
+    // Função responsável por enviar a mídia, agora aceitando o ID do álbum opcionalmente :
+    suspend fun uploadMedia(uri: Uri, userId: String, mediaType: String, sizeInBytes: Long, albumId: String? = null): MediaModel
 
 
 }

@@ -10,8 +10,8 @@ import com.example.monaly.domain.model.MediaModel
 interface MediaRepository {
 
 
-    // Função responsável por enviar a mídia, agora aceitando o ID do álbum opcionalmente :
     suspend fun uploadMedia(uri: Uri, userId: String, mediaType: String, sizeInBytes: Long, albumId: String? = null): MediaModel
+    suspend fun getMediaByAlbum(userId: String, albumId: String): List<MediaModel>
 
 
 }

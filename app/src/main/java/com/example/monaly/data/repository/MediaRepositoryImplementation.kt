@@ -68,4 +68,27 @@ class MediaRepositoryImplementation : MediaRepository {
     }
 
 
+    // Função que consulta o Firestore filtrando as mídias pelo ID do álbum e ordenando pelas mais recentes :
+    override suspend fun getMediaByAlbum(userId: String, albumId: String): List<MediaModel> {
+
+
+        val db = FirebaseFirestore.getInstance()
+
+
+        // Realizando a busca na coleção de mídias do usuário :
+        val snapshot = db.collection("users")
+            .document(userId)
+            .collection("media")
+            .whereEqualTo("albumId", albumId)
+            .get()
+            .await()
+
+
+        // Convertendo os documentos encontrados para o modelo de dados e ordenando por data :
+        return snapshot.toObjects(MediaModel::class.java).sortedByDescending { it.createdAt }
+
+
+    }
+
+
 }

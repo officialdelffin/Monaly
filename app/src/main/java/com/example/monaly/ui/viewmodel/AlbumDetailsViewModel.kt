@@ -6,31 +6,102 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.monaly.data.repository.MediaRepositoryImplementation
+import com.example.monaly.domain.model.AlbumDetailItem
 import com.example.monaly.domain.repository.MediaRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 
-// ViewModel responsável por orquestrar o envio de mídias vinculadas a um álbum específico :
+// ViewModel responsável por gerenciar uploads e downloads da tela de detalhes :
 class AlbumDetailsViewModel(private val repository: MediaRepository = MediaRepositoryImplementation()) : ViewModel() {
 
 
-    // Criando a variável de estado que será observada pela tela de detalhes :
     private val _uploadState = MutableStateFlow<UploadState>(UploadState.Idle)
     val uploadState: StateFlow<UploadState> = _uploadState
 
 
-    // Função que recebe a lista de imagens e o ID do álbum para processamento em lote :
+    // Variável reativa que guardará a lista processada e pronta para a tela desenhar :
+    private val _mediaList = MutableStateFlow<List<AlbumDetailItem>>(emptyList())
+    val mediaList: StateFlow<List<AlbumDetailItem>> = _mediaList
+
+
+    // Função para buscar os dados brutos e transformar no formato exigido pela interface :
+    fun loadMedia(albumId: String) {
+
+
+        viewModelScope.launch {
+
+
+            try {
+
+
+                val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return@launch
+                val rawMedia = repository.getMediaByAlbum(userId, albumId)
+
+
+                // Formatador de data para criar os textos dos cabeçalhos :
+                val sdf = SimpleDateFormat("dd 'de' MMMM 'de' yyyy", Locale("pt", "BR"))
+
+
+                // Agrupando as mídias brutas com base na data formatada :
+                val groupedMedia = rawMedia.groupBy { media ->
+
+
+                    sdf.format(media.createdAt)
+
+
+                }
+
+
+                val finalItems = mutableListOf<AlbumDetailItem>()
+
+
+                // Construindo a lista intercalando cabeçalhos de texto e as mídias correspondentes :
+                for ((dateString, mediaList) in groupedMedia) {
+
+
+                    finalItems.add(AlbumDetailItem.DateHeader("Atualizado em $dateString"))
+
+
+                    mediaList.forEach { media ->
+
+
+                        finalItems.add(AlbumDetailItem.Media(media))
+
+
+                    }
+
+
+                }
+
+
+                // Atualizando o estado reativo para notificar a tela :
+                _mediaList.value = finalItems
+
+
+            } catch (e: Exception) {
+
+
+                // Lidar com possíveis erros de rede de forma silenciosa na grade :
+            }
+
+
+        }
+
+
+    }
+
+
     fun uploadMediaToAlbum(uris: List<Uri>, albumId: String) {
 
 
-        // Buscando o identificador único do usuário logado na sessão oficial :
         val userId = FirebaseAuth.getInstance().currentUser?.uid
 
 
-        // Verificando a segurança da sessão antes de qualquer envio :
         if (userId == null) {
 
 
@@ -41,11 +112,9 @@ class AlbumDetailsViewModel(private val repository: MediaRepository = MediaRepos
         }
 
 
-        // Iniciando o estado de carregamento para exibir a barra de progresso :
         _uploadState.value = UploadState.Uploading(0, uris.size)
 
 
-        // Abrindo uma corrotina para rodar o processo pesado em segundo plano sem travar a interface :
         viewModelScope.launch {
 
 
@@ -55,20 +124,12 @@ class AlbumDetailsViewModel(private val repository: MediaRepository = MediaRepos
                 var uploadedCount = 0
 
 
-                // Criando um laço de repetição para enviar cada mídia vinculando ao álbum :
                 for (uri in uris) {
 
 
-                    // Valores provisórios base para simular tipo e tamanho :
                     val mockType = "image/jpeg"
                     val mockSize = 1024L
-
-
-                    // Disparando o motor do Repositório injetando o ID do álbum na nuvem :
                     repository.uploadMedia(uri, userId, mockType, mockSize, albumId)
-
-
-                    // Atualizando a contagem silenciosamente :
                     uploadedCount++
                     _uploadState.value = UploadState.Uploading(uploadedCount, uris.size)
 
@@ -76,14 +137,16 @@ class AlbumDetailsViewModel(private val repository: MediaRepository = MediaRepos
                 }
 
 
-                // Finalizando o processo com sucesso após o término do laço :
                 _uploadState.value = UploadState.Success
+
+
+                // Gatilho automático: forçando a busca de dados logo após o sucesso do upload :
+                loadMedia(albumId)
 
 
             } catch (e: Exception) {
 
 
-                // Capturando falhas de conexão :
                 _uploadState.value = UploadState.Error(e.message ?: "Erro desconhecido no upload.")
 
 
@@ -96,7 +159,6 @@ class AlbumDetailsViewModel(private val repository: MediaRepository = MediaRepos
     }
 
 
-    // Função pública para permitir que a interface solicite o retorno ao estado inicial com segurança :
     fun resetState() {
 
 

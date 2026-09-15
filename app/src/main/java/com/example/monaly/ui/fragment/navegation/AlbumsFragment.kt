@@ -106,7 +106,7 @@ class AlbumsFragment : Fragment() {
     }
 
 
-    // Função responsável por empacotar os dados e realizar a transição na lista de álbuns :
+    // Funcao responsavel por empacotar os dados e realizar a transicao na lista de albuns :
     private fun openAlbumDetails(album: AlbumModel) {
 
 
@@ -132,10 +132,20 @@ class AlbumsFragment : Fragment() {
         }
 
 
-        // Utilizando o gerenciador local para abrir a tela de detalhes sobre a lista atual :
+        // Utilizando o gerenciador local e aplicando as animacoes de deslizamento antes de adicionar a tela :
         childFragmentManager.beginTransaction()
 
 
+            .setCustomAnimations(
+
+
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+
+
+            )
             .add(R.id.albumsRootContainer, detailsFragment)
             .addToBackStack(null)
             .commit()

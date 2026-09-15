@@ -145,7 +145,7 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
     }
 
 
-    // Função responsável por empacotar os dados e realizar a transição de tela de forma segura :
+    // Funcao responsavel por empacotar os dados e realizar a transicao de tela de forma segura :
     private fun openAlbumDetails(album: AlbumModel) {
 
 
@@ -171,10 +171,20 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         }
 
 
-        // Utilizando o gerenciador filho para injetar a tela no recipiente de sobreposicao isolado :
+        // Aplicando a transicao suave para sobrepor a raiz do Feed sem emendas abruptas :
         childFragmentManager.beginTransaction()
 
 
+            .setCustomAnimations(
+
+
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+
+
+            )
             .add(R.id.feedOverlayContainer, detailsFragment)
             .addToBackStack(null)
             .commit()

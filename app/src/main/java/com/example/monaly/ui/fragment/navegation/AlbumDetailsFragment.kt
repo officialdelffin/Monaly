@@ -1,14 +1,21 @@
 package com.example.monaly.ui.fragment.navegation
 
 
-// Importacoes necessarias :
+// Importações necessárias :
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -19,13 +26,36 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.monaly.R
 import com.example.monaly.ui.adapter.AlbumDetailsAdapter
+import com.example.monaly.ui.viewmodel.AlbumDetailsViewModel
+import com.example.monaly.ui.viewmodel.UploadState
+import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.launch
 
 
-// Fragmento responsavel por exibir os detalhes injetando apenas dados reais :
+// Fragmento responsável por exibir os detalhes e gerenciar envios injetando dados reais :
 class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
 
 
     private lateinit var adapter: AlbumDetailsAdapter
+    private lateinit var viewModel: AlbumDetailsViewModel
+    private var currentAlbumId: String = ""
+
+
+    // Registrando o lançador moderno para selecionar múltiplas fotos da galeria :
+    private val pickMultipleMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(15)) { uris: List<Uri> ->
+
+
+        if (uris.isNotEmpty() && currentAlbumId.isNotEmpty()) {
+
+
+            // Disparando a função do ViewModel para iniciar o upload em lote :
+            viewModel.uploadMediaToAlbum(uris, currentAlbumId)
+
+
+        }
+
+
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,7 +64,11 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        // Mapeando todos os componentes, incluindo os tres campos da linha de status :
+        // Instanciando o ViewModel respeitando o ciclo de vida do fragmento :
+        viewModel = ViewModelProvider(this)[AlbumDetailsViewModel::class.java]
+
+
+        // Mapeando todos os componentes da tela :
         val tvTitle = view.findViewById<TextView>(R.id.tvDetailTitle)
         val tvDescription = view.findViewById<TextView>(R.id.tvDetailDescription)
         val tvStatusType = view.findViewById<TextView>(R.id.tvDetailStatus)
@@ -43,27 +77,30 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         val ivCover = view.findViewById<ImageView>(R.id.ivDetailCover)
         val btnBack = view.findViewById<ImageView>(R.id.btnBackDetail)
         val rvAlbumMedia = view.findViewById<RecyclerView>(R.id.rvAlbumMedia)
+        val btnAddMedia = view.findViewById<MaterialButton>(R.id.buttonAddMedia)
+        val progressUpload = view.findViewById<ProgressBar>(R.id.progressUploadMedia)
 
 
-        // Extraindo parametros repassados pelo clique nas telas anteriores :
+        // Extraindo parâmetros repassados pelo clique nas telas anteriores :
+        currentAlbumId = arguments?.getString("ALBUM_ID") ?: ""
         val albumTitle = arguments?.getString("ALBUM_TITLE") ?: ""
         val albumDesc = arguments?.getString("ALBUM_DESCRIPTION") ?: ""
         val coverUrl = arguments?.getString("ALBUM_COVER_URL") ?: ""
         val isPublic = arguments?.getBoolean("ALBUM_IS_PUBLIC") ?: false
 
 
-        // Povoando os textos dinamicos principais :
+        // Povoando os textos dinâmicos principais :
         tvTitle.text = albumTitle
         tvDescription.text = albumDesc
 
 
-        // Montando a frase do status de forma contínua utilizando os tres espacos :
+        // Montando a frase do status de forma contínua utilizando os três espaços :
         tvStatusType.text = "Álbum solo"
-        tvStatusSeparator.text = "-"
+        tvStatusSeparator.text = " - "
         tvStatusPrivacy.text = if (isPublic) "Público" else "Privado"
 
 
-        // Configurando botao de retrocesso para fechar a tela atual :
+        // Configurando botão de retrocesso para fechar a tela atual :
         btnBack.setOnClickListener {
 
 
@@ -73,7 +110,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         }
 
 
-        // Configuracao da animacao de carregamento :
+        // Configuração da animação de carregamento do cabeçalho :
         val circularProgressDrawable = CircularProgressDrawable(requireContext())
         circularProgressDrawable.strokeWidth = 5f
         circularProgressDrawable.centerRadius = 30f
@@ -84,7 +121,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         ivCover.alpha = 0f
 
 
-        // Gerenciamento da imagem de capa via biblioteca de terceiros :
+        // Gerenciamento da imagem de capa via biblioteca Glide :
         Glide.with(this)
             .load(coverUrl)
             .placeholder(circularProgressDrawable)
@@ -135,7 +172,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
             .into(ivCover)
 
 
-        // Inicializando o adaptador com uma lista totalmente vazia, eliminando dados ficticios :
+        // Inicializando o adaptador da grade de fotos com uma lista totalmente vazia :
         adapter = AlbumDetailsAdapter(emptyList())
 
 
@@ -143,7 +180,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         val layoutManager = GridLayoutManager(requireContext(), spanCount)
 
 
-        // Orientando o comportamento do grid com base no tipo de conteudo retornado :
+        // Orientando o comportamento da grade no gerenciador de layout :
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
 
 
@@ -169,6 +206,91 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
 
         rvAlbumMedia.layoutManager = layoutManager
         rvAlbumMedia.adapter = adapter
+
+
+        // Abrindo o seletor visual ao clicar em adicionar mídia :
+        btnAddMedia.setOnClickListener {
+
+
+            pickMultipleMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageAndVideo))
+
+
+        }
+
+
+        // Observando os estados emitidos pelo ViewModel para atualizar a interface em tempo real :
+        viewLifecycleOwner.lifecycleScope.launch {
+
+
+            viewModel.uploadState.collect { state ->
+
+
+                when (state) {
+
+
+                    is UploadState.Idle -> {
+
+
+                        // Estado inicial livre para interação :
+                        btnAddMedia.visibility = View.VISIBLE
+                        progressUpload.visibility = View.GONE
+                        btnBack.isEnabled = true
+
+
+                    }
+
+
+                    is UploadState.Loading -> {}
+
+
+                    is UploadState.Uploading -> {
+
+
+                        // Ocultando botão e exibindo indicador giratório enquanto envia para a nuvem :
+                        btnAddMedia.visibility = View.INVISIBLE
+                        progressUpload.visibility = View.VISIBLE
+                        btnBack.isEnabled = false
+
+
+                    }
+
+
+                    is UploadState.Success -> {
+
+
+                        // Restaurando interface após sucesso do upload :
+                        btnAddMedia.visibility = View.VISIBLE
+                        progressUpload.visibility = View.GONE
+                        btnBack.isEnabled = true
+                        Toast.makeText(requireContext(), "Mídias salvas com sucesso!", Toast.LENGTH_SHORT).show()
+
+                        // Retornando ao estado inicial para permitir novos envios imediatamente :
+                        viewModel.resetState()
+
+
+                    }
+
+
+                    is UploadState.Error -> {
+
+
+                        // Restaurando interface em caso de falha de conexão :
+                        btnAddMedia.visibility = View.VISIBLE
+                        progressUpload.visibility = View.GONE
+                        btnBack.isEnabled = true
+                        Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
+
+
+                    }
+
+
+                }
+
+
+            }
+
+
+        }
 
 
     }

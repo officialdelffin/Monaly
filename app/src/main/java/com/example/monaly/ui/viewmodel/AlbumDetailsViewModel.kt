@@ -96,4 +96,14 @@ class AlbumDetailsViewModel(private val repository: MediaRepository = MediaRepos
     }
 
 
+    // Função pública para permitir que a interface solicite o retorno ao estado inicial com segurança :
+    fun resetState() {
+
+
+        _uploadState.value = UploadState.Idle
+
+
+    }
+
+
 }

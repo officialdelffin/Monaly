@@ -180,7 +180,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         adapter = AlbumDetailsAdapter(emptyList())
 
 
-        val spanCount = 5
+        val spanCount = 4
         val layoutManager = GridLayoutManager(requireContext(), spanCount)
 
 

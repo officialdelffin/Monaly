@@ -144,14 +144,16 @@
                     android:layout_height="60dp"
                     android:background="@drawable/drawable_background_button_gray_deep_10_dp"
                     android:hint="@string/create_album_hint_title"
-                    android:imeOptions="actionNext"
-                    android:inputType="textMultiLine"
-                    android:maxLength="50"
-                    android:maxLines="1"
                     android:paddingStart="25dp"
                     android:paddingEnd="25dp"
                     android:textColor="@color/bage_neutral"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:maxLength="50"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:scrollHorizontally="false"
+                    android:singleLine="false"
+                    android:maxLines="2" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -177,13 +179,15 @@
                     android:background="@drawable/drawable_background_button_gray_deep_10_dp"
                     android:gravity="top|start"
                     android:hint="@string/create_album_hint_description"
-                    android:imeOptions="actionDone"
-                    android:inputType="textMultiLine"
-                    android:maxLength="350"
                     android:paddingStart="25dp"
                     android:paddingEnd="25dp"
                     android:textColor="@color/bage_neutral"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:maxLength="350"
+                    android:imeOptions="actionDone"
+                    android:inputType="textCapSentences"
+                    android:scrollHorizontally="false"
+                    android:singleLine="false" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

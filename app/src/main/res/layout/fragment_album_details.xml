@@ -139,12 +139,6 @@
                     android:background="@drawable/drawable_background_button_gray_deep_10_dp"
                     android:src="@drawable/ic_profile_bage_neutral" />
 
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/drawable_background_button_gray_deep_10_dp"
-                    android:src="@drawable/ic_profile_bage_neutral" />
 
                 <TextView
                     android:layout_width="50dp"

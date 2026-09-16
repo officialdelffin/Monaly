@@ -166,6 +166,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/llParticipantsMock" />
 
+            <LinearLayout
+                android:id="@+id/llEmptyState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="40dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llParticipantsMock">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/album_details_empty"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray_medium"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/tvDetailSeparator"
                 android:layout_width="wrap_content"

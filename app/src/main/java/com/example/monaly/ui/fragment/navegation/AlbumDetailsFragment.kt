@@ -79,6 +79,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         val rvAlbumMedia = view.findViewById<RecyclerView>(R.id.rvAlbumMedia)
         val btnAddMedia = view.findViewById<MaterialButton>(R.id.buttonAddMedia)
         val progressUpload = view.findViewById<ProgressBar>(R.id.progressUploadMedia)
+        val llEmptyState = view.findViewById<View>(R.id.llEmptyState) // Mapeando o bloco de estado vazio
 
 
         // Extraindo parâmetros repassados pelo clique nas telas anteriores :
@@ -297,14 +298,27 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         }
 
 
-        // Observador isolado para escutar a lista de mídias e desenhar a grade visualmente :
+        // Observador isolado para escutar a lista de mídias e alternar a visibilidade da tela :
         viewLifecycleOwner.lifecycleScope.launch {
 
 
             viewModel.mediaList.collect { items ->
 
 
-                adapter.updateItems(items)
+                if (items.isEmpty()) {
+
+                    // Se a lista estiver vazia, esconde a grade e mostra a mensagem de boas-vindas :
+                    rvAlbumMedia.visibility = View.GONE
+                    llEmptyState.visibility = View.VISIBLE
+
+                } else {
+
+                    // Se houver itens, esconde a mensagem, exibe a grade e injeta os dados :
+                    llEmptyState.visibility = View.GONE
+                    rvAlbumMedia.visibility = View.VISIBLE
+                    adapter.updateItems(items)
+
+                }
 
 
             }

@@ -35,7 +35,7 @@
     <!-- Textos do fragment Albums : -->
     <string name="albums_search">Buscar por álbum</string>
     <string name="albums_button_add">Adicionar novo álbum</string>
-    <string name="albums_empty_state_message">Você ainda não possui nenhum álbum. Crie o seu primeiro álbum abaixo!</string>
+    <string name="albums_empty_state_message">Nenhum album por aqui ainda.\nClique em adicionar novo album para começar</string>
 
     <!-- Textos da futura tela de Criar Álbum : -->
     <string name="create_album_button_add_cover">Adicionar capa no álbum</string>
@@ -54,5 +54,9 @@
     <string name="create_album_title_field">Título do seu álbum</string>
     <string name="create_album_space"> - </string>
     <string name="create_album_description_field">Aqui será exibida a descrição do seu álbum para contextualizar o tema e compartilhar detalhes sobre as memórias guardadas</string>
+
+
+    <!-- Textos de fragment Album Details -->
+    <string name="album_details_empty">Nenhuma foto por aqui ainda.\nClique em adicionar mídia para começar!</string>
 
 </resources>

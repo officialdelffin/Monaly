@@ -150,10 +150,7 @@
                     android:textSize="18sp"
                     android:maxLength="50"
                     android:imeOptions="actionNext"
-                    android:inputType="textMultiLine|textCapSentences"
-                    android:scrollHorizontally="false"
-                    android:singleLine="false"
-                    android:maxLines="2" />
+                    android:inputType="textCapSentences" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -185,9 +182,7 @@
                     android:textSize="18sp"
                     android:maxLength="350"
                     android:imeOptions="actionDone"
-                    android:inputType="textMultiLine|textCapSentences"
-                    android:scrollHorizontally="false"
-                    android:singleLine="false" />
+                    android:inputType="textCapSentences" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

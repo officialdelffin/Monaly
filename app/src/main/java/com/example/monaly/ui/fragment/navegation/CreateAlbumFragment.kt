@@ -96,9 +96,6 @@ class CreateAlbumFragment : Fragment() {
         etDescription = view.findViewById(R.id.EditDescriptionField)
         switchPublic = view.findViewById(R.id.switchPublic)
         switchDownload = view.findViewById(R.id.switchDownload)
-        etDescription = view.findViewById(R.id.EditDescriptionField)
-        switchPublic = view.findViewById(R.id.switchPublic)
-        switchDownload = view.findViewById(R.id.switchDownload)
         tvPreviewTitle = view.findViewById<TextView>(R.id.textView6)
         tvPreviewDescription = view.findViewById<TextView>(R.id.textView3)
         tvPreviewStatus = view.findViewById<TextView>(R.id.textView7)
@@ -157,6 +154,48 @@ class CreateAlbumFragment : Fragment() {
         }
 
 
+        // Forçando o Kotlin a quebrar a linha visualmente e impedindo a rolagem para o lado :
+        etTitle.setHorizontallyScrolling(false)
+        etTitle.maxLines = 2
+
+
+        etDescription.setHorizontallyScrolling(false)
+        etDescription.maxLines = 10
+
+
+        // Interceptando a tecla Concluir do teclado virtual e também a tecla Enter física :
+        etDescription.setOnEditorActionListener { _, actionId, event ->
+
+
+            if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.keyCode == android.view.KeyEvent.KEYCODE_ENTER && event.action == android.view.KeyEvent.ACTION_DOWN)) {
+
+
+                // Removendo o cursor piscante e o foco do campo de texto :
+                etDescription.clearFocus()
+
+
+                // Solicitando ao sistema operacional que esconda o teclado virtual da tela :
+                val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(etDescription.windowToken, 0)
+
+
+                // Retornando verdadeiro para avisar que o clique foi interceptado e processado :
+                true
+
+
+            } else {
+
+
+                // Retornando falso caso outra tecla tenha sido pressionada :
+                false
+
+
+            }
+
+
+        }
+
+
         // Escutando a mudança da chave de público/privado para atualizar o texto correspondente :
         switchPublic.setOnCheckedChangeListener { _, isChecked ->
 
@@ -202,39 +241,6 @@ class CreateAlbumFragment : Fragment() {
 
             // Mantendo o status padrão para álbuns sem convidados :
             tvPreviewStatus.text = "Álbum solo"
-
-
-        }
-
-
-        // Interceptando o clique no botão "Concluído" do teclado virtual no campo de descrição :
-        etDescription.setOnEditorActionListener { _, actionId, _ ->
-
-
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-
-
-                // Removendo o cursor piscante e o foco do campo de texto :
-                etDescription.clearFocus()
-
-
-                // Solicitando ao sistema operacional que esconda o teclado virtual da tela :
-                val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(etDescription.windowToken, 0)
-
-
-                // Retornando verdadeiro para avisar que a ação foi consumida com sucesso :
-                true
-
-
-            } else {
-
-
-                // Retornando falso caso outra tecla tenha sido pressionada :
-                false
-
-
-            }
 
 
         }

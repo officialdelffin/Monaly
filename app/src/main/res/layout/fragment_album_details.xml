@@ -186,7 +186,7 @@
                     android:text="@string/album_details_empty"
                     android:textAlignment="center"
                     android:textColor="@color/gray_medium"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
 

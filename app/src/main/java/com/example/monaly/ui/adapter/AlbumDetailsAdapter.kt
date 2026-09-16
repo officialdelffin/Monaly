@@ -20,17 +20,11 @@ import com.example.monaly.R
 import com.example.monaly.domain.model.AlbumDetailItem
 
 
-// Adaptador que agora recebe uma função de Callback (onMediaClick) para avisar a tela quando uma foto for tocada :
-class AlbumDetailsAdapter(
+// Adaptador inteligente que lida com múltiplos tipos de layout (cabeçalhos de data e fotos) :
+class AlbumDetailsAdapter(private var items: List<AlbumDetailItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
-    private var items: List<AlbumDetailItem>,
-    private val onMediaClick: (String) -> Unit
-
-
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-
+    // Constantes para identificar matematicamente qual é o tipo de tela :
     companion object {
 
 
@@ -41,6 +35,7 @@ class AlbumDetailsAdapter(
     }
 
 
+    // Classe de suporte para o texto de data :
     class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
@@ -50,6 +45,7 @@ class AlbumDetailsAdapter(
     }
 
 
+    // Classe de suporte para o quadrado da foto :
     class MediaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
@@ -59,6 +55,7 @@ class AlbumDetailsAdapter(
     }
 
 
+    // Função crucial que lê o dado e avisa ao Android qual tipo de item está sendo desenhado nesta posição :
     override fun getItemViewType(position: Int): Int {
 
 
@@ -75,6 +72,7 @@ class AlbumDetailsAdapter(
     }
 
 
+    // Infla o XML correto dependendo do viewType informado pela função anterior :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
 
@@ -101,15 +99,18 @@ class AlbumDetailsAdapter(
     }
 
 
+    // Conta o total de itens (somando textos e fotos) :
     override fun getItemCount(): Int = items.size
 
 
+    // Liga os dados reais aos componentes visuais :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
 
         val item = items[position]
 
 
+        // Se o holder for do tipo Cabeçalho, injeta o texto da data :
         if (holder is HeaderViewHolder && item is AlbumDetailItem.DateHeader) {
 
 
@@ -118,7 +119,7 @@ class AlbumDetailsAdapter(
 
         }
 
-
+        // Se o holder for do tipo Mídia, aciona o Glide para baixar a foto :
         else if (holder is MediaViewHolder && item is AlbumDetailItem.Media) {
 
 
@@ -133,15 +134,24 @@ class AlbumDetailsAdapter(
             circularProgressDrawable.start()
 
 
+            // Utilizando o Glide com as assinaturas exatas exigidas pela versão atual :
             Glide.with(context)
-
                 .load(item.mediaData.mediaUrl)
                 .placeholder(circularProgressDrawable)
                 .centerCrop()
                 .listener(object : RequestListener<Drawable> {
 
 
-                    override fun onLoadFailed(p0: GlideException?, p1: Any?, p2: Target<Drawable?>, p3: Boolean): Boolean {
+                    override fun onLoadFailed(
+
+
+                        p0: GlideException?,
+                        p1: Any?,
+                        p2: Target<Drawable?>,
+                        p3: Boolean
+
+
+                    ): Boolean {
 
 
                         holder.ivMediaGridItem.alpha = 1f
@@ -151,7 +161,17 @@ class AlbumDetailsAdapter(
                     }
 
 
-                    override fun onResourceReady(p0: Drawable, p1: Any, p2: Target<Drawable?>?, p3: DataSource, p4: Boolean): Boolean {
+                    override fun onResourceReady(
+
+
+                        p0: Drawable,
+                        p1: Any,
+                        p2: Target<Drawable?>?,
+                        p3: DataSource,
+                        p4: Boolean
+
+
+                    ): Boolean {
 
 
                         holder.ivMediaGridItem.animate().alpha(1f).setDuration(300L).start()
@@ -162,19 +182,7 @@ class AlbumDetailsAdapter(
 
 
                 })
-
-
                 .into(holder.ivMediaGridItem)
-
-
-            // Interceptando o toque do usuário e enviando a URL da foto de volta para o Fragmento :
-            holder.itemView.setOnClickListener {
-
-
-                onMediaClick(item.mediaData.mediaUrl)
-
-
-            }
 
 
         }

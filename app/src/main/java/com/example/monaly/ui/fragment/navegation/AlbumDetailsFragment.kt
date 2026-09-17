@@ -79,7 +79,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         val rvAlbumMedia = view.findViewById<RecyclerView>(R.id.rvAlbumMedia)
         val btnAddMedia = view.findViewById<MaterialButton>(R.id.buttonAddMedia)
         val progressUpload = view.findViewById<ProgressBar>(R.id.progressUploadMedia)
-        val llEmptyState = view.findViewById<View>(R.id.llEmptyState) // Mapeando o bloco de estado vazio
+        val llEmptyState = view.findViewById<View>(R.id.llEmptyState)
 
 
         // Extraindo parâmetros repassados pelo clique nas telas anteriores :
@@ -177,8 +177,15 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
             .into(ivCover)
 
 
-        // Inicializando o adaptador da grade de fotos com uma lista totalmente vazia :
-        adapter = AlbumDetailsAdapter(emptyList())
+        // Inicializando o adaptador da grade de fotos e configurando o gatilho de clique para abrir a tela cheia :
+        adapter = AlbumDetailsAdapter(emptyList()) { clickedImageUrl ->
+
+
+            // Acionando a função que desenha a janela sobreposta passando a URL da imagem :
+            showImageViewerDialog(clickedImageUrl)
+
+
+        }
 
 
         val spanCount = 4
@@ -307,16 +314,20 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
 
                 if (items.isEmpty()) {
 
-                    // Se a lista estiver vazia, esconde a grade e mostra a mensagem de boas-vindas :
+
+                    // Se a lista estiver vazia esconde a grade e mostra a mensagem de boas-vindas :
                     rvAlbumMedia.visibility = View.GONE
                     llEmptyState.visibility = View.VISIBLE
 
+
                 } else {
 
-                    // Se houver itens, esconde a mensagem, exibe a grade e injeta os dados :
+
+                    // Se houver itens esconde a mensagem exibe a grade e injeta os dados :
                     llEmptyState.visibility = View.GONE
                     rvAlbumMedia.visibility = View.VISIBLE
                     adapter.updateItems(items)
+
 
                 }
 
@@ -325,6 +336,49 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
 
 
         }
+
+
+    }
+
+
+    // Função encarregada de desenhar a janela sobreposta e exibir a mídia em qualidade total :
+    private fun showImageViewerDialog(imageUrl: String) {
+
+
+        // Instanciando o Dialog com o tema nativo de tela cheia :
+        val dialog = android.app.Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen)
+
+
+        // Vinculando o layout visual criado ao Dialog instanciado :
+        dialog.setContentView(R.layout.dialog_image_viewe)
+
+
+        // Mapeando os componentes visuais da janela sobreposta :
+        val ivViewer = dialog.findViewById<ImageView>(R.id.ivViewerFullScreen)
+
+
+        val btnClose = dialog.findViewById<ImageView>(R.id.btnViewerClose)
+
+
+        // Configurando o botão de fechar para dispensar a janela sobreposta :
+        btnClose.setOnClickListener {
+
+
+            // Fechando a visualização e retornando ao fragmento :
+            dialog.dismiss()
+
+
+        }
+
+
+        // Carregando a imagem no centro da tela cheia respeitando as proporções :
+        Glide.with(this)
+            .load(imageUrl)
+            .into(ivViewer)
+
+
+        // Exibindo a janela sobreposta pronta para o usuário :
+        dialog.show()
 
 
     }

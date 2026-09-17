@@ -20,8 +20,11 @@ import com.example.monaly.R
 import com.example.monaly.domain.model.AlbumDetailItem
 
 
-// Adaptador inteligente que lida com múltiplos tipos de layout (cabeçalhos de data e fotos) :
-class AlbumDetailsAdapter(private var items: List<AlbumDetailItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+// Adaptador inteligente recebendo função de callback no construtor para interceptar cliques :
+class AlbumDetailsAdapter(
+    private var items: List<AlbumDetailItem>,
+    private val onMediaClick: (String) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     // Constantes para identificar matematicamente qual é o tipo de tela :
@@ -99,7 +102,7 @@ class AlbumDetailsAdapter(private var items: List<AlbumDetailItem>) : RecyclerVi
     }
 
 
-    // Conta o total de itens (somando textos e fotos) :
+    // Conta o total de itens somando textos e fotos :
     override fun getItemCount(): Int = items.size
 
 
@@ -110,7 +113,7 @@ class AlbumDetailsAdapter(private var items: List<AlbumDetailItem>) : RecyclerVi
         val item = items[position]
 
 
-        // Se o holder for do tipo Cabeçalho, injeta o texto da data :
+        // Injetando o texto da data caso o holder seja do tipo Cabeçalho :
         if (holder is HeaderViewHolder && item is AlbumDetailItem.DateHeader) {
 
 
@@ -119,7 +122,8 @@ class AlbumDetailsAdapter(private var items: List<AlbumDetailItem>) : RecyclerVi
 
         }
 
-        // Se o holder for do tipo Mídia, aciona o Glide para baixar a foto :
+
+        // Acionando o Glide para baixar a foto caso o holder seja do tipo Mídia :
         else if (holder is MediaViewHolder && item is AlbumDetailItem.Media) {
 
 
@@ -185,12 +189,23 @@ class AlbumDetailsAdapter(private var items: List<AlbumDetailItem>) : RecyclerVi
                 .into(holder.ivMediaGridItem)
 
 
+            // Configurando o gatilho de clique para disparar o callback com a URL da imagem :
+            holder.itemView.setOnClickListener {
+
+
+                onMediaClick(item.mediaData.mediaUrl)
+
+
+            }
+
+
         }
 
 
     }
 
 
+    // Atualizando os itens da lista :
     fun updateItems(newItems: List<AlbumDetailItem>) {
 
 

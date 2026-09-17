@@ -20,14 +20,14 @@ import com.example.monaly.R
 import com.example.monaly.domain.model.AlbumDetailItem
 
 
-// Adaptador inteligente recebendo função de callback no construtor para interceptar cliques :
+// Adaptador configurado para enviar a posição clicada e a lista completa de imagens :
 class AlbumDetailsAdapter(
     private var items: List<AlbumDetailItem>,
-    private val onMediaClick: (String) -> Unit
+    private val onMediaClick: (Int, List<String>) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
-    // Constantes para identificar matematicamente qual é o tipo de tela :
+    // Constantes de identificação de layout :
     companion object {
 
 
@@ -38,7 +38,7 @@ class AlbumDetailsAdapter(
     }
 
 
-    // Classe de suporte para o texto de data :
+    // Suporte para o cabeçalho :
     class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
@@ -48,7 +48,7 @@ class AlbumDetailsAdapter(
     }
 
 
-    // Classe de suporte para o quadrado da foto :
+    // Suporte para a miniatura :
     class MediaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
@@ -58,7 +58,7 @@ class AlbumDetailsAdapter(
     }
 
 
-    // Função crucial que lê o dado e avisa ao Android qual tipo de item está sendo desenhado nesta posição :
+    // Função de identificação de tipo :
     override fun getItemViewType(position: Int): Int {
 
 
@@ -75,7 +75,7 @@ class AlbumDetailsAdapter(
     }
 
 
-    // Infla o XML correto dependendo do viewType informado pela função anterior :
+    // Inflador de layout condicional :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
 
@@ -102,18 +102,18 @@ class AlbumDetailsAdapter(
     }
 
 
-    // Conta o total de itens somando textos e fotos :
+    // Contagem de itens totais :
     override fun getItemCount(): Int = items.size
 
 
-    // Liga os dados reais aos componentes visuais :
+    // Vinculação de dados reais aos componentes visuais :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
 
         val item = items[position]
 
 
-        // Injetando o texto da data caso o holder seja do tipo Cabeçalho :
+        // Injetando data no cabeçalho :
         if (holder is HeaderViewHolder && item is AlbumDetailItem.DateHeader) {
 
 
@@ -123,7 +123,7 @@ class AlbumDetailsAdapter(
         }
 
 
-        // Acionando o Glide para baixar a foto caso o holder seja do tipo Mídia :
+        // Baixando imagem na miniatura :
         else if (holder is MediaViewHolder && item is AlbumDetailItem.Media) {
 
 
@@ -138,7 +138,7 @@ class AlbumDetailsAdapter(
             circularProgressDrawable.start()
 
 
-            // Utilizando o Glide com as assinaturas exatas exigidas pela versão atual :
+            // Carregamento via Glide :
             Glide.with(context)
                 .load(item.mediaData.mediaUrl)
                 .placeholder(circularProgressDrawable)
@@ -147,14 +147,7 @@ class AlbumDetailsAdapter(
 
 
                     override fun onLoadFailed(
-
-
-                        p0: GlideException?,
-                        p1: Any?,
-                        p2: Target<Drawable?>,
-                        p3: Boolean
-
-
+                        p0: GlideException?, p1: Any?, p2: Target<Drawable?>, p3: Boolean
                     ): Boolean {
 
 
@@ -166,15 +159,7 @@ class AlbumDetailsAdapter(
 
 
                     override fun onResourceReady(
-
-
-                        p0: Drawable,
-                        p1: Any,
-                        p2: Target<Drawable?>?,
-                        p3: DataSource,
-                        p4: Boolean
-
-
+                        p0: Drawable, p1: Any, p2: Target<Drawable?>?, p3: DataSource, p4: Boolean
                     ): Boolean {
 
 
@@ -189,11 +174,22 @@ class AlbumDetailsAdapter(
                 .into(holder.ivMediaGridItem)
 
 
-            // Configurando o gatilho de clique para disparar o callback com a URL da imagem :
+            // Tratamento de clique para extrair a lista limpa de URLs :
             holder.itemView.setOnClickListener {
 
 
-                onMediaClick(item.mediaData.mediaUrl)
+                // Filtrando a lista principal para isolar apenas as mídias :
+                val mediaItems = items.filterIsInstance<AlbumDetailItem.Media>()
+
+                // Mapeando os itens isolados para obter uma lista pura de links :
+                val urls = mediaItems.map { it.mediaData.mediaUrl }
+
+                // Encontrando o índice exato da imagem clicada na lista pura :
+                val currentIndex = urls.indexOf(item.mediaData.mediaUrl)
+
+
+                // Disparando o Callback enviando a posição inicial e as fotos :
+                onMediaClick(currentIndex, urls)
 
 
             }
@@ -205,7 +201,7 @@ class AlbumDetailsAdapter(
     }
 
 
-    // Atualizando os itens da lista :
+    // Atualizador de lista reativo :
     fun updateItems(newItems: List<AlbumDetailItem>) {
 
 

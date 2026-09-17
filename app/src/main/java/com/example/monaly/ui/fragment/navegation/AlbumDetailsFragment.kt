@@ -2,11 +2,15 @@ package com.example.monaly.ui.fragment.navegation
 
 
 // Importações necessárias :
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -19,6 +23,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -30,9 +35,10 @@ import com.example.monaly.ui.viewmodel.AlbumDetailsViewModel
 import com.example.monaly.ui.viewmodel.UploadState
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
+import kotlin.math.abs
 
 
-// Fragmento responsável por exibir os detalhes e gerenciar envios injetando dados reais :
+// Fragmento encarregado da interface de detalhes e gestão de mídias :
 class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
 
 
@@ -41,14 +47,14 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
     private var currentAlbumId: String = ""
 
 
-    // Registrando o lançador moderno para selecionar múltiplas fotos da galeria :
+    // Lançador configurado para seleção de galeria local :
     private val pickMultipleMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(15)) { uris: List<Uri> ->
 
 
         if (uris.isNotEmpty() && currentAlbumId.isNotEmpty()) {
 
 
-            // Disparando a função do ViewModel para iniciar o upload em lote :
+            // Chamada de carregamento para a nuvem :
             viewModel.uploadMediaToAlbum(uris, currentAlbumId)
 
 
@@ -64,11 +70,11 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        // Instanciando o ViewModel respeitando o ciclo de vida do fragmento :
+        // Instanciação segura do modelo de visão :
         viewModel = ViewModelProvider(this)[AlbumDetailsViewModel::class.java]
 
 
-        // Mapeando todos os componentes da tela :
+        // Mapeamento dos componentes de interface :
         val tvTitle = view.findViewById<TextView>(R.id.tvDetailTitle)
         val tvDescription = view.findViewById<TextView>(R.id.tvDetailDescription)
         val tvStatusType = view.findViewById<TextView>(R.id.tvDetailStatus)
@@ -82,7 +88,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         val llEmptyState = view.findViewById<View>(R.id.llEmptyState)
 
 
-        // Extraindo parâmetros repassados pelo clique nas telas anteriores :
+        // Recebimento de parâmetros externos :
         currentAlbumId = arguments?.getString("ALBUM_ID") ?: ""
         val albumTitle = arguments?.getString("ALBUM_TITLE") ?: ""
         val albumDesc = arguments?.getString("ALBUM_DESCRIPTION") ?: ""
@@ -90,22 +96,19 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         val isPublic = arguments?.getBoolean("ALBUM_IS_PUBLIC") ?: false
 
 
-        // Solicitando ao ViewModel que busque as fotos no banco de dados assim que a tela possuir o ID do álbum :
+        // Inicialização da busca de dados :
         viewModel.loadMedia(currentAlbumId)
 
 
-        // Povoando os textos dinâmicos principais :
+        // Preenchimento textual da interface :
         tvTitle.text = albumTitle
         tvDescription.text = albumDesc
-
-
-        // Montando a frase do status de forma contínua utilizando os três espaços :
         tvStatusType.text = "Álbum solo"
         tvStatusSeparator.text = " - "
         tvStatusPrivacy.text = if (isPublic) "Público" else "Privado"
 
 
-        // Configurando botão de retrocesso para fechar a tela atual :
+        // Configuração de retrocesso :
         btnBack.setOnClickListener {
 
 
@@ -115,7 +118,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         }
 
 
-        // Configuração da animação de carregamento do cabeçalho :
+        // Construção do indicador de progresso dinâmico :
         val circularProgressDrawable = CircularProgressDrawable(requireContext())
         circularProgressDrawable.strokeWidth = 5f
         circularProgressDrawable.centerRadius = 30f
@@ -126,7 +129,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         ivCover.alpha = 0f
 
 
-        // Gerenciamento da imagem de capa via biblioteca Glide :
+        // Gerenciamento gráfico da capa via Glide :
         Glide.with(this)
             .load(coverUrl)
             .placeholder(circularProgressDrawable)
@@ -135,14 +138,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
 
 
                 override fun onLoadFailed(
-
-
-                    p0: GlideException?,
-                    p1: Any?,
-                    p2: Target<Drawable?>,
-                    p3: Boolean
-
-
+                    p0: GlideException?, p1: Any?, p2: Target<Drawable?>, p3: Boolean
                 ): Boolean {
 
 
@@ -154,15 +150,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
 
 
                 override fun onResourceReady(
-
-
-                    p0: Drawable,
-                    p1: Any,
-                    p2: Target<Drawable?>?,
-                    p3: DataSource,
-                    p4: Boolean
-
-
+                    p0: Drawable, p1: Any, p2: Target<Drawable?>?, p3: DataSource, p4: Boolean
                 ): Boolean {
 
 
@@ -177,22 +165,23 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
             .into(ivCover)
 
 
-        // Inicializando o adaptador da grade de fotos e configurando o gatilho de clique para abrir a tela cheia :
-        adapter = AlbumDetailsAdapter(emptyList()) { clickedImageUrl ->
+        // Inicializando adaptador escutando índice e lista de URLs :
+        adapter = AlbumDetailsAdapter(emptyList()) { initialPosition, urls ->
 
 
-            // Acionando a função que desenha a janela sobreposta passando a URL da imagem :
-            showImageViewerDialog(clickedImageUrl)
+            // Acionando a janela sobreposta com carrossel dinâmico :
+            showImageViewerDialog(initialPosition, urls)
 
 
         }
 
 
+        // Configuração estrutural da grade :
         val spanCount = 4
         val layoutManager = GridLayoutManager(requireContext(), spanCount)
 
 
-        // Orientando o comportamento da grade no gerenciador de layout :
+        // Distribuição de pesos de coluna :
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
 
 
@@ -220,7 +209,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         rvAlbumMedia.adapter = adapter
 
 
-        // Abrindo o seletor visual ao clicar em adicionar mídia :
+        // Configuração do botão central de envio :
         btnAddMedia.setOnClickListener {
 
 
@@ -230,7 +219,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         }
 
 
-        // Observando os estados emitidos pelo ViewModel para atualizar a interface de carregamento :
+        // Escuta reativa de status de processamento :
         viewLifecycleOwner.lifecycleScope.launch {
 
 
@@ -243,7 +232,6 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
                     is UploadState.Idle -> {
 
 
-                        // Estado inicial livre para interação :
                         btnAddMedia.visibility = View.VISIBLE
                         progressUpload.visibility = View.GONE
                         btnBack.isEnabled = true
@@ -258,7 +246,6 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
                     is UploadState.Uploading -> {
 
 
-                        // Ocultando botão e exibindo indicador giratório enquanto envia para a nuvem :
                         btnAddMedia.visibility = View.INVISIBLE
                         progressUpload.visibility = View.VISIBLE
                         btnBack.isEnabled = false
@@ -270,13 +257,10 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
                     is UploadState.Success -> {
 
 
-                        // Restaurando interface após sucesso do upload :
                         btnAddMedia.visibility = View.VISIBLE
                         progressUpload.visibility = View.GONE
                         btnBack.isEnabled = true
                         Toast.makeText(requireContext(), "Mídias salvas com sucesso!", Toast.LENGTH_SHORT).show()
-
-                        // Retornando ao estado inicial para permitir novos envios imediatamente :
                         viewModel.resetState()
 
 
@@ -286,7 +270,6 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
                     is UploadState.Error -> {
 
 
-                        // Restaurando interface em caso de falha de conexão :
                         btnAddMedia.visibility = View.VISIBLE
                         progressUpload.visibility = View.GONE
                         btnBack.isEnabled = true
@@ -305,7 +288,7 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
         }
 
 
-        // Observador isolado para escutar a lista de mídias e alternar a visibilidade da tela :
+        // Escuta reativa de dados estruturados para desenho na grade :
         viewLifecycleOwner.lifecycleScope.launch {
 
 
@@ -315,7 +298,6 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
                 if (items.isEmpty()) {
 
 
-                    // Se a lista estiver vazia esconde a grade e mostra a mensagem de boas-vindas :
                     rvAlbumMedia.visibility = View.GONE
                     llEmptyState.visibility = View.VISIBLE
 
@@ -323,7 +305,6 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
                 } else {
 
 
-                    // Se houver itens esconde a mensagem exibe a grade e injeta os dados :
                     llEmptyState.visibility = View.GONE
                     rvAlbumMedia.visibility = View.VISIBLE
                     adapter.updateItems(items)
@@ -341,44 +322,222 @@ class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
     }
 
 
-    // Função encarregada de desenhar a janela sobreposta e exibir a mídia em qualidade total :
-    private fun showImageViewerDialog(imageUrl: String) {
+    // Função responsável pela exibição do Dialog carrossel :
+    private fun showImageViewerDialog(initialPosition: Int, urls: List<String>) {
 
 
-        // Instanciando o Dialog com o tema nativo de tela cheia :
+        // Instanciamento de tema imersivo nativo :
         val dialog = android.app.Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen)
-
-
-        // Vinculando o layout visual criado ao Dialog instanciado :
         dialog.setContentView(R.layout.dialog_image_viewe)
 
 
-        // Mapeando os componentes visuais da janela sobreposta :
-        val ivViewer = dialog.findViewById<ImageView>(R.id.ivViewerFullScreen)
-
-
+        // Mapeamento do ViewPager2 e fechamento :
+        val vpViewer = dialog.findViewById<ViewPager2>(R.id.vpFullscreenMedia)
         val btnClose = dialog.findViewById<ImageView>(R.id.btnViewerClose)
 
 
-        // Configurando o botão de fechar para dispensar a janela sobreposta :
         btnClose.setOnClickListener {
 
 
-            // Fechando a visualização e retornando ao fragmento :
             dialog.dismiss()
 
 
         }
 
 
-        // Carregando a imagem no centro da tela cheia respeitando as proporções :
-        Glide.with(this)
-            .load(imageUrl)
-            .into(ivViewer)
+        // Conectando o adaptador interno do carrossel injetando a função de fechar janela :
+        val pagerAdapter = FullscreenPagerAdapter(urls) {
 
 
-        // Exibindo a janela sobreposta pronta para o usuário :
+            dialog.dismiss()
+
+
+        }
+
+
+        vpViewer.adapter = pagerAdapter
+
+
+        // Posicionando o carrossel diretamente na foto clicada na grade :
+        vpViewer.setCurrentItem(initialPosition, false)
+
+
         dialog.show()
+
+
+    }
+
+
+    // Classe interna adaptadora para processamento de visualização em tela cheia :
+    private inner class FullscreenPagerAdapter(
+
+
+        private val urls: List<String>,
+        private val onDismiss: () -> Unit
+
+
+    ) : RecyclerView.Adapter<FullscreenPagerAdapter.ImageViewHolder>() {
+
+
+        // Mapeamento interno de visualizador :
+        inner class ImageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+
+            val ivFullscreenItem: ImageView = view.findViewById(R.id.ivFullscreenItem)
+
+
+        }
+
+
+        // Insuflador do item singular do carrossel :
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
+
+
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_fullscreen_image, parent, false)
+            return ImageViewHolder(view)
+
+
+        }
+
+
+        // Contagem espelhada de URLs :
+        override fun getItemCount(): Int = urls.size
+
+
+        // Processamento reativo do ciclo de vida da imagem tocável :
+        @SuppressLint("ClickableViewAccessibility")
+        override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
+
+
+            val url = urls[position]
+
+
+            // Configuração do motor visual com suporte a transparência natural :
+            Glide.with(holder.itemView.context)
+
+
+                .load(url)
+                .into(holder.ivFullscreenItem)
+
+
+            // Variáveis lógicas de medição do vetor de toque :
+            var startY = 0f
+            var startX = 0f
+            var isDragging = false
+
+
+            // Injeção de detector táctil validando a física do arrasto de fechamento :
+            holder.ivFullscreenItem.setOnTouchListener { view, event ->
+
+
+                when (event.action) {
+
+
+                    MotionEvent.ACTION_DOWN -> {
+
+
+                        // Registrando as coordenadas iniciais sem bloquear o carrossel horizontal :
+                        startY = event.rawY
+                        startX = event.rawX
+                        isDragging = false
+                        false
+
+
+                    }
+
+
+                    MotionEvent.ACTION_MOVE -> {
+
+
+                        val deltaY = event.rawY - startY
+                        val deltaX = event.rawX - startX
+
+
+                        // Avaliando se a força vertical supera a horizontal para acionar o modo arraste :
+                        if (abs(deltaY) > abs(deltaX) && abs(deltaY) > 50) {
+
+
+                            isDragging = true
+                            view.translationY = deltaY
+                            view.alpha = 1f - (abs(deltaY) / 1000f)
+
+
+                            // Consumindo o evento para neutralizar interferência do ViewPager2 :
+                            true
+
+
+                        }
+
+
+                        else {
+
+
+                            false
+
+
+                        }
+
+
+                    }
+
+
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+
+
+                        if (isDragging) {
+
+
+                            val deltaY = event.rawY - startY
+
+
+                            // Concluindo ação de fechamento se a barreira limite for rompida :
+                            if (abs(deltaY) > 300) {
+
+
+                                onDismiss()
+
+
+                            }
+
+
+                            else {
+
+
+                                // Restituindo propriedades físicas caso o gesto seja abortado :
+                                view.animate().translationY(0f).alpha(1f).setDuration(200).start()
+
+
+                            }
+
+
+                            isDragging = false
+                            true
+
+
+                        }
+
+                        else {
+
+
+                            false
+
+
+                        }
+
+
+                    }
+
+
+                    else -> false
+
+
+                }
+
+
+            }
+
+
+        }
 
 
     }
